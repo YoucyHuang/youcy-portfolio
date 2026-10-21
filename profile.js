@@ -1,7 +1,7 @@
 /* 黄鈺茜 · 个人简介与创作理念（来自《黄鈺茜-艺术家个人简介》与 CV） */
 window.PROFILE = {
   name: ['黄鈺茜', 'Youcy Huang'],
-  born: ['2002 年生，现生活、工作于杭州。', 'Born 2002. Lives and works in Hangzhou.'],
+  born: ['2002 年生，现无稳定居住地。', 'Born 2002. Currently without a fixed place of residence.'],
   media: ['绘画 · 装置 · 摄影 · 写作', 'Painting · Installation · Photography · Writing'],
   email: 'lunahyx7@gmail.com',
   education: [

@@ -162,6 +162,10 @@ html{overflow-x:clip}
   filter:blur(8px);animation:ember 9s ease-in-out infinite alternate}
 @keyframes ember{from{opacity:.75;transform:translate3d(0,0,0) scale(1)}to{opacity:1;transform:translate3d(-2%,1.5%,0) scale(1.04)}}
 .home .hero .by{color:var(--amber)}
+.home .hero .by.tr{font-family:var(--en);font-style:italic;font-size:clamp(15px,1.35vw,19px);line-height:1.6;letter-spacing:.01em}
+:lang(en) .home .hero .by.tr{font-family:var(--cn);font-style:normal;letter-spacing:.06em}
+.home .hero .by.tr{position:relative;padding-left:40px}
+.home .hero .by.tr::before{position:absolute;left:0;top:.8em;margin:0}
 .home .hero .by::before{content:"";display:inline-block;width:28px;height:1px;background:var(--amber);vertical-align:middle;margin-right:10px}
 .home .hero-side .cap{color:var(--amber)}
 .home .table-h{border-top:0;background:linear-gradient(90deg,var(--amber),var(--rule) 38%) top/100% 1px no-repeat}
@@ -499,7 +503,7 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 
 /* ============ 关于 ============ */
 .about{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:32px clamp(32px,7vw,120px);padding-block:8px 96px;align-items:start}
-@media (max-width:900px){.about{grid-template-columns:1fr}}
+@media (max-width:900px){.about{grid-template-columns:1fr}.side{position:static}}  /* 窄屏上下排列时左栏不再固定，避免和右栏叠在一起 */
 .side{display:grid;gap:26px;position:sticky;top:96px}
 .side .blk{display:grid;gap:8px;padding-top:14px;border-top:1px solid var(--ink)}
 .side p{margin:0}
@@ -528,7 +532,7 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
   <img class="sp-art" id="spArt" alt="">
   <div class="veil" id="veil"></div>
   <div class="sp-ui">
-    <div class="sp-top"><span class="cap">Archive · 2021 — 2026</span><span class="cap">Hangzhou</span></div>
+    <div class="sp-top"><span class="cap">Archive · 2021 — 2026</span><span class="cap">No fixed abode</span></div>
     <div class="sp-mid">
       <h1 class="sp-name">黄鈺茜</h1>
       <p class="sp-en">Youcy Huang</p>
@@ -556,13 +560,13 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 <main class="wrap" id="view"></main>
 <footer><div class="wrap foot"><span id="foot1"></span><span id="foot2"></span></div></footer>
 
-<script src="essays.js?v=20261021h"></script>
-<script src="paintings.js?v=20261021h"></script>
-<script src="photos.js?v=20261021h"></script>
-<script src="projects.js?v=20261021h"></script>
-<script src="profile.js?v=20261021h"></script>
-<script src="diary.js?v=20261021h"></script>
-<script src="poems.js?v=20261021h"></script>
+<script src="essays.js?v=20261021i"></script>
+<script src="paintings.js?v=20261021i"></script>
+<script src="photos.js?v=20261021i"></script>
+<script src="projects.js?v=20261021i"></script>
+<script src="profile.js?v=20261021i"></script>
+<script src="diary.js?v=20261021i"></script>
+<script src="poems.js?v=20261021i"></script>
 <script>
 /* ================= 数据 ================= */
 const MED={'纸上水彩':'Watercolour on paper','纸面水彩':'Watercolour on paper','纸上综合材料':'Mixed media on paper','纸上油画棒':'Oil pastel on paper','纸上丙烯':'Acrylic on paper','布面丙烯':'Acrylic on canvas','布面综合材料':'Mixed media on canvas','PE布面综合材料':'Mixed media on PE canvas','铜板飞尘':'Aquatint on copper','铜板线腐蚀':'Line etching on copper'};
@@ -585,7 +589,8 @@ const T={
   foot2:['最近更新 2026-10-19','Updated 19 October 2026'],
   /* 首页引文：两行，作者自己定的句子 */
   quote:['向外凝视的目光，向内审视着。<br>而意义，来源于对此在的深深投入。','A gaze turned outward, examining inward.<br>And meaning comes from a deep immersion in being-there.'],
-  quoteBy:['黄鈺茜','Youcy Huang'],
+  /* 引文下面放另一种语言的译文：中文页显示英文，英文页显示中文原文 */
+  quoteBy:['A gaze turned outward, examining inward.<br>And meaning comes from a deep immersion in being-there.','向外凝视的目光，向内审视着。<br>而意义，来源于对此在的深深投入。'],
   series:['系列','Series'],index:['作品总目','Index of works'],all:['全部','All'],search:['检索标题、材料、年份','Search title, medium, year'],
   empty:[q=>`没有找到包含“${q}”的条目，换个关键词试试。`,q=>`No entries match “${q}”. Try another word.`],
   works:[n=>`${n} 件`,n=>`${n} works`],frames:[n=>`${n} 张`,n=>`${n} frames`],texts:[n=>`${n} 篇`,n=>`${n} texts`],
@@ -660,7 +665,7 @@ const ENTRY=[
 ];
 function vIndex(){
   return `<div class="home"><section class="hero">
-      <div><q>${L(T.quote)}</q><p class="by cap">${L(T.quoteBy)}</p></div>
+      <div><q>${L(T.quote)}</q><p class="by tr">${L(T.quoteBy)}</p></div>
       <div class="hero-side"><span class="cap">${L(PF.media)}</span><p>${L(T.heroSide)}</p></div>
     </section>
     <section class="drum-wrap" aria-label="${lang==='en'?'Sections':'栏目'}">
