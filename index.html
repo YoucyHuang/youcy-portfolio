@@ -1,0 +1,1094 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>黄鈺茜 · Youcy Huang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#191817; --ink2:#5E5A55; --ink3:#9A958E; --rule:#E5E1DB; --hair:#F0EDE9; --mat:#F4F3F1;
+  --veil:rgba(255,255,255,.46); --bar:rgba(255,255,255,.78);
+  /* 取自作品的颜色：本真的朱红、诗影的金、畲山养物的绿、风起东坂的蓝 */
+  --c-p:#C8452F; --c-f:#D3951B; --c-d:#5E7F4E; --c-w:#2F5D8A;
+  --cn:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --en:"EB Garamond","Garamond","Times New Roman",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --serif:var(--cn);
+}
+:root:lang(en){--serif:var(--en),var(--cn)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131211; --ink:#EEEAE4; --ink2:#ABA59C; --ink3:#77726B; --rule:#2C2A27; --hair:#201E1C; --mat:#1B1A18;
+    --veil:rgba(19,18,17,.5); --bar:rgba(19,18,17,.8);
+    --c-p:#E0603F; --c-f:#E8AE3A; --c-d:#86A874; --c-w:#6E9BCB; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131211; --ink:#EEEAE4; --ink2:#ABA59C; --ink3:#77726B; --rule:#2C2A27; --hair:#201E1C; --mat:#1B1A18;
+  --veil:rgba(19,18,17,.5); --bar:rgba(19,18,17,.8);
+  --c-p:#E0603F; --c-f:#E8AE3A; --c-d:#86A874; --c-w:#6E9BCB; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.85;-webkit-font-smoothing:antialiased}
+:lang(en) body{font-family:var(--en);font-size:18px;line-height:1.6}
+a{color:inherit}
+img{max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+/* 标签：字距拉开的大写衬线，与作者自己的项目书一致 */
+.cap{font-family:var(--en);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink3);font-weight:400}
+.num{font-family:var(--en);font-variant-numeric:lining-nums tabular-nums;letter-spacing:.06em;color:var(--ink3);font-size:13px}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--dc,var(--ink));flex:none;vertical-align:middle}
+
+/* ============ 入口页 ============ */
+.splash{position:fixed;inset:0;z-index:40;background:var(--bg);overflow:hidden;transition:opacity .9s ease,visibility .9s}
+.splash.out{opacity:0;visibility:hidden}
+.sp-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 6s ease-out}
+.splash.ready .sp-art{transform:scale(1)}
+.veil{position:absolute;inset:0;background:var(--veil);-webkit-backdrop-filter:blur(26px) saturate(1.15);backdrop-filter:blur(26px) saturate(1.15);
+  --x:68%;--y:46%;--r:min(26vmax,420px);
+  -webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0,transparent 42%,#000 100%);
+          mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0,transparent 42%,#000 100%)}
+.sp-ui{position:relative;height:100%;display:grid;grid-template-rows:auto 1fr auto;padding-inline:clamp(18px,4.5vw,64px);padding-block:calc(env(safe-area-inset-top,0px) + 26px) calc(env(safe-area-inset-bottom,0px) + 26px);pointer-events:none}
+.sp-ui>*{pointer-events:auto}
+.sp-top{display:flex;justify-content:space-between;gap:16px}
+.sp-mid{align-self:center;display:grid;gap:10px;max-width:640px}
+.sp-name{margin:0;font-family:var(--cn);font-weight:600;font-size:clamp(46px,7vw,104px);line-height:1.05;letter-spacing:.16em}
+.sp-en{margin:0;font-family:var(--en);font-style:italic;font-size:clamp(22px,2.4vw,32px);color:var(--ink)}
+.sp-media{margin:18px 0 0;font-family:var(--cn);font-size:14px;letter-spacing:.3em;color:var(--ink)}
+.sp-media span{display:block;margin-top:4px}
+.sp-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 40px}
+.sp-lang{display:flex;gap:0;border-top:1px solid var(--ink)}
+.sp-lang button{background:none;border:0;padding:16px 40px 4px 0;text-align:left;display:grid;gap:2px}
+.sp-lang button+button{padding-left:28px;border-left:1px solid var(--rule)}
+.sp-lang .l{font-size:clamp(24px,2.6vw,34px);line-height:1.2}
+.sp-lang button:first-child .l{font-family:var(--cn);letter-spacing:.18em}
+.sp-lang button:last-child .l{font-family:var(--en)}
+.sp-lang .s{display:flex;align-items:center;gap:12px}
+.sp-lang .s i{display:block;height:1px;width:22px;background:currentColor;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.sp-lang button:hover .s,.sp-lang button:focus-visible .s{color:var(--c-p)}
+.sp-lang button:hover .s i,.sp-lang button:focus-visible .s i{width:60px}
+.sp-cap{margin:0;max-width:30em;text-align:right;font-family:var(--serif);font-size:13px;color:var(--ink2)}
+.splash .cap{color:var(--ink2)}
+.sp-hint{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);pointer-events:none}
+@media (max-width:700px){.sp-hint{display:none}.sp-cap{text-align:left}}
+
+/* ============ 页眉页脚 ============ */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid var(--rule)}
+.top-in{max-width:1440px;margin:0 auto;padding-inline:clamp(16px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:12px 28px;min-height:64px;flex-wrap:wrap}
+.mark{display:flex;align-items:baseline;gap:12px;text-decoration:none;background:none;border:0;padding:6px 0}
+.mark b{font-family:var(--cn);font-weight:600;font-size:18px;letter-spacing:.14em}
+.mark i{font-family:var(--en);font-size:16px;color:var(--ink2)}
+.nav{display:flex;align-items:center;gap:4px clamp(14px,2.4vw,34px);flex-wrap:wrap}
+.nav a{position:relative;text-decoration:none;font-size:14px;color:var(--ink2);padding-block:6px;transition:color .2s}
+:lang(en) .nav a{font-size:17px}
+.nav a:hover{color:var(--ink)}
+.nav a.on{color:var(--ink)}
+.nav a.on::after{content:"";position:absolute;left:50%;bottom:-2px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--dc,var(--ink))}
+.lang{display:flex;gap:8px;align-items:center;padding-left:clamp(10px,2vw,24px);border-left:1px solid var(--rule)}
+.lang button{background:none;border:0;padding:4px 0;font-family:var(--en);font-size:13px;letter-spacing:.14em;color:var(--ink3)}
+.lang button[aria-pressed="true"]{color:var(--ink)}
+.wrap{max-width:1440px;margin:0 auto;padding-inline:clamp(16px,4vw,56px)}
+footer{border-top:1px solid var(--rule);margin-top:40px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 28px;padding-block:28px 48px;font-size:12.5px;color:var(--ink3)}
+.view{animation:fade .6s ease-out}
+@keyframes fade{from{opacity:.25}to{opacity:1}}
+
+/* ============ 通用 ============ */
+.ph{padding-block:72px 40px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 40px;align-items:end}
+.ph h1{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.6vw,64px);line-height:1.1;letter-spacing:.06em}
+:lang(en) .ph h1{letter-spacing:0}
+.ph h1 small{display:block;margin-top:10px}
+.ph p{margin:0;max-width:30em;color:var(--ink2)}
+@media (max-width:800px){.ph{grid-template-columns:1fr;padding-block:48px 28px}}
+/* 系列 / 栏目切换：做成带封面的大卡片，让人一眼看出“这里还有别的系列” */
+.switch{padding-block:22px 4px;border-top:1px solid var(--rule)}
+.switch-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px}
+.switch-h .cap:first-child{color:var(--ink)}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
+.tab{display:grid;grid-template-columns:72px minmax(0,1fr) auto;align-items:center;gap:18px;padding:10px 22px 10px 10px;background:var(--bg);border:1px solid var(--rule);text-align:left;color:var(--ink2);transition:border-color .25s,box-shadow .25s,color .25s,transform .25s}
+.tab img,.tab .tg{display:block;width:72px;height:72px;object-fit:cover;background:var(--mat);transition:filter .3s,opacity .3s}
+.tab .tg{display:grid;place-items:center;font-family:var(--cn);font-size:30px;color:var(--dc)}
+.tab .tc{display:grid;gap:4px;min-width:0}
+.tab b{font-family:var(--serif);font-weight:400;font-size:clamp(20px,1.9vw,26px);line-height:1.25}
+.tab i{font-style:normal;font-size:18px;color:var(--ink3);transition:color .25s,transform .25s}
+.tab:hover{border-color:var(--ink3);color:var(--ink);transform:translateY(-2px)}
+.tab:hover i{color:var(--dc);transform:translateX(3px)}
+.tab:not([aria-pressed="true"]) img{filter:saturate(.55);opacity:.75}
+.tab:hover img{filter:none;opacity:1}
+.tab[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);box-shadow:inset 0 -3px 0 var(--dc);transform:none;cursor:default}
+.tab[aria-pressed="true"] i{color:var(--dc);font-size:11px}
+.tab[aria-pressed="true"] .cap{color:var(--dc)}
+.modes{display:flex;gap:20px;flex-wrap:wrap}
+.modes button{background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;font-family:var(--en);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
+:lang(zh-CN) .modes button{font-family:var(--sans);font-size:13px;letter-spacing:.12em}
+.modes button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px clamp(32px,6vw,96px);padding-block:48px 40px}
+.intro h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.8vw,38px);line-height:1.25}
+.intro .meta{margin-top:12px;display:grid;gap:4px}
+.intro .say{display:grid;gap:1em}
+.intro .say p{margin:0;font-family:var(--serif);font-size:16px;line-height:2.05;color:var(--ink)}
+:lang(en) .intro .say p{font-size:19px;line-height:1.6}
+.intro .say p.line{font-size:clamp(20px,2vw,26px);line-height:1.6}
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding-block:14px;border-top:1px solid var(--ink);margin-bottom:28px}
+.back{display:inline-block;padding-block:28px 6px;text-decoration:none}
+.back:hover{color:var(--ink)}
+.more{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--rule);padding-block:18px 8px;margin-top:40px;font-size:14px}
+.more a{text-decoration:none;color:var(--ink2)} .more a:hover{color:var(--ink)}
+.empty{padding:28px 0;color:var(--ink2)}
+
+/* ============ 首页 ============ */
+.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:28px clamp(32px,6vw,110px);padding-block:clamp(56px,8vw,112px) 48px;align-items:end}
+.hero q{display:block;quotes:none;font-family:var(--serif);font-size:clamp(26px,3.3vw,46px);line-height:1.45;letter-spacing:.02em;text-wrap:balance}
+:lang(en) .hero q{line-height:1.25}
+.hero .by{margin-top:22px}
+.hero-side{display:grid;gap:14px;padding-bottom:6px}
+.hero-side p{margin:0;color:var(--ink2)}
+.hero-side .links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:6px}
+.hero-side .links a{text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-family:var(--serif)}
+.hero-side .links a:hover{color:var(--c-p)}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+/* 入口照片是夜里的橘黄灯光（取样约 #B3823F），进首页后留一点它的余温：右上角一团暖光、几处琥珀色细节 */
+:root{--amber:#B3823F;--amber-glow:rgba(214,140,58,.20);--amber-glow2:rgba(232,176,92,.14)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--amber:#D9A35C;--amber-glow:rgba(214,130,48,.20);--amber-glow2:rgba(230,160,80,.10)}}
+:root[data-theme="dark"]{--amber:#D9A35C;--amber-glow:rgba(214,130,48,.20);--amber-glow2:rgba(230,160,80,.10)}
+html{overflow-x:clip}
+.home{position:relative;isolation:isolate}
+.home::before{content:"";position:absolute;z-index:-1;pointer-events:none;top:-140px;right:calc(clamp(16px,4vw,56px) * -1 - 6vw);
+  width:min(78vw,980px);height:min(78vw,760px);
+  background:radial-gradient(closest-side at 62% 42%,var(--amber-glow),transparent 72%),radial-gradient(closest-side at 30% 70%,var(--amber-glow2),transparent 70%);
+  filter:blur(8px);animation:ember 9s ease-in-out infinite alternate}
+@keyframes ember{from{opacity:.75;transform:translate3d(0,0,0) scale(1)}to{opacity:1;transform:translate3d(-2%,1.5%,0) scale(1.04)}}
+.home .hero .by{color:var(--amber)}
+.home .hero .by::before{content:"";display:inline-block;width:28px;height:1px;background:var(--amber);vertical-align:middle;margin-right:10px}
+.home .hero-side .cap{color:var(--amber)}
+.home .table-h{border-top:0;background:linear-gradient(90deg,var(--amber),var(--rule) 38%) top/100% 1px no-repeat}
+#drumNow{color:var(--amber)}
+@media (prefers-reduced-motion:reduce){.home::before{animation:none}}
+/* 首页滚筒：四张卡片围成一圈，缓缓旋转 */
+.drum-wrap{padding-block:8px 96px}
+.table-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;border-top:1px solid var(--rule)}
+.drum{--cw:clamp(170px,21vw,290px);position:relative;height:calc(var(--cw) * 4 / 3 + 120px);perspective:1500px;perspective-origin:50% 40%;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;overflow:hidden}
+.drum.drag{cursor:grabbing}
+.ring{position:absolute;left:50%;top:44px;width:var(--cw);aspect-ratio:3/4;margin-left:calc(var(--cw) / -2);transform-style:preserve-3d}
+.card3{position:absolute;inset:0;display:block;overflow:hidden;background:var(--mat);color:#fff;text-decoration:none;backface-visibility:hidden;
+  box-shadow:0 2px 4px rgba(0,0,0,.08),0 24px 50px -20px rgba(0,0,0,.4);
+  filter:brightness(calc(.55 + .45 * max(var(--f,1), 0))) saturate(calc(.5 + .5 * max(var(--f,1), 0)))}
+.card3 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.card3::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--dc);z-index:2}
+.card3::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.72),rgba(10,9,8,0) 58%)}
+.card3 .et{position:absolute;left:0;right:0;bottom:0;z-index:1;display:grid;gap:5px;padding:clamp(14px,1.8vw,24px)}
+.card3 .en{font-family:var(--en);font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:.85}
+.card3 b{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--cn);font-weight:400;font-size:clamp(24px,2.6vw,38px);line-height:1.1;letter-spacing:.1em}
+:lang(en) .card3 b{font-family:var(--en);letter-spacing:.02em}
+.card3 b i{font-style:normal;font-size:20px;opacity:0;transition:opacity .3s,transform .4s}
+.card3 small{font-size:12.5px;opacity:.85}
+.card3.front b i{opacity:1}
+.card3.front:hover b i{transform:translateX(5px)}
+.card3:focus-visible{outline:2px solid #fff;outline-offset:-6px}
+/* 地面上的一圈淡影，让滚筒“落”在页面上 */
+.drum::after{content:"";position:absolute;left:50%;bottom:26px;width:min(70%,640px);height:34px;transform:translateX(-50%);
+  background:radial-gradient(closest-side,rgba(120,72,20,.20),transparent);pointer-events:none}
+@media (max-width:640px){.drum{--cw:52vw;perspective:900px}}
+.entries{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.4vw,20px);padding-block:8px 104px}
+.entry{position:relative;display:block;aspect-ratio:3/4;max-width:100%;overflow:hidden;background:var(--mat);text-decoration:none;color:#fff}
+.entry img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.entry::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--dc);z-index:2;transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.entry::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.68),rgba(10,9,8,0) 58%)}
+.entry .et{position:absolute;left:0;right:0;bottom:0;z-index:1;display:grid;gap:6px;padding:clamp(16px,2vw,28px)}
+.entry .en{font-family:var(--en);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.85}
+.entry b{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--cn);font-weight:400;font-size:clamp(28px,3vw,44px);line-height:1.1;letter-spacing:.1em}
+:lang(en) .entry b{font-family:var(--en);letter-spacing:.02em}
+.entry b i{font-style:normal;font-size:22px;transition:transform .45s}
+.entry small{font-size:13px;opacity:.85}
+.entry:hover img,.entry:focus-visible img{transform:scale(1.05)}
+.entry:hover::before,.entry:focus-visible::before{transform:scaleX(1)}
+.entry:hover b i,.entry:focus-visible b i{transform:translateX(6px)}
+@media (max-width:980px){.entries{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.entries{grid-template-columns:1fr}.entry{aspect-ratio:4/3}}
+.band{display:flex;gap:clamp(6px,.8vw,12px);height:clamp(150px,22vw,320px);margin-inline:calc(clamp(16px,4vw,56px) * -1);padding-inline:clamp(16px,4vw,56px);overflow-x:auto;scrollbar-width:none}
+.band::-webkit-scrollbar{display:none}
+.band a{flex:none;height:100%;display:block;position:relative}
+.band img{height:100%;width:auto;display:block;transition:filter .5s}
+.band a .dot{position:absolute;left:10px;bottom:10px;box-shadow:0 0 0 2px rgba(255,255,255,.7)}
+.band:hover img{filter:saturate(.55) brightness(1.04)}
+.band a:hover img{filter:none}
+.sec-title{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-block:72px 18px;border-bottom:1px solid var(--rule);margin-bottom:26px}
+.sec-title h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.2vw,30px)}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px clamp(14px,2vw,28px)}
+@media (max-width:980px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.card{text-decoration:none;display:grid;gap:12px}
+.card .im{position:relative;aspect-ratio:4/5;max-width:100%;overflow:hidden;background:var(--mat)}
+.card .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.card:hover .im img{transform:scale(1.04)}
+.card .im.text{display:grid;align-content:end;padding:22px}
+.card .im.text b{font-family:var(--serif);font-weight:400;font-size:clamp(18px,1.8vw,24px);line-height:1.5}
+.card .t{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:17px}
+:lang(en) .card .t{font-size:20px}
+.card .k{margin-top:-8px;font-size:12.5px;color:var(--ink3)}
+.card:hover .t{color:var(--dc)}
+.tools{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px 20px}
+.chip{background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink3)}
+:lang(en) .chip{font-size:16px}
+.chip .dot{opacity:.4}
+.chip[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.chip[aria-pressed="true"] .dot{opacity:1}
+.search{font:inherit;font-size:13.5px;background:transparent;color:var(--ink);border:0;border-bottom:1px solid var(--rule);padding:4px 0;width:200px;max-width:100%}
+.search:focus{outline:none;border-bottom-color:var(--ink)}
+.search::placeholder{color:var(--ink3)}
+.rows{margin-bottom:40px}
+.row{display:grid;grid-template-columns:110px 10px minmax(0,1fr) minmax(0,240px) 54px;gap:18px;align-items:baseline;padding-block:14px;border-bottom:1px solid var(--hair);text-decoration:none;transition:padding .3s}
+.row .dot{align-self:center}
+.row .t{font-family:var(--serif);font-size:16px}
+:lang(en) .row .t{font-size:19px}
+.row .m{font-size:13px;color:var(--ink2)}
+:lang(en) .row .m{font-size:15px}
+.row .y{text-align:right}
+.row:hover{padding-left:10px}
+.row:hover .t{color:var(--dc)}
+@media (max-width:700px){.row{grid-template-columns:72px 8px minmax(0,1fr) 40px;gap:12px}.row .m{display:none}}
+
+/* ============ 绘画 ============ */
+.pgroup{padding-bottom:72px}
+.pg-h{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline;padding-block:12px 26px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink2)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:52px clamp(18px,2.4vw,36px)}
+.pcard{text-decoration:none;display:grid;gap:12px}
+.mat{position:relative;aspect-ratio:1;max-width:100%;background:var(--mat)}
+.mat img{position:absolute;inset:10%;width:80%;height:80%;object-fit:contain;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pcard:hover .mat img{transform:scale(1.035)}
+.pcap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:baseline}
+.pcap b{font-family:var(--serif);font-weight:400;font-size:15px}
+:lang(en) .pcap b{font-size:18px}
+.pcard:hover .pcap b{color:var(--dc)}
+.scroll{--h:420px;direction:rtl;display:flex;align-items:flex-end;gap:clamp(44px,6vw,100px);overflow-x:auto;padding:64px clamp(24px,4vw,64px) 44px;background:var(--mat);scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.scroll-item{direction:ltr;flex:none;display:flex;align-items:flex-end;gap:16px;text-decoration:none}
+.scroll-item img{display:block;height:var(--h);width:auto}
+.tiba{writing-mode:vertical-rl;display:flex;gap:12px;height:var(--h);font-family:var(--cn);font-size:12px;color:var(--ink3);letter-spacing:.16em}
+.tiba b{font-weight:400;color:var(--ink);font-size:14px;letter-spacing:.24em}
+:lang(en) .tiba{font-family:var(--en);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+:lang(en) .tiba b{text-transform:none;font-size:15px;letter-spacing:.04em}
+.scroll-item:hover .tiba b{color:var(--dc)}
+.hint{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-block:14px 88px;margin:0}
+@media (max-width:640px){.scroll{--h:260px}}
+.scale{--k:4.4px;overflow-x:auto;background:var(--mat);padding:64px clamp(24px,4vw,64px) 30px;scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.wall{display:flex;align-items:flex-end;gap:calc(var(--k) * 8);width:max-content;padding-bottom:32px;border-bottom:1px solid var(--ink)}
+.sw{position:relative;flex:none;display:block;width:calc(var(--w) * var(--k));height:calc(var(--h) * var(--k))}
+.sw img{display:block;width:100%;height:100%;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+.sw .num{position:absolute;left:0;top:calc(100% + 10px);white-space:nowrap;font-size:11px}
+.ruler{position:relative;margin-top:22px;width:calc(var(--k) * 100);height:26px}
+.ruler i{position:absolute;left:0;right:0;top:0;height:6px;border:1px solid var(--ink2);border-top:0}
+.ruler i::after{content:"";position:absolute;left:50%;top:0;height:4px;border-left:1px solid var(--ink2)}
+.ruler span{position:absolute;top:10px;font-family:var(--en);font-size:11px;color:var(--ink3);white-space:nowrap}
+.ruler span:nth-of-type(2){left:50%;transform:translateX(-50%)}
+.ruler span:nth-of-type(3){left:100%;transform:translateX(-50%)}
+@media (max-width:640px){.scale{--k:2.6px}}
+.pseq{display:grid;gap:clamp(72px,10vw,150px);padding-block:40px 120px}
+.pw{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px clamp(28px,4vw,64px);align-items:end}
+.pw.r{grid-template-columns:260px minmax(0,1fr)}
+.pw figure{margin:0;min-width:0;display:flex;justify-content:flex-end}
+.pw.r figure{order:2;justify-content:flex-start}
+.pw .phb{width:auto;max-width:100%}
+.pw img{display:block;width:auto;height:auto;max-width:100%;max-height:min(84vh,980px)}
+.pw2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px clamp(24px,4vw,64px);align-items:end}
+.pwc{display:grid;gap:22px;align-content:end;min-width:0}
+.pwc figure{margin:0;display:flex;justify-content:center}
+.pwc .phb{width:auto;max-width:100%}
+.pwc img{display:block;width:auto;height:auto;max-width:100%;max-height:min(70vh,760px)}
+.pwc .pw-info{max-width:30em}
+@media (max-width:760px){.pw2{grid-template-columns:1fr}}
+/* b 系列：深色展厅，背景铺满整屏宽 */
+.pdark{--ink:#EEEAE4;--ink2:#ABA59C;--ink3:#7E786F;--rule:#2E2B28;--hair:#221F1D;--mat:#1C1A18;
+  background:#121110;color:var(--ink);box-shadow:0 0 0 100vmax #121110;clip-path:inset(0 -100vmax);padding-block:40px 24px;margin-top:24px}
+.pdark .pg-h{border-top-color:transparent;color:var(--ink2)}
+.pdark .pseq{padding-bottom:96px}
+.pdark img{box-shadow:0 18px 50px rgba(0,0,0,.45)}
+/* 绘画模块：深灰展厅。墙面上亮下暗，每幅画头顶一束偏暖的聚光 */
+body{transition:background-color .6s ease}
+/* 底色直接写在 html 和 body 上；渐变放在单独一层固定的伪元素里，图很多时浏览器也不会退回白底 */
+html.gallery{background:#232220}
+body.gallery{--bg:#262523;--ink:#ECE8E1;--ink2:#B5AFA6;--ink3:#857F76;--rule:#3B3936;--hair:#312F2C;--mat:#2E2C29;--bar:rgba(34,33,31,.94);color-scheme:dark;background:transparent}
+body.gallery::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 130% 70% at 50% -10%,#3A3835 0,#2A2927 45%,#1E1D1C 100%)}
+body.gallery .tab{background:#2A2927}
+body.gallery .pw .phb,body.gallery .pwc .phb,body.gallery .pd-img .zoom{position:relative;z-index:0}
+body.gallery .pw .phb::before,body.gallery .pwc .phb::before,body.gallery .pd-img .zoom::before{content:"";position:absolute;z-index:-1;pointer-events:none;
+  inset:-26% -22% -10% -22%;
+  background:radial-gradient(52% 62% at 50% 6%,rgba(255,236,204,.22),rgba(255,228,186,.08) 46%,rgba(255,228,186,0) 74%)}
+body.gallery .pw img,body.gallery .pwc img{box-shadow:0 26px 40px -18px rgba(0,0,0,.65),0 2px 6px rgba(0,0,0,.35)}
+body.gallery .pd-img{background:transparent}
+body.gallery .pdet img{box-shadow:0 8px 16px -6px rgba(0,0,0,.6)}
+body.gallery .framed .pw .phb{box-shadow:inset 0 0 0 1px rgba(168,138,82,.7),0 0 0 1px rgba(255,255,255,.05),0 30px 60px -22px rgba(0,0,0,.75)}
+/* 本真：一行一张，画与画之间留得更开，配极简古典画框（深胡桃木细框 + 一线金 + 象牙白卡纸） */
+.pseq.framed{gap:clamp(120px,15vw,240px)}
+.framed .pw .phb{padding:clamp(12px,1.6vw,26px);background:#F4F0E8;border:clamp(5px,.5vw,8px) solid #2A231D;
+  box-shadow:inset 0 0 0 1px rgba(168,138,82,.7),0 1px 0 rgba(255,255,255,.06),0 22px 44px -22px rgba(0,0,0,.45)}
+.framed .pw img{max-height:min(74vh,860px);box-shadow:0 0 0 1px rgba(40,30,20,.14)}
+/* 局部图 */
+.pdet{grid-column:1/-1;display:grid;gap:10px;margin-top:6px}
+.pdet>div{display:flex;flex-wrap:wrap;gap:10px}
+.pdet .phb{width:auto}
+.pdet img{display:block;height:clamp(80px,9vw,128px);width:auto;max-width:100%;object-fit:cover;opacity:.9;transition:opacity .2s,transform .3s}
+.pdet .phb:hover img{opacity:1;transform:translateY(-2px)}
+.pd-meta .pdet{margin-block:4px 18px}
+.pd-meta .pdet img{height:72px}
+.pw-info{display:grid;gap:4px;padding-bottom:4px}
+.pw-info h3{margin:6px 0 0;font-family:var(--serif);font-weight:400;font-size:clamp(22px,2vw,28px);line-height:1.3}
+.pw-info h3 a{text-decoration:none;transition:color .2s}
+.pw-info h3 a:hover{color:var(--dc)}
+.pw-info .alt{margin:0;font-family:var(--serif);color:var(--ink3)}
+.pw-info dl.meta{margin:14px 0 0}
+@media (max-width:760px){.pw,.pw.r{grid-template-columns:1fr}.pw.r figure{order:0}.pw figure,.pw.r figure{justify-content:center}}
+.pdetail{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:clamp(28px,5vw,80px);padding-block:16px 96px;align-items:start}
+@media (max-width:900px){.pdetail{grid-template-columns:1fr}}
+.pd-img{margin:0;background:var(--mat);padding:clamp(22px,5vw,80px)}
+.zoom{display:block;width:100%;background:none;border:0;padding:0;cursor:zoom-in}
+.pd-img img{display:block;width:100%;height:min(74vh,840px);object-fit:contain}
+.pd-meta{position:sticky;top:96px}
+.pd-meta h1{margin:10px 0 0;font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.25}
+.pd-meta .alt{margin:6px 0 0;font-family:var(--serif);color:var(--ink3)}
+dl.meta{display:grid;grid-template-columns:auto 1fr;gap:10px 24px;margin:26px 0;padding-top:18px;border-top:1px solid var(--ink);font-size:14px}
+:lang(en) dl.meta{font-size:16px}
+dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
+
+/* ============ 摄影 ============ */
+.seq{display:grid;gap:clamp(72px,11vw,160px);padding-block:48px 120px}
+.sq{display:grid;gap:clamp(14px,2.4vw,32px);align-items:end}
+.sq figure{margin:0;display:grid;gap:10px;min-width:0}
+.sq.one{justify-items:center}
+.sq.one figure{width:min(100%,1180px)}
+.sq.one.narrow figure{width:min(100%,780px)}
+.sq.one.port figure{width:min(100%,540px)}
+.sq.one.l{justify-items:start}
+.sq.one.r{justify-items:end}
+.sq.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sq.pair.pp{max-width:1040px;margin-inline:auto;width:100%}
+.phb{display:block;width:100%;background:none;border:0;padding:0;cursor:zoom-in}
+.phb img{display:block;width:100%;height:auto}
+.sq figcaption{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline}
+@media (max-width:640px){.sq.pair{grid-template-columns:1fr}.sq.one.l,.sq.one.r{justify-items:center}}
+.csheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:24px 14px;padding:36px clamp(16px,3vw,40px);background:var(--mat)}
+.cs{background:none;border:0;padding:0;display:grid;gap:6px;justify-items:start;cursor:zoom-in}
+.csf{position:relative;display:block;width:100%;aspect-ratio:3/2;max-width:100%}
+.csf img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.cs:hover .num{color:var(--dc)}
+
+/* ============ 项目 ============ */
+.plist{display:grid;gap:clamp(72px,10vw,140px);padding-block:24px 96px}
+.prow{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px clamp(28px,5vw,80px);align-items:center;text-decoration:none}
+.prow:nth-child(even){grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.prow:nth-child(even) .pim{order:2}
+.pim{position:relative;aspect-ratio:3/2;max-width:100%;overflow:hidden;background:var(--mat)}
+.pim img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+.prow:hover .pim img{transform:scale(1.03)}
+.ptx{display:grid;gap:14px}
+.ptx h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,42px);line-height:1.2}
+.ptx .sub{margin:-6px 0 0;font-family:var(--serif);color:var(--ink2);font-size:16px}
+:lang(en) .ptx .sub{font-size:19px}
+.ptx p{margin:0;color:var(--ink2)}
+.ptx .go{display:inline-flex;align-items:center;gap:12px;margin-top:6px;font-family:var(--serif)}
+.ptx .go i{display:block;width:26px;height:1px;background:currentColor;transition:width .5s}
+.prow:hover .go{color:var(--dc)} .prow:hover .go i{width:60px}
+@media (max-width:860px){.prow,.prow:nth-child(even){grid-template-columns:1fr}.prow:nth-child(even) .pim{order:0}}
+.pj-head{padding-block:24px 36px;display:grid;gap:12px}
+.pj-head h1{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.6vw,80px);line-height:1.1;letter-spacing:.04em}
+:lang(en) .pj-head h1{letter-spacing:0}
+.pj-head .sub{margin:0;font-family:var(--serif);font-size:clamp(17px,1.6vw,22px);color:var(--ink2)}
+.pj-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px 28px;padding-block:20px;border-block:1px solid var(--rule);margin-bottom:40px}
+.pj-meta div{display:grid;gap:6px;align-content:start}
+.pj-meta dd{margin:0;font-family:var(--serif);font-size:15px;line-height:1.6}
+:lang(en) .pj-meta dd{font-size:17px}
+@media (max-width:860px){.pj-meta{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pj-hero{margin:0 calc(clamp(16px,4vw,56px) * -1);background:var(--mat);display:flex;justify-content:center;align-items:flex-end;gap:clamp(10px,2vw,28px);padding:clamp(20px,4vw,56px) clamp(16px,4vw,56px)}
+.pj-hero img{display:block;width:auto;height:auto;max-width:100%;max-height:78vh;min-width:0}
+.pj-hero.set img{flex:1 1 0;max-height:62vh;object-fit:contain}
+.pim.set{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:8px}
+.pim.set img{position:static;width:100%;height:100%;object-fit:cover}
+.pj-lead{max-width:30em;margin:clamp(48px,7vw,96px) 0;font-family:var(--serif);font-size:clamp(22px,2.4vw,32px);line-height:1.6}
+:lang(en) .pj-lead{line-height:1.4}
+.pj-sec{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:20px clamp(32px,6vw,96px);padding-block:40px;border-top:1px solid var(--rule)}
+.pj-sec h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(19px,1.7vw,24px);line-height:1.4}
+.pj-sec h2 .num{display:block;margin-bottom:8px}
+.pj-sec .tx{display:grid;gap:1.1em;max-width:40em}
+.pj-sec .tx p{margin:0;font-family:var(--serif);font-size:16px;line-height:2}
+:lang(en) .pj-sec .tx p{font-size:19px;line-height:1.6}
+.pj-sec ol{margin:0;padding-left:1.4em;display:grid;gap:.7em;font-family:var(--serif)}
+.pj-sec ol li::marker{font-family:var(--en);color:var(--dc)}
+@media (max-width:860px){.pj-sec{grid-template-columns:1fr}}
+.pj-fig{margin:8px 0 56px;display:grid;gap:12px}
+.pj-fig .ims{display:grid;gap:clamp(12px,2vw,24px);grid-template-columns:repeat(var(--n,1),minmax(0,1fr));align-items:end}
+.pj-fig .ims img{display:block;width:100%;height:auto;background:var(--mat)}
+.pj-fig.solo .ims{max-width:1100px}
+@media (max-width:640px){.pj-fig .ims{grid-template-columns:1fr}}
+
+/* ============ 文字 ============ */
+.wrow{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:4px 22px;align-items:baseline;padding-block:22px;border-bottom:1px solid var(--hair);text-decoration:none;transition:padding .3s}
+.wrow:hover{padding-left:10px}
+.wt{font-family:var(--serif);font-size:20px;transition:color .2s}
+:lang(en) .wt{font-size:23px}
+.wt small{display:block;font-size:14px;color:var(--ink2);margin-top:2px}
+.wrow:hover .wt{color:var(--c-w)}
+.wm{font-size:12.5px;color:var(--ink3);text-align:right;font-variant-numeric:tabular-nums}
+.wx{grid-column:2/4;margin:0;font-size:14px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:lang(en) .wx{font-size:16px}
+.wlist{padding-bottom:88px}
+@media (max-width:640px){.wrow{grid-template-columns:minmax(0,1fr) auto}.wrow .num,.wx{grid-column:1/-1}}
+/* 诗 */
+.poems{display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px clamp(32px,7vw,120px);padding-block:40px 120px;align-items:start}
+.po-toc{position:sticky;top:96px;max-height:calc(100vh - 120px);overflow:auto;display:grid;gap:12px;scrollbar-width:thin}
+.po-toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.po-toc button{width:100%;background:none;border:0;padding:6px 0;display:grid;gap:1px;text-align:left;color:var(--ink2)}
+.po-toc button b{font-family:var(--serif);font-weight:400;font-size:15px}
+.po-toc button .num{font-size:11px}
+.po-toc button:hover{color:var(--c-w)}
+.po-list{max-width:34em}
+.poem header{display:grid;gap:8px;margin-bottom:28px}
+.poem h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,32px);letter-spacing:.08em}
+.po-l p{margin:0;padding-left:2em;text-indent:-2em;font-family:var(--serif);font-size:17px;line-height:2.15;letter-spacing:.03em}
+.po-l .po-br{display:block;height:1.2em}
+.po-orn{margin:clamp(72px,9vw,120px) 0;color:var(--ink3);font-size:12px;letter-spacing:.4em}
+@media (max-width:760px){.poems{grid-template-columns:1fr}.po-toc{position:static;max-height:none}.po-toc ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 16px}}
+/* 随记 */
+.diary{padding-bottom:96px}
+.dy{padding-top:64px}
+.dy-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:12px;border-bottom:1px solid var(--ink)}
+.dy-h h2{margin:0;font-family:var(--en);font-weight:400;font-size:clamp(44px,5.4vw,76px);line-height:1;letter-spacing:.02em;color:var(--c-w)}
+.de{display:grid;grid-template-columns:190px minmax(0,36em);gap:10px clamp(28px,6vw,96px);padding-block:40px;border-bottom:1px solid var(--hair)}
+.de-d{position:sticky;top:96px;align-self:start;display:grid;gap:2px;font-family:var(--serif);font-size:17px;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.de-d small{font-size:13px;color:var(--ink3);letter-spacing:.1em}
+.de-b p{margin:0 0 1.1em;font-family:var(--serif);font-size:16.5px;line-height:2.1;text-indent:2em;text-align:justify}
+.de-b p:last-of-type{margin-bottom:0}
+.de-b p.v{text-indent:0;margin:0;padding-left:2em;color:var(--ink2);line-height:2}
+.de-b p.v+p:not(.v){margin-top:1.1em}
+.de-b figure{margin:1.4em 0;background:var(--mat);padding:clamp(12px,2.4vw,24px)}
+.de-b figure img{display:block;max-width:100%;max-height:64vh;margin:0 auto}
+.de-b h3{margin:1.6em 0 .7em;font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.08em}
+.de-b h3:first-child{margin-top:0}
+.de-b .de-n{text-indent:0;margin:1.4em 0 .4em;font-family:var(--en);font-size:13px;color:var(--ink3);letter-spacing:.2em}
+.de-b .de-br{display:block;height:1.1em}
+.de-sep{border:0;height:auto;margin:1.8em 0;text-align:center;color:var(--ink3)}
+.de-sep::before{content:"·  ·  ·";letter-spacing:.3em;font-size:13px}
+.de.fold .de-b>:is(p,h3,hr,figure,.de-br):nth-child(n+7){display:none}
+.de.fold .de-b>p:nth-child(6){-webkit-mask-image:linear-gradient(#000 30%,transparent);mask-image:linear-gradient(#000 30%,transparent)}
+.de-more{margin-top:18px;height:auto;padding:4px 0;border:0;border-bottom:1px solid var(--ink);background:none;font-size:13px;letter-spacing:.06em}
+.de-more:hover{color:var(--c-w);border-color:var(--c-w)}
+@media (max-width:760px){.de{grid-template-columns:1fr;padding-block:30px}.de-d{position:static;display:flex;gap:12px;align-items:baseline}}
+.reader{max-width:36em;margin:0 auto;padding-block:8px 104px}
+.reader h1{margin:12px 0 6px;font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.8vw,44px);line-height:1.3;text-wrap:balance}
+.rsub{font-family:var(--serif);font-size:18px;color:var(--ink2);margin:0}
+.rbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-block:12px;margin-block:22px 36px;border-block:1px solid var(--rule);font-size:13px;color:var(--ink2)}
+.prose p{font-family:var(--serif);font-size:17px;line-height:2.1;margin-block:0 1.2em;margin-inline:0;text-indent:2em;text-align:justify}
+:lang(en) .prose p{font-size:20px;line-height:1.6;text-indent:0;text-align:left;hyphens:auto}
+.prose h2{font-family:var(--serif);font-weight:600;font-size:19px;line-height:1.5;margin:2.2em 0 .9em}
+.prose .plabel{font-family:var(--en);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);text-indent:0;margin-block:1.6em .4em}
+.prose blockquote{margin:0 0 1.4em;padding-left:1.2em;border-left:2px solid var(--c-w);font-family:var(--serif);color:var(--ink2);line-height:2}
+.prose figure{margin:2em 0;background:var(--mat);padding:clamp(12px,3vw,28px)}
+.prose figure img{display:block;max-width:100%;height:auto;margin:0 auto;max-height:70vh}
+.prose .cp{font-size:12.5px;line-height:1.7;color:var(--ink3);text-indent:0;text-align:center;margin-block:-1.2em 2em}
+.prose .tbl{overflow-x:auto;margin:1.6em 0 2em;max-width:100%}
+.prose table{border-collapse:collapse;width:100%;min-width:520px;font-size:13.5px;line-height:1.75}
+:lang(en) .prose table{font-size:15px;line-height:1.45}
+.prose th,.prose td{border-bottom:1px solid var(--rule);padding:10px 12px;text-align:left;vertical-align:top}
+.prose th{font-weight:500;border-bottom:1px solid var(--ink)}
+.prose .refs{margin:2.4em 0 0;padding:1.2em 0 0 1.4em;border-top:1px solid var(--rule);font-size:13px;color:var(--ink2);line-height:1.8;display:grid;gap:.4em}
+.prose.vert{writing-mode:vertical-rl;height:min(64vh,560px);overflow-x:auto;max-width:100%;padding:6px 2px;letter-spacing:.06em}
+.prose.vert h2{margin:0 0 0 1.2em}
+.prose.vert figure,.prose.vert .tbl{writing-mode:horizontal-tb;margin:0 1.5em}
+
+/* ============ 关于 ============ */
+.about{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:32px clamp(32px,7vw,120px);padding-block:8px 96px;align-items:start}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+.side{display:grid;gap:26px;position:sticky;top:96px}
+.side .blk{display:grid;gap:8px;padding-top:14px;border-top:1px solid var(--ink)}
+.side p{margin:0}
+.side ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.side li{display:grid;gap:2px}
+.side code{font-family:var(--en);font-size:17px;user-select:all}
+.btn{background:none;border:0;border-bottom:1px solid var(--ink);padding:1px 0;font-family:var(--en);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase}
+.btn:hover{color:var(--c-p);border-color:var(--c-p)}
+.stmt{display:grid;gap:56px}
+.stmt section{display:grid;gap:14px}
+.stmt h2{margin:0;display:flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.2vw,28px)}
+.stmt p{margin:0;font-family:var(--serif);font-size:16.5px;line-height:2.05}
+:lang(en) .stmt p{font-size:19px;line-height:1.6}
+.stmt .ims{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:6px}
+.stmt .ims img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:var(--mat)}
+
+/* ============ 大图查看 ============ */
+.lb{position:fixed;inset:0;z-index:50;background:var(--bg);display:grid;grid-template-rows:minmax(0,1fr) auto;padding:calc(env(safe-area-inset-top,0px) + 24px) clamp(16px,4vw,48px) calc(env(safe-area-inset-bottom,0px) + 18px)}
+.lb img{display:block;width:100%;height:100%;min-height:0;object-fit:contain}
+.lb-cap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 20px;padding-top:14px;font-size:13px;color:var(--ink2)}
+.lb-nav{display:flex;gap:20px;align-items:center}
+.lb .btn[disabled]{opacity:.3;cursor:default}
+</style>
+
+<div class="splash" id="splash">
+  <img class="sp-art" id="spArt" alt="">
+  <div class="veil" id="veil"></div>
+  <div class="sp-ui">
+    <div class="sp-top"><span class="cap">Archive · 2021 — 2026</span><span class="cap">Hangzhou</span></div>
+    <div class="sp-mid">
+      <h1 class="sp-name">黄鈺茜</h1>
+      <p class="sp-en">Youcy Huang</p>
+      <p class="sp-media">绘画 · 装置 · 摄影 · 写作<span class="cap">Painting · Installation · Photography · Writing</span></p>
+    </div>
+    <div class="sp-bottom">
+      <div class="sp-lang" role="group" aria-label="选择语言 / Choose language">
+        <button data-lang="zh"><span class="l">中文</span><span class="s cap">进入<i></i></span></button>
+        <button data-lang="en"><span class="l">English</span><span class="s cap">Enter<i></i></span></button>
+      </div>
+      <p class="sp-cap" id="spCap"></p>
+    </div>
+  </div>
+  <p class="sp-hint cap" id="spHint">移动鼠标，掀开薄纱 · Move to lift the veil</p>
+</div>
+
+<header class="top">
+  <div class="top-in">
+    <button class="mark" id="toSplash" aria-label="返回入口 / Entrance"><b>黄鈺茜</b><i>Youcy Huang</i></button>
+    <nav class="nav" aria-label="Main"><span class="nav" id="navlinks"></span>
+      <span class="lang" role="group" aria-label="Language"><button data-setlang="zh">中</button><button data-setlang="en">EN</button></span>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="view"></main>
+<footer><div class="wrap foot"><span id="foot1"></span><span id="foot2"></span></div></footer>
+
+<script src="essays.js?v=20261021h"></script>
+<script src="paintings.js?v=20261021h"></script>
+<script src="photos.js?v=20261021h"></script>
+<script src="projects.js?v=20261021h"></script>
+<script src="profile.js?v=20261021h"></script>
+<script src="diary.js?v=20261021h"></script>
+<script src="poems.js?v=20261021h"></script>
+<script>
+/* ================= 数据 ================= */
+const MED={'纸上水彩':'Watercolour on paper','纸面水彩':'Watercolour on paper','纸上综合材料':'Mixed media on paper','纸上油画棒':'Oil pastel on paper','纸上丙烯':'Acrylic on paper','布面丙烯':'Acrylic on canvas','布面综合材料':'Mixed media on canvas','PE布面综合材料':'Mixed media on PE canvas','铜板飞尘':'Aquatint on copper','铜板线腐蚀':'Line etching on copper'};
+const GENRE={'论文':'Papers','评论':'Criticism','随笔':'Essays'};
+const PSERIES=window.PSERIES||[],P=window.PAINTINGS||[];
+const PHS=window.PHSERIES||[],PH=window.PHOTOS||[],CAMERA=window.PHCAMERA||'';
+const PR=window.PROJECTS||[],PF=window.PROFILE||{},PRDIM=window.PROJDIMS||{};
+const W=(window.ESSAYS||[]).map(e=>({...e,title:[e.title.zh,e.title.en],subtitle:e.subtitle?[e.subtitle.zh,e.subtitle.en]:null,summary:[e.summary.zh,e.summary.en],year:+e.date.slice(0,4)}));
+/* 系列颜色取自作品本身 */
+const SCOL={A2:'#C8452F',A1:'#9A922E',S:'#77706A',D:'#5F8A7A',E:'#3F3A52',B1:'#D3951B',B2:'#A4561F'};
+const TCOL={p:'var(--c-p)',f:'var(--c-f)',w:'var(--c-w)',d:'var(--c-d)'};
+/* 入口页固定用 b1-31 这张 */
+const SPLASH=[{src:'photo/B1/full/b1-31.jpg',ph:'B1-11'}];
+
+/* ================= 文案 ================= */
+const T={
+  nav:{index:['首页','Home'],painting:['绘画','Painting'],photo:['摄影','Photography'],projects:['项目','Projects'],writing:['文字','Writing'],about:['关于','About']},
+  navCol:{painting:'var(--c-p)',photo:'var(--c-f)',projects:'var(--c-d)',writing:'var(--c-w)'},
+  foot1:['© 黄鈺茜 Youcy Huang · 2026','© Youcy Huang 黄鈺茜 · 2026'],
+  foot2:['最近更新 2026-10-19','Updated 19 October 2026'],
+  /* 首页引文：两行，作者自己定的句子 */
+  quote:['向外凝视的目光，向内审视着。<br>而意义，来源于对此在的深深投入。','A gaze turned outward, examining inward.<br>And meaning comes from a deep immersion in being-there.'],
+  quoteBy:['黄鈺茜','Youcy Huang'],
+  series:['系列','Series'],index:['作品总目','Index of works'],all:['全部','All'],search:['检索标题、材料、年份','Search title, medium, year'],
+  empty:[q=>`没有找到包含“${q}”的条目，换个关键词试试。`,q=>`No entries match “${q}”. Try another word.`],
+  works:[n=>`${n} 件`,n=>`${n} works`],frames:[n=>`${n} 张`,n=>`${n} frames`],texts:[n=>`${n} 篇`,n=>`${n} texts`],
+  pLead:['本真、山水两个创作系列，以及素描速写、日常与版画。可以一幅一幅陈列着看，也可以用网格、手卷或按真实尺寸并排比较。','Two series, Authenticity and Shanshui, with sketches, everyday paintings and prints. View one work at a time, or as a grid, a handscroll, or side by side at real size.'],
+  pseq:['陈列','Sequence'],detail:['局部','Detail'],
+  sLead:{S:['素描、速写与肖像习作。','Drawings, sketches and portrait studies.'],D:['静物、风景与身边的人。','Still lifes, landscapes and the people around me.'],E:['铜版画。','Copperplate prints.']},
+  noSize:[n=>`另有 ${n} 件尺寸待补`,n=>`${n} more without recorded size`],noSizeAll:['这个系列的尺寸还没有记录。','Sizes for this series have not been recorded yet.'],grid:['网格','Grid'],scroll:['手卷','Handscroll'],scale:['比例','To scale'],
+  hint1:['手卷式陈列 · 自右向左展开 · 横向滚动','Handscroll · unrolls right to left · scroll sideways'],hint2:['点击作品查看详情','Select a work for details'],
+  hintScale:['按真实尺寸比例陈列 · 底边对齐 · 横向滚动','Shown at true relative size · bottom-aligned · scroll sideways'],
+  lbl:{series:['系列','Series'],medium:['材料','Medium'],size:['尺寸','Size'],year:['年份','Year'],note:['说明','Notes'],wh:['（宽 × 高）','(w × h)']},
+  zoom:['查看大图','View large'],close:['关闭','Close'],keys:['← → 翻页 · 点击图片放大','← → to browse · select image to enlarge'],
+  phLead:['两组摄影，器材为 Canon EOS 7D 与 EF 24–105mm f/4L IS USM。','Two photographic series, made with a Canon EOS 7D and EF 24–105mm f/4L IS USM.'],
+  seq:['序列','Sequence'],sheet:['印样','Contact sheet'],sheetHint:['点击任意一帧全屏查看','Select any frame to view it full screen'],
+  dLead:['公共艺术、品牌与工作室项目。每个项目从地方的风、海、山、人出发。','Public art, branding and studio projects. Each begins with the wind, sea, mountains and people of a place.'],
+  view:['查看项目','View project'],pmeta:[['类型','时间','地点','角色'],['Type','Date','Place','Role']],context:['背景','Context'],next:['下一个项目','Next project'],
+  essays:['文章','Essays'],diary:['随记','Notebook'],poems:['诗','Poems'],poemsN:[n=>`${n} 首`,n=>`${n} poems`],untitled:['无题','Untitled'],
+  poLead:['从随记里挑出的分行诗，按写作时间由早到晚排列。','Poems gathered from the notebooks, in the order they were written.'],
+  drumHint:['左右拖动转一转，点正面的一张进入','Drag to turn, open the card facing you'],
+  nSeries:[n=>`${n} 个系列`,n=>`${n} series`],nProj:[n=>`${n} 个项目`,n=>`${n} projects`],
+  pickSeries:['选择系列','Series'],pickSection:['选择栏目','Sections'],tapSwitch:['点击卡片切换','Select a card to switch'],
+  viewing:['正在浏览','Viewing'],goSwitch:['点击切换','Switch'],
+  dLead:['这几年随手写下的念头、梦和路上的见闻。年份由近到远，每一年里从一月读起。','Thoughts, dreams and notes from the road, written over the past few years. Newest year first; within each year, from January on.'],
+  dOrder:['年份由近到远 · 年内由早到晚','Years newest first · each year from January'],
+  dMore:[n=>`展开全文 · ${n} 段`,n=>`Read all · ${n} paragraphs`],dLess:['收起','Collapse'],
+  dZh:['','These notebook entries are in Chinese only.'],
+  wLead:['论文、评论与随笔，按写作时间排列。每篇都可以切换中文或英文阅读，中文还可以竖排。','Papers, criticism and essays, in the order they were written. Every piece can be read in Chinese or English.'],
+  asc:['由早到晚','Oldest first'],desc:['由近到远','Newest first'],chars:[n=>`${n.toLocaleString()} 字`,n=>`${n.toLocaleString('en')} chars`],
+  horiz:['横排','Horizontal'],vert:['竖排','Vertical'],rSample:['英文为译文。','English translation from the Chinese original.'],
+  aLead:['简介、创作理念与联系方式。','Biography, statements and contact.'],
+  edu:['教育','Education'],contact:['联系','Contact'],copy:['复制邮箱','Copy email'],copied:['已复制','Copied'],selected:['已选中，按 Ctrl+C 复制','Selected. Press Ctrl+C to copy'],
+  st:{shanshui:['绘画 · 山水系列','Painting · Shanshui Series'],benzhen:['绘画 · 本真系列','Painting · Authenticity Series'],install:['装置','Installation'],photo:['摄影 · 儒与酒','Photography · Confucians and Wine'],writing:['写作','Writing']}
+};
+T.heroSide=[`${PF.born?PF.born[0]:''}以绘画为核心，延伸到装置、摄影与写作；关注传统山水在当代绘画中的再生，以及半透明材料中图像的遮蔽与显现。`,`${PF.born?PF.born[1]:''} Painting is the core of her practice, extending into installation, photography and writing. She asks how the classical landscape can live again in contemporary painting, and how images are hidden and revealed in translucent material.`];
+
+/* ================= 状态与工具 ================= */
+let store={};try{store=JSON.parse(localStorage.getItem('yh-archive')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('yh-archive',JSON.stringify(store))}catch(e){}};
+let lang=store.lang||'zh',filter='all',query='',curSeries=store.series||'A2',curPh=store.ph||'B1',artLang=null,wGenre='all',wOrder='desc',wSec='essays',dYear='all',dOpen=new Set(),readMode=store.read||'h';
+const L=a=>Array.isArray(a)?a[lang==='en'?1:0]:a;
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CN='〇一二三四五六七八九',cnYear=y=>String(y).split('').map(d=>CN[d]).join('');
+const dot=c=>`<i class="dot" style="--dc:${c}"></i>`;
+const ser=k=>PSERIES.find(s=>s.key===k),phSer=k=>PHS.find(s=>s.key===k);
+const med=w=>!w.medium?'':lang==='en'?(MED[w.medium]||w.medium):w.medium;
+/* 图片地址加版本号：换了同名图片后，浏览器不会再用旧缓存 */
+const IMGV='20261021c';
+const pImg=(w,s)=>`paint/${s}/${w.code}.jpg?v=${IMGV}`,phImg=(p,s)=>`photo/${p.set}/${s}/${p.file}.jpg`,prImg=n=>n.includes('.')?`projimg/${n}`:`projimg/${n}.jpg`;
+const pad=n=>String(n).padStart(2,'0');
+const pYears=l=>{const y=l.map(x=>x.year).filter(Boolean),a=Math.min(...y),b=Math.max(...y);return a===b?`${a}`:`${a} — ${b}`};
+const ALL=[
+  ...P.map(x=>({...x,type:'p',col:SCOL[x.series],sub:()=>[L(ser(x.series).short),med(x)].filter(Boolean).join(' · ')})),
+  ...PHS.map(x=>{const l=PH.filter(p=>p.set===x.key);return {id:x.key,type:'f',col:SCOL[x.key],title:x.name,year:Math.max(...l.map(p=>p.year)),sub:()=>L(T.frames)(l.length)+' · '+pYears(l)}}),
+  ...PR.map(x=>({...x,type:'d',col:'var(--c-d)',sub:()=>L(x.kind)})),
+  ...W.map(x=>({...x,type:'w',col:'var(--c-w)',sub:()=>(lang==='en'?GENRE[x.genre]:x.genre)+' · '+L(T.chars)(x.words)}))
+].sort((a,b)=>(b.year||0)-(a.year||0)||b.id.localeCompare(a.id));
+const BYID=Object.fromEntries(ALL.map(x=>[x.id,x]));
+const NAV={p:'painting',f:'photo',w:'writing',d:'projects'};
+
+/* ================= 首页 ================= */
+/* 系列 / 栏目切换卡片：items = [{k,name,col,img|glyph,n}] */
+function switcher(items,attr,cur,label){
+  return `<div class="switch"><div class="switch-h"><span class="cap">${label} · ${items.length}</span><span class="cap">${L(T.tapSwitch)}</span></div>
+    <div class="tabs" role="group" aria-label="${esc(label)}">${items.map(x=>{const on=x.k===cur;
+      return `<button class="tab" data-${attr}="${x.k}" aria-pressed="${on}" style="--dc:${x.col}">${x.img?`<img src="${x.img}" alt="" loading="lazy">`:`<span class="tg" aria-hidden="true">${x.glyph||''}</span>`}<span class="tc"><b>${esc(x.name)}</b><span class="cap">${on?L(T.viewing):L(T.goSwitch)} · ${x.n}</span></span><i aria-hidden="true">${on?'●':'→'}</i></button>`}).join('')}</div></div>`;
+}
+/* 首页四个入口：围成一个滚筒，缓缓旋转；鼠标停上去会停下，可左右拖动，点正对着的一张进入 */
+const ENTRY=[
+  {k:'painting',img:'paint/full/c7-d1.jpg',sub:()=>`${L(T.nSeries)(PSERIES.length)} · ${L(T.works)(P.length)}`},
+  {k:'photo',img:'photo/B1/full/b1-33.jpg',sub:()=>`${L(T.nSeries)(PHS.length)} · ${L(T.frames)(PH.length)}`},
+  {k:'projects',img:'projimg/dongban-hero.jpg',sub:()=>L(T.nProj)(PR.length)},
+  {k:'writing',img:'img/e09-02.png',sub:()=>[W.length&&`${L(T.essays)} ${W.length}`,DY.length&&`${L(T.diary)} ${DY.length}`,PO.length&&`${L(T.poems)} ${PO.length}`].filter(Boolean).join(' · ')}
+];
+function vIndex(){
+  return `<div class="home"><section class="hero">
+      <div><q>${L(T.quote)}</q><p class="by cap">${L(T.quoteBy)}</p></div>
+      <div class="hero-side"><span class="cap">${L(PF.media)}</span><p>${L(T.heroSide)}</p></div>
+    </section>
+    <section class="drum-wrap" aria-label="${lang==='en'?'Sections':'栏目'}">
+      <div class="table-h"><span class="cap">${L(T.drumHint)}</span><span class="cap" id="drumNow"></span></div>
+      <div class="drum" id="drum"><div class="ring" id="ring">${ENTRY.map((e,i)=>`<a class="card3" href="#${e.k}" draggable="false" data-i="${i}" style="--dc:${T.navCol[e.k]}">
+        <img src="${e.img}" alt="" draggable="false"><span class="et"><span class="en">${pad(i+1)} · ${T.nav[e.k][1]}</span><b>${L(T.nav[e.k])}<i aria-hidden="true">→</i></b><small>${e.sub()}</small></span></a>`).join('')}</div></div>
+    </section></div>`;
+}
+let drumStop=null;
+function initDeck(){
+  if(drumStop){drumStop();drumStop=null}
+  const drum=document.getElementById('drum'),ring=document.getElementById('ring');if(!drum)return;
+  const cards=[...ring.children],n=cards.length,step=360/n,calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ang=Math.random()*360,vel=0,hover=false,drag=null,auto=false,moved=false,raf=0,last=performance.now(),R=0,front=-1;
+  const SPEED=calm?0:-14;  /* 每秒转几度（约 25 秒一圈） */
+  function size(){const cw=cards[0].offsetWidth;R=Math.round(cw/2/Math.tan(Math.PI/n)+cw*.18);drum.style.setProperty('--R',R+'px')}
+  function paint(){
+    ring.style.transform=`translateZ(${-R}px) rotateY(${ang}deg)`;
+    let best=-2,bi=0;
+    cards.forEach((c,i)=>{const a=(i*step+ang)*Math.PI/180,f=Math.cos(a);  /* f=1 正对，-1 背面 */
+      c.style.transform=`rotateY(${i*step}deg) translateZ(${R}px)`;
+      c.style.setProperty('--f',f.toFixed(3));c.style.zIndex=Math.round((f+1)*10);
+      if(f>best){best=f;bi=i}});
+    if(bi!==front){front=bi;cards.forEach((c,i)=>{c.classList.toggle('front',i===bi);c.tabIndex=i===bi?0:-1});
+      const el=document.getElementById('drumNow');if(el)el.textContent=`${pad(bi+1)} / ${pad(n)} · ${L(T.nav[ENTRY[bi].k])}`}
+  }
+  function tick(t){
+    const dt=Math.min(.05,(t-last)/1000);last=t;
+    if(!drag&&!auto){
+      if(Math.abs(vel)>.5){ang+=vel*dt;vel*=Math.pow(.04,dt)}        /* 拖完的惯性 */
+      else ang+=SPEED*dt;   /* 一直转，鼠标停上去也不停 */
+    }
+    paint();raf=requestAnimationFrame(tick);
+  }
+  drum.addEventListener('pointerdown',e=>{if(e.button>0||auto)return;drag={x:e.clientX,a:ang,t:performance.now(),lx:e.clientX};moved=false});
+  drum.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;
+    if(!moved&&Math.abs(dx)>6){moved=true;drum.setPointerCapture(e.pointerId);drum.classList.add('drag')}
+    if(moved){const now=performance.now();ang=drag.a+dx*.35;vel=(e.clientX-drag.lx)*.35/Math.max(.016,(now-drag.t)/1000);drag.t=now;drag.lx=e.clientX}});
+  const end=()=>{if(!drag)return;drag=null;drum.classList.remove('drag')};
+  drum.addEventListener('pointerup',end);drum.addEventListener('pointercancel',end);
+  /* 点到侧面的卡片：先转到正面，不跳转；点正面的才进入 */
+  cards.forEach((c,i)=>c.addEventListener('click',e=>{
+    if(moved){e.preventDefault();moved=false;return}
+    if(i!==front){e.preventDefault();const target=-i*step;let d=((target-ang)%360+540)%360-180;vel=0;
+      const a0=ang,t0=performance.now();auto=true;
+      const go=t=>{const k=Math.min(1,(t-t0)/600),ease=1-Math.pow(1-k,3);ang=a0+d*ease;if(k<1)requestAnimationFrame(go);else auto=false};requestAnimationFrame(go)}
+  }));
+  drum.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();ang+=e.key==='ArrowLeft'?step:-step;
+    setTimeout(()=>cards[front]&&cards[front].focus(),0)}});
+  size();paint();raf=requestAnimationFrame(tick);
+  const ro=window.ResizeObserver?new ResizeObserver(size):null;if(ro)ro.observe(drum);
+  drumStop=()=>{cancelAnimationFrame(raf);if(ro)ro.disconnect()};
+}
+/* 旧首页（作品条带、系列卡片、作品总目），先留着备用，目前不显示 */
+function vIndexOld(){
+  const band=['A2-b4','A1-c6','B1-16','D-2026-02','A2-b13','B2-06','A1-c7','A2-00','D-2026-01','A2-b9','B1-31','A1-c5','D-2026-03','A2-01'].map(id=>{
+    const ph=PH.find(p=>p.id===id);if(ph)return `<a href="#${ph.set}" title="${esc(L(phSer(ph.set).name))}"><img src="${phImg(ph,'thumb')}" alt="" loading="lazy">${dot(SCOL[ph.set])}</a>`;
+    const x=BYID[id];if(!x)return '';
+    if(x.type==='d')return `<a href="#${x.id}" title="${esc(L(x.title))}"><img src="${prImg(x.cover)}" alt="" loading="lazy">${dot(x.col)}</a>`;
+    return `<a href="#${x.id}" title="${esc(L(x.title))}"><img src="${pImg(x,'thumb')}" alt="" loading="lazy">${dot(x.col)}</a>`}).join('');
+  const cards=[
+    ...PSERIES.map(s=>({href:'#painting',set:['s',s.key],col:SCOL[s.key],img:pImg(P.find(w=>w.code===s.cover),'thumb'),t:L(s.name),k:`${L(T.nav.painting)} · ${L(T.works)(P.filter(w=>w.series===s.key).length)}`})),
+    ...PHS.map(s=>({href:'#'+s.key,col:SCOL[s.key],img:phImg(PH.find(p=>p.id===s.cover),'thumb'),t:L(s.name),k:`${L(T.nav.photo)} · ${L(T.frames)(PH.filter(p=>p.set===s.key).length)}`})),
+    ...PR.map(p=>({href:'#'+p.id,col:'var(--c-d)',img:prImg(p.cover),t:L(p.title),k:`${L(T.nav.projects)} · ${p.year}`}))
+  ];
+  const latest=W.slice().sort((a,b)=>b.date.localeCompare(a.date))[0];
+  return `<section class="hero">
+      <div><q>${L(T.quote)}</q><p class="by cap">— ${L(T.quoteBy)}</p></div>
+      <div class="hero-side"><span class="cap">${L(PF.media)}</span><p>${L(T.heroSide)}</p>
+        <div class="links">${['painting','photo','projects','writing'].map(k=>`<a href="#${k}">${dot(T.navCol[k])}${L(T.nav[k])}</a>`).join('')}</div></div>
+    </section>
+    <div class="band" aria-label="${lang==='en'?'Selected works':'作品选'}">${band}</div>
+    <div class="sec-title"><h2>${L(T.series)}</h2><span class="cap">Series & Projects</span></div>
+    <div class="cards">${cards.map(c=>`<a class="card" href="${c.href}" ${c.set?`data-goseries="${c.set[1]}"`:''} style="--dc:${c.col}"><span class="im"><img src="${c.img}" alt="" loading="lazy"></span><span class="t">${dot(c.col)}${esc(c.t)}</span><span class="k">${c.k}</span></a>`).join('')}
+      <a class="card" href="#writing" style="--dc:var(--c-w)"><span class="im text"><span class="cap">${latest?latest.date.replace(/-/g,'.'):''}</span><b>${latest?esc(L(latest.title)):''}</b></span><span class="t">${dot('var(--c-w)')}${L(T.nav.writing)}</span><span class="k">${L(T.texts)(W.length)} · ${pYears(W)}</span></a>
+    </div>
+    <div class="sec-title"><h2>${L(T.index)}</h2><span class="num">${pad(ALL.length)}</span></div>
+    <div class="bar" style="border-top:0;padding-top:0">
+      <div class="chips" role="group">${['all','p','f','d','w'].map(t=>`<button class="chip" data-f="${t}" aria-pressed="${filter===t}">${t==='all'?'':dot(TCOL[t])}${t==='all'?L(T.all):L(T.nav[NAV[t]])}</button>`).join('')}</div>
+      <input class="search" id="q" type="search" placeholder="${L(T.search)}" value="${esc(query)}" aria-label="${L(T.search)}">
+    </div>
+    <div class="rows" id="rows"></div>`;
+}
+function rowsHTML(){
+  const q=query.trim().toLowerCase();
+  const list=ALL.filter(x=>(filter==='all'||x.type===filter)&&(!q||[x.id,x.year,...[].concat(x.title),x.medium||'',MED[x.medium]||'',x.genre||'',...[].concat(x.kind||[])].join(' ').toLowerCase().includes(q)));
+  if(!list.length)return `<p class="empty">${L(T.empty)(esc(query.trim()))}</p>`;
+  return list.map(x=>`<a class="row" href="#${x.id}" style="--dc:${x.col}"><span class="num">${x.id}</span>${dot(x.col)}<span class="t">${esc(L(x.title))}</span><span class="m">${esc(x.sub())}</span><span class="num y">${x.year||'—'}</span></a>`).join('');
+}
+
+/* ================= 绘画 ================= */
+const pMedia=l=>[...new Set(l.map(x=>x.medium).filter(Boolean))].map(m=>lang==='en'?(MED[m]||m):m).join(lang==='en'?', ':'、');
+const pSize=w=>w.w&&w.h?`${w.w} × ${w.h} cm`:'';
+/* 作品信息：缺的项（尺寸、材料等待补）不显示 */
+function pMeta(w,withSeries){
+  const rows=[];
+  if(withSeries)rows.push([L(T.lbl.series),L(ser(w.series).name)]);
+  if(w.year)rows.push([L(T.lbl.year),w.year]);
+  if(w.medium)rows.push([L(T.lbl.medium),med(w)]);
+  if(pSize(w))rows.push([L(T.lbl.size),`${pSize(w)} ${L(T.lbl.wh)}`]);
+  if(w.note)rows.push([L(T.lbl.note),esc(L(w.note))]);
+  return rows.length?`<dl class="meta">${rows.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl>`:'';
+}
+const pCap=x=>[L(x.title),x.year,x.medium?med(x):'',pSize(x)].filter(Boolean).join(' · ');
+const P_SAY={A1:'shanshui',A2:'benzhen'};
+function pGroups(s,works){
+  if(s.key!=='A2')return [{label:null,list:works}];
+  const a=works.filter(w=>!w.code.startsWith('b')),b=works.filter(w=>w.code.startsWith('b'));
+  const lab=l=>l.length>1?`${l[0].code} — ${l[l.length-1].code}`:l[0].code;
+  return [a.length&&{label:lab(a),list:a},b.length&&{label:lab(b),list:b}].filter(Boolean);
+}
+/* 陈列：像摄影序列那样一幅一幅看，旁边写这幅画的信息；有局部图的，在画下面排一行局部 */
+const pFig=(w,size)=>`<figure><button class="phb" data-view="p:${w.id}" aria-label="${L(T.zoom)} · ${esc(L(w.title))}"><img src="${pImg(w,size||'full')}" alt="${esc(L(w.title))}" loading="lazy" width="${w.px[0]}" height="${w.px[1]}"></button></figure>`;
+const pDet=w=>w.det&&w.det.length?`<div class="pdet"><span class="cap">${L(T.detail)} · ${w.det.length}</span><div>${w.det.map((d,j)=>`<button class="phb" data-view="p:${w.id}~${j}" aria-label="${L(T.detail)} ${j+1}"><img src="paint/thumb/${d}.jpg?v=${IMGV}" alt="" loading="lazy"></button>`).join('')}</div></div>`:'';
+const pInfo=(w,col)=>`<div class="pw-info"><span class="num">${dot(col)} ${w.series} / ${w.code}</span><h3><a href="#${w.id}">${esc(L(w.title))}</a></h3><p class="alt">${esc(lang==='en'?w.title[0]:w.title[1])}</p>${pMeta(w)}</div>`;
+const pWork=(w,i,col)=>`<article class="pw ${i%2?'r':'l'}" style="--dc:${col}">${pFig(w)}${pInfo(w,col)}${pDet(w)}</article>`;
+const pPair=(ws,col)=>`<div class="pw2" style="--dc:${col}">${ws.map(w=>`<article class="pwc">${pFig(w,'thumb')}${pInfo(w,col)}${pDet(w)}</article>`).join('')}</div>`;
+/* 本真：一行一张、加画框；山水：一行一张；素描速写、日常、版画：相邻两张竖幅并排 */
+const pPortrait=w=>w.px[1]>w.px[0]*1.05;
+function pSeq(list,col,key){
+  let out='',k=0;const pairs=!['A1','A2'].includes(key);
+  for(let i=0;i<list.length;i++){
+    const a=list[i],b=list[i+1];
+    if(pairs&&b&&pPortrait(a)&&pPortrait(b)&&!a.det&&!b.det&&!a.solo&&!b.solo){out+=pPair([a,b],col);i++}
+    else out+=pWork(a,k++,col);
+  }
+  return `<div class="pseq${key==='A2'?' framed':''}">${out}</div>`;
+}
+function vPainting(){
+  const s=ser(curSeries)||PSERIES[0],works=P.filter(w=>w.series===s.key),col=SCOL[s.key];
+  const m=(store.pmode||{})[s.key]||'pseq';
+  const say=P_SAY[s.key]?L(PF.statements[P_SAY[s.key]]||[[],[]]):[L(T.sLead[s.key]||['',''])].filter(Boolean);
+  const head=g=>g.label?`<div class="pg-h"><span class="num">${g.label}</span><span>${[L(T.works)(g.list.length),pYears(g.list),pMedia(g.list)].filter(Boolean).join(' · ')}</span></div>`:'';
+  const sized=works.filter(w=>w.w&&w.h);
+  let body;
+  if(m==='pseq')body=pGroups(s,works).map(g=>`<section class="${g.dark?'pdark':''}">${head(g)}${pSeq(g.list,col,s.key)}</section>`).join('');
+  else if(m==='grid')body=pGroups(s,works).map(g=>`<section class="pgroup${g.dark?' pdark':''}">${head(g)}<div class="pgrid">${g.list.map(w=>`<a class="pcard" href="#${w.id}" style="--dc:${col}"><div class="mat"><img src="${pImg(w,'thumb')}" alt="${esc(L(w.title))}" loading="lazy"></div><div class="pcap"><span class="num">${w.code}</span><b>${esc(L(w.title))}</b><span class="num">${w.year||''}</span></div></a>`).join('')}</div></section>`).join('');
+  else if(m==='scroll')body=`<div class="scroll" id="scroll">${works.map(w=>`<a class="scroll-item" href="#${w.id}" style="--dc:${col}"><div class="tiba"><b>${esc(L(w.title))}</b>${w.medium?`<span>${med(w)}</span>`:''}${w.year?`<span>${lang==='en'?w.year:cnYear(w.year)}</span>`:''}</div><img src="${pImg(w,'thumb')}" alt="${esc(L(w.title))}" loading="lazy"></a>`).join('')}</div><p class="hint"><span class="cap">${L(T.hint1)}</span><span class="cap">${L(T.hint2)}</span></p>`;
+  else body=sized.length?`<div class="scale" id="scroll"><div class="wall">${sized.map(w=>`<a class="sw" href="#${w.id}" style="--w:${w.w};--h:${w.h}"><img src="${pImg(w,'thumb')}" alt="${esc(L(w.title))}" loading="lazy"><span class="num">${w.code} · ${w.w}×${w.h}</span></a>`).join('')}</div><div class="ruler" aria-hidden="true"><i></i><span>0</span><span>50</span><span>100 cm</span></div></div><p class="hint"><span class="cap">${L(T.hintScale)}${sized.length<works.length?' · '+L(T.noSize)(works.length-sized.length):''}</span><span class="cap">${L(T.hint2)}</span></p>`:`<p class="empty">${L(T.noSizeAll)}</p>`;
+  return `<section class="ph"><h1>${L(T.nav.painting)}<small class="cap">Painting · ${pad(P.length)}</small></h1><p>${L(T.pLead)}</p></section>
+    ${switcher(PSERIES.map(x=>({k:x.key,name:L(x.name),col:SCOL[x.key],img:pImg(P.find(w=>w.code===x.cover),'thumb'),n:L(T.works)(P.filter(w=>w.series===x.key).length)})),'s',s.key,L(T.pickSeries))}
+    <section class="intro"><div><h2>${L(s.name)}</h2><div class="meta"><span class="cap">${s.key} · ${pYears(works)}</span>${pMedia(works)?`<span>${pMedia(works)}</span>`:''}</div></div>
+      <div class="say">${say.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
+    <div class="bar"><span class="cap">${L(T.works)(works.length)}</span><div class="modes" role="group">${['pseq','grid','scroll','scale'].map(k=>`<button data-m="${k}" aria-pressed="${m===k}">${L(T[k])}</button>`).join('')}</div></div>
+    ${body}`;
+}
+function vPaintDetail(w){
+  curSeries=w.series;const s=ser(w.series),sib=P.filter(x=>x.series===w.series),i=sib.indexOf(w),prev=sib[i-1],next=sib[i+1];
+  return `<a class="back cap" href="#painting">← ${L(T.nav.painting)} / ${L(s.name)}</a>
+  <div class="pdetail">
+    <figure class="pd-img"><button class="zoom" data-view="p:${w.id}" aria-label="${L(T.zoom)}"><img src="${pImg(w,'full')}" alt="${esc(L(w.title))}" width="${w.px[0]}" height="${w.px[1]}"></button></figure>
+    <aside class="pd-meta"><span class="num">${dot(SCOL[w.series])} ${w.series} / ${w.code} · ${pad(i+1)} of ${pad(sib.length)}</span><h1>${esc(L(w.title))}</h1><p class="alt">${esc(lang==='en'?w.title[0]:w.title[1])}</p>
+      ${pMeta(w,true)}${pDet(w)}
+      <nav class="more">${prev?`<a href="#${prev.id}" data-prev>← ${esc(L(prev.title))}</a>`:'<span></span>'}${next?`<a href="#${next.id}" data-next>${esc(L(next.title))} →</a>`:'<span></span>'}</nav>
+      <p class="cap" style="margin-top:14px">${L(T.keys)}</p>
+    </aside></div>`;
+}
+
+/* ================= 摄影 ================= */
+const phPortrait=p=>p.px[1]>p.px[0];
+const phFig=p=>`<figure><button class="phb" data-view="f:${p.id}" aria-label="${L(T.zoom)} ${p.set} · ${pad(p.n)}"><img src="${phImg(p,'mid')}" alt="" loading="lazy" width="${p.px[0]}" height="${p.px[1]}"></button><figcaption><span class="num">${p.set} · ${pad(p.n)}</span><span class="num">${p.year}</span>${p.exp?`<span class="num">${p.exp}</span>`:''}</figcaption></figure>`;
+function phSequence(list){
+  let out='',i=0,k=0,side=0;
+  while(i<list.length){
+    const a=list[i],b=list[i+1];
+    if(b&&phPortrait(a)&&phPortrait(b)){out+=`<div class="sq pair pp">${phFig(a)}${phFig(b)}</div>`;i+=2}
+    else if(b&&k%3===1&&!phPortrait(a)&&!phPortrait(b)){out+=`<div class="sq pair">${phFig(a)}${phFig(b)}</div>`;i+=2}
+    else if(phPortrait(a)){out+=`<div class="sq one port ${side++%2?'r':'l'}">${phFig(a)}</div>`;i++}
+    else{out+=`<div class="sq one ${k%4===2?'narrow '+(side++%2?'r':'l'):''}">${phFig(a)}</div>`;i++}
+    k++;
+  }
+  return `<div class="seq">${out}</div>`;
+}
+function vPhoto(){
+  const s=phSer(curPh)||PHS[0],list=PH.filter(p=>p.set===s.key),m=store.phmode||'seq',col=SCOL[s.key];
+  return `<section class="ph"><h1>${L(T.nav.photo)}<small class="cap">Photography · ${pad(PH.length)}</small></h1><p>${L(T.phLead)}</p></section>
+    ${switcher(PHS.map(x=>({k:x.key,name:L(x.name),col:SCOL[x.key],img:phImg(PH.find(p=>p.id===x.cover),'thumb'),n:L(T.frames)(PH.filter(p=>p.set===x.key).length)})),'ps',s.key,L(T.pickSeries))}
+    <section class="intro"><div><h2>${L(s.name)}</h2><div class="meta"><span class="cap">${s.key} · ${pYears(list)}</span><span class="num">${CAMERA}</span></div></div>
+      <div class="say"><p class="line">${L(s.line)}</p>${s.text?`<p>${esc(L(s.text))}</p>`:''}</div></section>
+    <div class="bar" style="--dc:${col}"><span class="cap">${L(T.frames)(list.length)}</span><div class="modes" role="group"><button data-pm="seq" aria-pressed="${m==='seq'}">${L(T.seq)}</button><button data-pm="sheet" aria-pressed="${m==='sheet'}">${L(T.sheet)}</button></div></div>
+    ${m==='seq'?phSequence(list):`<div class="csheet">${list.map(p=>`<button class="cs" data-view="f:${p.id}" style="--dc:${col}"><span class="csf"><img src="${phImg(p,'thumb')}" alt="" loading="lazy"></span><span class="num">${pad(p.n)}</span></button>`).join('')}</div><p class="hint"><span class="cap">${L(T.sheetHint)}</span></p>`}`;
+}
+
+/* ================= 项目 ================= */
+function vProjects(){
+  return `<section class="ph"><h1>${L(T.nav.projects)}<small class="cap">Projects · ${pad(PR.length)}</small></h1><p>${L(T.dLead)}</p></section>
+    <div class="plist">${PR.map(p=>`<a class="prow" href="#${p.id}" style="--dc:${p.color}"><span class="pim ${p.heroSet?'set':''}">${(p.heroSet||[p.cover]).map(n=>`<img src="${prImg(n)}" alt="" loading="lazy">`).join('')}</span>
+      <span class="ptx"><span class="num">${dot(p.color)} ${p.id} · ${p.date}</span><h2>${esc(L(p.title))}</h2><p class="sub">${esc(L(p.sub))}</p><p>${esc(L(p.lead))}</p><span class="cap">${esc(L(p.kind))} · ${esc(L(p.place))}</span><span class="go">${L(T.view)}<i></i></span></span></a>`).join('')}</div>`;
+}
+function vProject(p){
+  const i=PR.indexOf(p),nx=PR[(i+1)%PR.length],lb=L(T.pmeta);
+  const fig=(names,cap,solo)=>`<figure class="pj-fig ${solo?'solo':''}"><div class="ims" style="--n:${names.length}">${names.map(n=>`<img src="${prImg(n)}" alt="${esc(L(cap||p.title))}" loading="lazy">`).join('')}</div>${cap?`<figcaption class="cap">${esc(L(cap))}</figcaption>`:''}</figure>`;
+  return `<a class="back cap" href="#projects">← ${L(T.nav.projects)}</a>
+  <section class="pj-head" style="--dc:${p.color}"><span class="num">${dot(p.color)} ${p.id}</span><h1>${esc(L(p.title))}</h1><p class="sub">${esc(L(p.sub))}</p></section>
+  <dl class="pj-meta"><div><dt class="cap">${lb[0]}</dt><dd>${esc(L(p.kind))}</dd></div><div><dt class="cap">${lb[1]}</dt><dd>${p.date}</dd></div><div><dt class="cap">${lb[2]}</dt><dd>${esc(L(p.place))}</dd></div><div><dt class="cap">${lb[3]}</dt><dd>${esc(L(p.role))}</dd></div></dl>
+  <figure class="pj-hero ${p.heroSet?'set':''}">${(p.heroSet||[p.cover]).map(n=>`<img src="${prImg(n)}" alt="${esc(L(p.title))}" width="${(PRDIM[n]||[])[0]||''}" height="${(PRDIM[n]||[])[1]||''}">`).join('')}</figure>
+  <p class="pj-lead">${esc(L(p.lead))}</p>
+  ${p.sections.map((s,k)=>`<section class="pj-sec" style="--dc:${p.color}"><h2><span class="num">${pad(k+1)}</span>${esc(L(s.h))}</h2><div class="tx">${(s.p||[]).map(x=>`<p>${esc(L(x))}</p>`).join('')}${s.list?`<ol>${s.list.map(x=>`<li>${esc(L(x))}</li>`).join('')}</ol>`:''}${(s.pAfter||[]).map(x=>`<p>${esc(L(x))}</p>`).join('')}</div></section>
+    ${s.img&&s.img!==p.cover?fig([s.img],s.cap,true):''}${s.imgs?fig(s.imgs,s.cap):''}`).join('')}
+  <p class="cap" style="margin-top:24px">${L(T.context)} · ${esc(L(p.context))}</p>
+  <nav class="more"><span></span><a href="#${nx.id}">${L(T.next)} · ${esc(L(nx.title))} →</a></nav>`;
+}
+
+/* ================= 文字 ================= */
+const sortedW=()=>W.slice().sort((a,b)=>a.date.localeCompare(b.date));
+/* 文字下分三块：文章 / 随记 / 诗 */
+const DY=window.DIARY||[],PO=window.POEMS||[];
+const wTabs=()=>switcher([
+  {k:'essays',name:L(T.essays),glyph:'文',col:'var(--c-w)',n:L(T.texts)(W.length),c:W.length},
+  {k:'diary',name:L(T.diary),glyph:'记',col:'var(--c-w)',n:L(T.texts)(DY.length),c:DY.length},
+  {k:'poems',name:L(T.poems),glyph:'诗',col:'var(--c-w)',n:L(T.poemsN)(PO.length),c:PO.length}].filter(x=>x.c),'ws',wSec,L(T.pickSection));
+/* 诗：由早到晚；左边是目录，右边一首一首排下来 */
+const CNUM='〇一二三四五六七八九十';
+const poTitle=p=>p.title||(p.no?`${L(T.untitled)} · ${lang==='en'?'No. '+p.no:'其'+CNUM[p.no]}`:L(T.untitled));
+function vPoems(){
+  const span=PO.length?`${PO[0].key.slice(0,4)} — ${PO[PO.length-1].key.slice(0,4)}`:'';
+  const toc=PO.map((p,i)=>`<li><button data-poem="${i}"><span class="num">${p.date.replace(/年|月/g,'.').replace('日','')}</span><b>${esc(poTitle(p))}</b></button></li>`).join('');
+  const body=PO.map((p,i)=>`<article class="poem" id="po-${i}"><header><span class="cap">${p.date}${p.note?' · '+esc(p.note):''}</span><h2>${esc(poTitle(p))}</h2></header>
+    <div class="po-l" lang="zh-CN">${p.lines.map(l=>l?`<p>${esc(l)}</p>`:'<span class="po-br"></span>').join('')}</div></article>`).join('<div class="po-orn" aria-hidden="true">✦</div>');
+  return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.poems)} · ${span}</small></h1><p>${L(T.poLead)}</p></section>
+    ${wTabs()}
+    ${lang==='en'?`<p class="empty">${L(T.dZh)}</p>`:''}
+    <div class="poems"><nav class="po-toc" aria-label="${L(T.poems)}"><span class="cap">${L(T.poemsN)(PO.length)} · ${L(T.asc)}</span><ol>${toc}</ol></nav><div class="po-list">${body}</div></div>`;
+}
+function deHTML(e){
+  const body=e.p.map(p=>p.img?`<figure><img src="img/${p.img}" alt="" loading="lazy"></figure>`
+    :p.sep?'<hr class="de-sep">':p.br?'<span class="de-br"></span>':p.h?`<h3>${esc(p.h)}</h3>`:p.n?`<p class="de-n">${esc(p.n)}</p>`
+    :`<p${p.v?' class="v"':''}>${esc(p.t)}</p>`).join('');
+  const long=e.p.filter(p=>p.t).length>6;
+  return `<article class="de${long&&!dOpen.has(e.key+e.note)?' fold':''}" id="d-${e.key}"><div class="de-d"><span>${e.date}</span>${e.note?`<small>${esc(e.note)}</small>`:''}</div>
+    <div class="de-b" lang="zh-CN">${body}${long?`<button class="btn de-more" data-dopen="${e.key+e.note}">${dOpen.has(e.key+e.note)?L(T.dLess):L(T.dMore)(e.p.filter(p=>p.t).length)}</button>`:''}</div></article>`;
+}
+function vDiary(){
+  const years=[...new Set(DY.map(e=>e.key.slice(0,4)))].sort().reverse();
+  /* 年份由近到远；每一年里从一月读起（同一天保持原文顺序） */
+  const list=years.filter(y=>dYear==='all'||y===dYear).flatMap(y=>DY.filter(e=>e.key.startsWith(y)).sort((a,b)=>a.key.localeCompare(b.key)));
+  const span=years.length?`${years[years.length-1]} — ${years[0]}`:'';
+  let html='',y=null;
+  list.forEach(e=>{const ey=e.key.slice(0,4);if(ey!==y){if(y)html+='</section>';y=ey;html+=`<section class="dy"><div class="dy-h"><h2>${ey}</h2><span class="num">${L(T.texts)(DY.filter(x=>x.key.startsWith(ey)).length)}</span></div>`}html+=deHTML(e)});
+  if(y)html+='</section>';
+  return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.diary)} · ${span}</small></h1><p>${L(T.dLead)}</p></section>
+    ${wTabs()}
+    <div class="bar" style="border-top:0"><div class="chips" role="group">${['all',...years].map(k=>`<button class="chip" data-dy="${k}" aria-pressed="${dYear===k}">${k==='all'?L(T.all):k}</button>`).join('')}</div><span class="cap">${L(T.dOrder)}</span></div>
+    ${lang==='en'?`<p class="empty">${L(T.dZh)}</p>`:''}
+    <div class="diary">${html}</div>`;
+}
+function vWriting(){
+  if(wSec==='diary'&&DY.length)return vDiary();
+  if(wSec==='poems'&&PO.length)return vPoems();
+  const total=W.reduce((s,x)=>s+x.words,0),gl=g=>lang==='en'?GENRE[g]:g;
+  const list=W.filter(x=>wGenre==='all'||x.genre===wGenre).slice().sort((a,b)=>wOrder==='asc'?a.date.localeCompare(b.date):b.date.localeCompare(a.date));
+  return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${pad(W.length)} · ${lang==='en'?total.toLocaleString('en')+' characters':(total/10000).toFixed(1)+' 万字'}</small></h1><p>${L(T.wLead)}</p></section>
+    ${DY.length?wTabs():''}
+    <div class="bar" style="border-top-color:var(--rule)"><div class="chips" role="group">${['all',...Object.keys(GENRE).filter(g=>W.some(x=>x.genre===g))].map(g=>`<button class="chip" data-wg="${g}" aria-pressed="${wGenre===g}">${g==='all'?L(T.all):gl(g)}</button>`).join('')}</div>
+      <div class="modes" role="group"><button data-wo="asc" aria-pressed="${wOrder==='asc'}">${L(T.asc)}</button><button data-wo="desc" aria-pressed="${wOrder==='desc'}">${L(T.desc)}</button></div></div>
+    <div class="wlist">${list.map(x=>`<a class="wrow" href="#${x.id}"><span class="num">${x.id}</span><span class="wt">${esc(L(x.title))}${x.subtitle?`<small>${esc(L(x.subtitle))}</small>`:''}</span><span class="wm">${gl(x.genre)} · ${L(T.chars)(x.words)} · ${x.date.replace(/-/g,'.')}</span><p class="wx">${esc(L(x.summary))}</p></a>`).join('')}</div>`;
+}
+function blocksHTML(w,al){
+  const k=al==='en'?'en':'zh';let out='',refs=[];
+  const flush=()=>{if(refs.length){out+=`<ol class="refs">${refs.map(r=>`<li>${esc(r)}</li>`).join('')}</ol>`;refs=[]}};
+  for(const b of w.blocks){
+    if(b.t==='ref'){refs.push(b[k]||b.zh);continue}
+    flush();
+    if(b.t==='img'){out+=`<figure><img src="img/${b.src}" alt="${esc(L(w.title))}" loading="lazy"></figure>`;continue}
+    if(b.t==='table'){out+=`<div class="tbl"><table>${b.rows.map((r,ri)=>`<tr>${r.map(c=>{const tg=ri===0?'th':'td';return `<${tg}${c.span>1?` colspan="${c.span}"`:''}>${esc(c[k]||c.zh).replace(/\n/g,'<br>')}</${tg}>`}).join('')}</tr>`).join('')}</table></div>`;continue}
+    if(b.t==='cap'){out+=`<p class="cp">${esc(b[k]||b.zh)}</p>`;continue}
+    const t=esc(b[k]||b.zh||'');
+    out+=b.t==='h'?`<h2>${t}</h2>`:b.t==='quote'?`<blockquote>${t}</blockquote>`:b.t==='label'?`<p class="plabel">${t}</p>`:`<p>${t}</p>`;
+  }
+  flush();return out;
+}
+function vReader(w){
+  const al=artLang||lang,vert=al==='zh'&&readMode==='v',gl=lang==='en'?GENRE[w.genre]:w.genre,all=sortedW(),i=all.indexOf(w),prev=all[i-1],next=all[i+1];
+  return `<a class="back cap" href="#writing">← ${L(T.nav.writing)} / ${gl}</a>
+  <article class="reader" lang="${al==='en'?'en':'zh-CN'}"><span class="num">${w.id}</span><h1>${esc(al==='en'?w.title[1]:w.title[0])}</h1>
+    ${w.subtitle?`<p class="rsub">${esc(al==='en'?w.subtitle[1]:w.subtitle[0])}</p>`:''}
+    <div class="rbar"><span>${gl} · ${L(T.chars)(w.words)} · ${w.date.replace(/-/g,'.')}</span>
+      <div style="display:flex;gap:26px;flex-wrap:wrap"><div class="modes" role="group"><button data-al="zh" aria-pressed="${al==='zh'}">中</button><button data-al="en" aria-pressed="${al==='en'}">EN</button></div>
+      ${al==='zh'?`<div class="modes" role="group"><button data-r="h" aria-pressed="${!vert}">${L(T.horiz)}</button><button data-r="v" aria-pressed="${vert}">${L(T.vert)}</button></div>`:''}</div></div>
+    <div class="prose ${vert?'vert':''}">${blocksHTML(w,al)}</div>
+    ${al==='en'?`<p class="cap" style="margin-top:28px">${L(T.rSample)}</p>`:''}
+    <nav class="more">${prev?`<a href="#${prev.id}">← ${esc(L(prev.title))}</a>`:'<span></span>'}${next?`<a href="#${next.id}">${esc(L(next.title))} →</a>`:'<span></span>'}</nav>
+  </article>`;
+}
+
+/* ================= 关于 ================= */
+function vAbout(){
+  const S=PF.statements||{},ims=ids=>`<div class="ims">${ids.map(id=>{const w=P.find(x=>x.id===id);return w?`<a href="#${w.id}"><img src="${pImg(w,'thumb')}" alt="${esc(L(w.title))}" loading="lazy"></a>`:''}).join('')}</div>`;
+  const b2=phSer('B2');
+  const sec=(key,col,paras,extra)=>`<section><h2>${dot(col)}${L(T.st[key])}</h2>${L(paras).map(p=>`<p>${esc(p)}</p>`).join('')}${extra||''}</section>`;
+  return `<section class="ph"><h1>${L(T.nav.about)}<small class="cap">About</small></h1><p>${L(T.aLead)}</p></section>
+  <div class="about">
+    <aside class="side">
+      <div class="blk"><span class="cap">${lang==='en'?'Artist':'艺术家'}</span><p style="font-family:var(--cn);font-size:26px;letter-spacing:.14em">${PF.name[0]}</p><p style="font-family:var(--en);font-style:italic;font-size:20px;margin-top:-6px">${PF.name[1]}</p><p style="color:var(--ink2)">${L(PF.born)}</p><p class="cap">${L(PF.media)}</p></div>
+      <div class="blk"><span class="cap">${L(T.edu)}</span><ul>${PF.education.map(e=>`<li><span class="num">${e[0]==='本科'&&lang==='en'?'BA':e[0]}</span><span>${lang==='en'?e[2]:e[1]}</span></li>`).join('')}</ul></div>
+      <div class="blk"><span class="cap">${L(T.contact)}</span><code id="mail">${PF.email}</code><div style="display:flex;gap:14px;align-items:center"><button class="btn" id="copy">${L(T.copy)}</button><span id="copied" class="cap" aria-live="polite"></span></div></div>
+    </aside>
+    <div class="stmt">
+      ${sec('shanshui',SCOL.A1,S.shanshui)}
+      ${sec('benzhen',SCOL.A2,S.benzhen)}
+      ${sec('install','var(--c-d)',S.install,`<div class="ims"><a href="#D-2026-02"><img src="${prImg('studio-detail')}" alt="" loading="lazy"></a><a href="#D-2026-01"><img src="${prImg('dongban-hero')}" alt="" loading="lazy"></a><a href="#D-2026-02"><img src="${prImg('studio-sites')}" alt="" loading="lazy"></a></div>`)}
+      ${b2?sec('photo',SCOL.B2,[[b2.text[0]],[b2.text[1]]]):''}
+      ${sec('writing','var(--c-w)',S.writing)}
+    </div>
+  </div>`;
+}
+
+/* ================= 大图查看（绘画与摄影共用） ================= */
+let vw=null;
+function viewList(key){const [t,id]=key.split(':');if(t==='p'){
+  /* 同一系列的画依次排开，有局部图的紧跟在原画后面 */
+  const w=P.find(x=>x.id===id.split('~')[0]),list=[];
+  P.filter(x=>x.series===w.series).forEach(x=>{list.push({key:'p:'+x.id,src:pImg(x,'full'),cap:pCap(x)});(x.det||[]).forEach((d,j)=>list.push({key:`p:${x.id}~${j}`,src:`paint/full/${d}.jpg?v=${IMGV}`,cap:`${L(x.title)} · ${L(T.detail)} ${j+1}`}))});
+  return {list,i:Math.max(0,list.findIndex(v=>v.key===key))}}
+  const p=PH.find(x=>x.id===id),l=PH.filter(x=>x.set===p.set);return {list:l.map(x=>({key:'f:'+x.id,src:phImg(x,'full'),cap:`${L(phSer(x.set).short)} · ${pad(x.n)} · ${x.year}${x.exp?' · '+x.exp:''}`})),i:l.indexOf(p)}}
+function openView(key){
+  const {list,i}=viewList(key);vw={list,i};let lb=document.getElementById('lb');
+  if(!lb){lb=document.createElement('div');lb.id='lb';lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');document.body.appendChild(lb);
+    lb.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.go)step(+b.dataset.go);else if(b&&b.id==='lbClose')closeView();else if(!e.target.closest('img'))closeView()});
+    let x0=null;lb.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+    lb.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)step(dx<0?1:-1);x0=null});}
+  paintView();lb.hidden=false;document.body.style.overflow='hidden';
+}
+function paintView(){const lb=document.getElementById('lb'),it=vw.list[vw.i];
+  lb.innerHTML=`<img src="${it.src}" alt="${esc(it.cap)}"><div class="lb-cap"><span>${esc(it.cap)}</span><span class="lb-nav"><span class="num">${pad(vw.i+1)} / ${pad(vw.list.length)}</span><button class="btn" data-go="-1" ${vw.i===0?'disabled':''}>←</button><button class="btn" data-go="1" ${vw.i===vw.list.length-1?'disabled':''}>→</button><button class="btn" id="lbClose">${L(T.close)}</button></span></div>`;
+  const nx=vw.list[vw.i+1];if(nx){const im=new Image();im.src=nx.src}}
+function step(d){if(!vw)return;const j=vw.i+d;if(j<0||j>=vw.list.length)return;vw.i=j;paintView()}
+function closeView(){const lb=document.getElementById('lb');if(lb&&!lb.hidden){lb.hidden=true;document.body.style.overflow=splashOpen()?'hidden':'';vw=null}}
+document.addEventListener('keydown',e=>{
+  const lb=document.getElementById('lb'),open=lb&&!lb.hidden;
+  if(e.key==='Escape'){closeView();return}
+  if(e.target.closest&&e.target.closest('input,textarea'))return;
+  if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+  if(open){e.preventDefault();step(e.key==='ArrowLeft'?-1:1);return}
+  if(splashOpen())return;
+  const a=view.querySelector(e.key==='ArrowLeft'?'[data-prev]':'[data-next]');if(a){e.preventDefault();location.hash=a.getAttribute('href')}
+});
+
+/* ================= 入口页：薄纱与掀开 ================= */
+const splash=document.getElementById('splash'),veil=document.getElementById('veil');
+const splashOpen=()=>!splash.hidden&&!splash.classList.contains('out');
+let tx=0,ty=0,cx=0,cy=0,lastMove=0,raf=0,t0=performance.now();
+function pickSplash(){
+  const s=SPLASH[Math.floor(Math.random()*SPLASH.length)],img=document.getElementById('spArt');
+  img.onload=()=>splash.classList.add('ready');img.src=s.src;
+  let cap=s.cap;if(s.id){const w=P.find(x=>x.id===s.id);cap=[`${w.title[0]} · ${w.year} · ${w.medium} · ${pSize(w)}`,`${w.title[1]} · ${w.year} · ${MED[w.medium]} · ${pSize(w)}`]}
+  if(s.ph){const p=PH.find(x=>x.id===s.ph),sr=phSer(p.set);cap=[`${sr.name[0]} · ${pad(p.n)} · ${p.year}`,`${sr.name[1]} · ${pad(p.n)} · ${p.year}`]}
+  document.getElementById('spCap').innerHTML=`${esc(cap[0])}<br><span style="font-family:var(--en)">${esc(cap[1])}</span>`;
+}
+function loop(now){
+  if(!splashOpen()){raf=0;return}
+  const W0=innerWidth,H0=innerHeight;
+  if(now-lastMove>2600){const t=(now-t0)/1000;tx=W0*(.66+.16*Math.sin(t*.23));ty=H0*(.48+.2*Math.sin(t*.31+1.3))}
+  cx+=(tx-cx)*.08;cy+=(ty-cy)*.08;
+  veil.style.setProperty('--x',cx+'px');veil.style.setProperty('--y',cy+'px');
+  raf=requestAnimationFrame(loop);
+}
+function startSplash(){
+  splash.hidden=false;splash.classList.remove('out');document.body.style.overflow='hidden';pickSplash();
+  cx=tx=innerWidth*.66;cy=ty=innerHeight*.48;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){veil.style.setProperty('--x',cx+'px');veil.style.setProperty('--y',cy+'px');return}
+  if(!raf)raf=requestAnimationFrame(loop);
+}
+splash.addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;lastMove=performance.now();document.getElementById('spHint').style.opacity='0'});
+function enter(l){setLang(l);splash.classList.add('out');document.body.style.overflow='';setTimeout(()=>{if(splash.classList.contains('out'))splash.hidden=true},900)}
+splash.addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(b)enter(b.dataset.lang)});
+document.getElementById('toSplash').addEventListener('click',startSplash);
+
+/* ================= 路由 ================= */
+const view=document.getElementById('view');
+function chrome(){
+  document.documentElement.lang=lang==='en'?'en':'zh-CN';
+  document.getElementById('foot1').textContent=L(T.foot1);document.getElementById('foot2').textContent=L(T.foot2);
+  document.querySelectorAll('[data-setlang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.setlang===lang));
+}
+function route(scroll){
+  const h=decodeURIComponent(location.hash.slice(1))||'index',item=BYID[h],ph=PH.find(x=>x.id===h);let html,nav;
+  /* 先切展厅底色，再画内容：就算后面出错，绘画页也不会退回白底 */
+  /* 深灰展厅只用于本真、素描与速写、版画；山水、日常保持白底 */
+  const darkSer=k=>!['A1','D'].includes(k);
+  const isGallery=(h==='painting'&&darkSer((ser(curSeries)||PSERIES[0]).key))||!!(item&&item.type==='p'&&darkSer(item.series));
+  document.body.classList.toggle('gallery',isGallery);document.documentElement.classList.toggle('gallery',isGallery);
+  if(ph){nav='photo';curPh=ph.set;html=vPhoto()}
+  else if(item){nav=NAV[item.type];html=item.type==='p'?vPaintDetail(item):item.type==='f'?(curPh=item.id,vPhoto()):item.type==='w'?vReader(item):vProject(PR.find(x=>x.id===item.id))}
+  else{nav=T.nav[h]?h:'index';html={index:vIndex,painting:vPainting,photo:vPhoto,projects:vProjects,writing:vWriting,about:vAbout}[nav]()}
+  document.getElementById('navlinks').innerHTML=Object.keys(T.nav).map(k=>`<a href="#${k}" class="${k===nav?'on':''}" style="--dc:${T.navCol[k]||'var(--ink)'}">${L(T.nav[k])}</a>`).join('');
+  view.innerHTML=`<div class="view">${html}</div>`;
+  const rows=document.getElementById('rows');if(rows)rows.innerHTML=rowsHTML();
+  initDeck();
+  bindScroll();if(ph)openView('f:'+ph.id);else if(document.getElementById('lb'))closeView();
+  if(scroll)window.scrollTo(0,0);
+}
+function setLang(l){lang=l;store.lang=l;save();chrome();route()}
+function bindScroll(){
+  const sc=document.getElementById('scroll');if(!sc)return;
+  sc.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)<=Math.abs(e.deltaX))return;
+    const max=sc.scrollWidth-sc.clientWidth,pos=Math.abs(sc.scrollLeft),rtl=getComputedStyle(sc).direction==='rtl';
+    if((e.deltaY>0&&pos<max-1)||(e.deltaY<0&&pos>1)){e.preventDefault();sc.scrollLeft+=rtl?-e.deltaY:e.deltaY}},{passive:false});
+}
+document.querySelector('header.top').addEventListener('click',e=>{const b=e.target.closest('[data-setlang]');if(b&&b.dataset.setlang!==lang)setLang(b.dataset.setlang)});
+view.addEventListener('click',e=>{
+  const card=e.target.closest('[data-goseries]');if(card){curSeries=card.dataset.goseries;store.series=curSeries;save()}
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.f){filter=b.dataset.f;view.querySelectorAll('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x===b));document.getElementById('rows').innerHTML=rowsHTML()}
+  else if(b.dataset.s){curSeries=b.dataset.s;store.series=curSeries;save();route()}
+  else if(b.dataset.m){store.pmode={...(store.pmode||{}),[curSeries]:b.dataset.m};save();route()}
+  else if(b.dataset.ps){curPh=b.dataset.ps;store.ph=curPh;save();route()}
+  else if(b.dataset.pm){store.phmode=b.dataset.pm;save();route()}
+  else if(b.dataset.view){openView(b.dataset.view)}
+  else if(b.dataset.wg){wGenre=b.dataset.wg;route()}
+  else if(b.dataset.ws){wSec=b.dataset.ws;route()}
+  else if(b.dataset.poem){const el=document.getElementById('po-'+b.dataset.poem);if(el){el.scrollIntoView({block:'start'});window.scrollBy(0,-96)}}
+  else if(b.dataset.dy){dYear=b.dataset.dy;route()}
+  else if(b.dataset.dopen){const k=b.dataset.dopen,art=b.closest('.de');if(dOpen.has(k)){dOpen.delete(k);art.classList.add('fold');b.textContent=L(T.dMore)(art.querySelectorAll('.de-b>p:not(.de-n)').length);art.scrollIntoView({block:'start'});window.scrollBy(0,-90)}else{dOpen.add(k);art.classList.remove('fold');b.textContent=L(T.dLess)}}
+  else if(b.dataset.wo){wOrder=b.dataset.wo;store.wOrder=wOrder;save();route()}
+  else if(b.dataset.al){artLang=b.dataset.al;route()}
+  else if(b.dataset.r){readMode=b.dataset.r;store.read=readMode;save();route()}
+  else if(b.id==='copy'){
+    const el=document.getElementById('mail'),msg=document.getElementById('copied');
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);msg.textContent=L(T.selected)};
+    try{navigator.clipboard.writeText(el.textContent).then(()=>{msg.textContent=L(T.copied)},sel)}catch(err){sel()}
+  }
+});
+view.addEventListener('input',e=>{if(e.target.id==='q'){query=e.target.value;document.getElementById('rows').innerHTML=rowsHTML()}});
+window.addEventListener('hashchange',()=>{artLang=null;route(true)});
+
+chrome();route(false);
+if(location.hash.length>1){splash.hidden=true}else{startSplash()}
+</script>
+
+</body></html>
