@@ -560,13 +560,13 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 <main class="wrap" id="view"></main>
 <footer><div class="wrap foot"><span id="foot1"></span><span id="foot2"></span></div></footer>
 
-<script src="essays.js?v=20261021i"></script>
-<script src="paintings.js?v=20261021i"></script>
-<script src="photos.js?v=20261021i"></script>
-<script src="projects.js?v=20261021i"></script>
-<script src="profile.js?v=20261021i"></script>
-<script src="diary.js?v=20261021i"></script>
-<script src="poems.js?v=20261021i"></script>
+<script src="essays.js?v=20261023a"></script>
+<script src="paintings.js?v=20261023a"></script>
+<script src="photos.js?v=20261023a"></script>
+<script src="projects.js?v=20261023a"></script>
+<script src="profile.js?v=20261023a"></script>
+<script src="diary.js?v=20261023a"></script>
+<script src="poems.js?v=20261023a"></script>
 <script>
 /* ================= 数据 ================= */
 const MED={'纸上水彩':'Watercolour on paper','纸面水彩':'Watercolour on paper','纸上综合材料':'Mixed media on paper','纸上油画棒':'Oil pastel on paper','纸上丙烯':'Acrylic on paper','布面丙烯':'Acrylic on canvas','布面综合材料':'Mixed media on canvas','PE布面综合材料':'Mixed media on PE canvas','铜板飞尘':'Aquatint on copper','铜板线腐蚀':'Line etching on copper'};
@@ -576,7 +576,7 @@ const PHS=window.PHSERIES||[],PH=window.PHOTOS||[],CAMERA=window.PHCAMERA||'';
 const PR=window.PROJECTS||[],PF=window.PROFILE||{},PRDIM=window.PROJDIMS||{};
 const W=(window.ESSAYS||[]).map(e=>({...e,title:[e.title.zh,e.title.en],subtitle:e.subtitle?[e.subtitle.zh,e.subtitle.en]:null,summary:[e.summary.zh,e.summary.en],year:+e.date.slice(0,4)}));
 /* 系列颜色取自作品本身 */
-const SCOL={A2:'#C8452F',A1:'#9A922E',S:'#77706A',D:'#5F8A7A',E:'#3F3A52',B1:'#D3951B',B2:'#A4561F'};
+const SCOL={A2:'#C8452F',A1:'#9A922E',S:'#77706A',D:'#5F8A7A',W:'#6F93B4',E:'#3F3A52',B1:'#D3951B',B2:'#A4561F'};
 const TCOL={p:'var(--c-p)',f:'var(--c-f)',w:'var(--c-w)',d:'var(--c-d)'};
 /* 入口页固定用 b1-31 这张 */
 const SPLASH=[{src:'photo/B1/full/b1-31.jpg',ph:'B1-11'}];
@@ -596,7 +596,7 @@ const T={
   works:[n=>`${n} 件`,n=>`${n} works`],frames:[n=>`${n} 张`,n=>`${n} frames`],texts:[n=>`${n} 篇`,n=>`${n} texts`],
   pLead:['本真、山水两个创作系列，以及素描速写、日常与版画。可以一幅一幅陈列着看，也可以用网格、手卷或按真实尺寸并排比较。','Two series, Authenticity and Shanshui, with sketches, everyday paintings and prints. View one work at a time, or as a grid, a handscroll, or side by side at real size.'],
   pseq:['陈列','Sequence'],detail:['局部','Detail'],
-  sLead:{S:['素描、速写与肖像习作。','Drawings, sketches and portrait studies.'],D:['静物、风景与身边的人。','Still lifes, landscapes and the people around me.'],E:['铜版画。','Copperplate prints.']},
+  sLead:{S:['素描、速写与肖像习作。','Drawings, sketches and portrait studies.'],D:['静物、风景与身边的人。','Still lifes, landscapes and the people around me.'],W:['纸上水彩：人体与色彩。','Watercolours on paper: the figure and colour.'],E:['铜版画。','Copperplate prints.']},
   noSize:[n=>`另有 ${n} 件尺寸待补`,n=>`${n} more without recorded size`],noSizeAll:['这个系列的尺寸还没有记录。','Sizes for this series have not been recorded yet.'],grid:['网格','Grid'],scroll:['手卷','Handscroll'],scale:['比例','To scale'],
   hint1:['手卷式陈列 · 自右向左展开 · 横向滚动','Handscroll · unrolls right to left · scroll sideways'],hint2:['点击作品查看详情','Select a work for details'],
   hintScale:['按真实尺寸比例陈列 · 底边对齐 · 横向滚动','Shown at true relative size · bottom-aligned · scroll sideways'],
@@ -636,7 +636,7 @@ const dot=c=>`<i class="dot" style="--dc:${c}"></i>`;
 const ser=k=>PSERIES.find(s=>s.key===k),phSer=k=>PHS.find(s=>s.key===k);
 const med=w=>!w.medium?'':lang==='en'?(MED[w.medium]||w.medium):w.medium;
 /* 图片地址加版本号：换了同名图片后，浏览器不会再用旧缓存 */
-const IMGV='20261021c';
+const IMGV='20261023a';
 const pImg=(w,s)=>`paint/${s}/${w.code}.jpg?v=${IMGV}`,phImg=(p,s)=>`photo/${p.set}/${s}/${p.file}.jpg`,prImg=n=>n.includes('.')?`projimg/${n}`:`projimg/${n}.jpg`;
 const pad=n=>String(n).padStart(2,'0');
 const pYears=l=>{const y=l.map(x=>x.year).filter(Boolean),a=Math.min(...y),b=Math.max(...y);return a===b?`${a}`:`${a} — ${b}`};
