@@ -1038,7 +1038,7 @@ const INK=(()=>{
   const FS=`#version 300 es
   precision highp float;
   uniform vec2 uRes;uniform float uDpr,uTime,uLine,uSpread,uTextP,uExit,uHoverAmt,uCell,uRippleOn;
-  uniform vec2 uExitPos,uGrid;uniform vec4 uHover;uniform sampler2D uTextTex,uRipple,uRimTex;
+  uniform vec2 uExitPos,uGrid;uniform vec4 uHover;uniform sampler2D uTextTex,uRipple,uRimTex,uTrail;
   out vec4 o;
   float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
   float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
@@ -1102,6 +1102,20 @@ const INK=(()=>{
     }
     /* 水波高光（偏暖金，很淡） */
     col+=vec3(.85,.68,.40)*clamp(dot(grad,normalize(vec2(-1.)))*1.4,-.04,.22)*ink;
+    /* 水痕：涟漪走过的地方留一层很淡的湿光，几秒后才退；里面零星的金星缓缓明灭 */
+    if(uRippleOn>0.){
+      float wet=texture(uTrail,(Q/uCell+.5)/uGrid).r*uRippleOn;
+      if(wet>.005){
+        col+=vec3(.018,.016,.012)*wet*ink;
+        vec2 id=floor(Q/7.);float h=hash(id+3.1);
+        if(h>.86){
+          vec2 d=Q-(id+.25+.5*vec2(hash(id+7.7),hash(id+1.9)))*7.;
+          float tw=pow(.5+.5*sin(uTime*(.6+h*.8)+hash(id+5.3)*6.283),5.);
+          float star=exp(-dot(d,d)/1.1)+.3*(exp(-abs(d.x)*1.2-d.y*d.y*5.)+exp(-abs(d.y)*1.2-d.x*d.x*5.));
+          col=mix(col,vec3(.96,.79,.42),clamp(star*tw*smoothstep(.03,.6,wet)*.65,0.,.65)*ink);
+        }
+      }
+    }
     /* 退场：从点击处洇开，露出下面的网站 */
     float a=1.;
     if(uExit>0.){
@@ -1117,12 +1131,13 @@ const INK=(()=>{
   const prog=gl.createProgram();
   gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);gl.useProgram(prog);
   gl.bindVertexArray(gl.createVertexArray());
-  const U={};['uRes','uDpr','uTime','uLine','uSpread','uTextP','uExit','uHoverAmt','uExitPos','uHover','uTextTex','uRipple','uRimTex','uGrid','uCell','uRippleOn'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+  const U={};['uRes','uDpr','uTime','uLine','uSpread','uTextP','uExit','uHoverAmt','uExitPos','uHover','uTextTex','uRipple','uRimTex','uTrail','uGrid','uCell','uRippleOn'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
   function tex(unit){const t=gl.createTexture();gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,t);
     [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]].forEach(([k,v])=>gl.texParameteri(gl.TEXTURE_2D,k,v));return t}
   const textTex=tex(0);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array(4));
   const rippleTex=tex(1);gl.uniform1i(U.uTextTex,0);gl.uniform1i(U.uRipple,1);
   const rimTex=tex(2);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array(4));gl.uniform1i(U.uRimTex,2);
+  const trailTex=tex(3);gl.uniform1i(U.uTrail,3);
 
   /* ---- 文字贴图：和网站同一套字体 ---- */
   const tc=document.createElement('canvas'),tx=tc.getContext('2d');
@@ -1156,16 +1171,20 @@ const INK=(()=>{
     .catch(()=>{}).then(()=>{fontsReady=true;fontsAt=performance.now();if(cssW)drawText()});
 
   /* ---- 水波高度场（CPU，低分辨率） ---- */
-  const CELL=5,DAMP=.972;let gw,gh,A,B;
-  function initRipple(){gw=Math.ceil(cssW/CELL)+2;gh=Math.ceil(cssH/CELL)+2;A=new Float32Array(gw*gh);B=new Float32Array(gw*gh);
-    gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.R16F,gw,gh,0,gl.RED,gl.FLOAT,A)}
+  /* WET：水痕，涟漪经过时被“打湿”，之后每帧慢慢变干（约 5 秒） */
+  const CELL=5,DAMP=.972,DRY=.992;let gw,gh,A,B,WET;
+  function initRipple(){gw=Math.ceil(cssW/CELL)+2;gh=Math.ceil(cssH/CELL)+2;A=new Float32Array(gw*gh);B=new Float32Array(gw*gh);WET=new Float32Array(gw*gh);
+    gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.R16F,gw,gh,0,gl.RED,gl.FLOAT,A);
+    gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,trailTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.R16F,gw,gh,0,gl.RED,gl.FLOAT,WET)}
   function splat(x,y,s,rad=2.6){const gx=x/CELL,gy=y/CELL,r=Math.ceil(rad);
     for(let j=-r;j<=r;j++)for(let i=-r;i<=r;i++){const X=Math.round(gx)+i,Y=Math.round(gy)+j;
       if(X<1||Y<1||X>=gw-1||Y>=gh-1)continue;const d=Math.hypot(X-gx,Y-gy);if(d>rad)continue;
       A[Y*gw+X]+=s*(.5+.5*Math.cos(Math.PI*d/rad))}}
   function stepRipple(){
     for(let y=1;y<gh-1;y++){let i=y*gw+1;for(let x=1;x<gw-1;x++,i++)B[i]=((A[i-1]+A[i+1]+A[i-gw]+A[i+gw])*.5-B[i])*DAMP}
-    const t=A;A=B;B=t;gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,gw,gh,gl.RED,gl.FLOAT,A)}
+    const t=A;A=B;B=t;gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,gw,gh,gl.RED,gl.FLOAT,A);
+    for(let i=0;i<A.length;i++){const a=Math.abs(A[i]),w=a<.12?0:Math.min(1,(a-.12)*2.2),d=WET[i]*DRY;WET[i]=w>d?w:d}
+    gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,trailTex);gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,gw,gh,gl.RED,gl.FLOAT,WET)}
 
   function resize(){dpr=Math.min(devicePixelRatio||1,2);cssW=innerWidth;cssH=innerHeight;
     cv.width=Math.round(cssW*dpr);cv.height=Math.round(cssH*dpr);gl.viewport(0,0,cv.width,cv.height);initRipple();if(fontsReady)drawText()}
