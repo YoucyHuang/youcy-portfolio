@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>后台 · 黄鈺茜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF;--ink:#191817;--ink2:#5E5A55;--ink3:#9A958E;--rule:#E5E1DB;--hair:#F0EDE9;--mat:#F7F6F4;--gold:#B8892E;--red:#C8452F;
+  --cn:"Noto Serif SC","Songti SC","STSong","SimSun",serif;--en:"EB Garamond","Garamond","Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{--bg:#131211;--ink:#EEEAE4;--ink2:#ABA59C;--ink3:#77726B;--rule:#2C2A27;--hair:#201E1C;--mat:#1B1A18;--gold:#D9AE55;--red:#E0603F;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+.cap{font-family:var(--en);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
+.num{font-variant-numeric:tabular-nums;color:var(--ink3);font-size:12.5px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding:28px 0 18px;border-bottom:1px solid var(--ink)}
+header h1{margin:0;font-family:var(--cn);font-weight:600;font-size:22px;letter-spacing:.16em}
+header h1 i{font-family:var(--en);font-weight:400;letter-spacing:.02em;color:var(--ink3);margin-left:10px}
+.lnk{background:none;border:0;border-bottom:1px solid currentColor;padding:0;font-family:var(--en);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
+.lnk:hover{color:var(--red)}
+/* 登录 */
+#login{max-width:340px;margin:16vh auto;display:grid;gap:16px}
+#login h1{margin:0 0 8px;font-family:var(--cn);font-weight:600;font-size:26px;letter-spacing:.2em}
+#login input{border:0;border-bottom:1px solid var(--rule);background:transparent;padding:10px 0;font-size:15px}
+#login input:focus{outline:none;border-color:var(--ink)}
+#login button{justify-self:start;background:none;border:0;border-bottom:1px solid var(--ink);padding:2px 0;font-family:var(--en);letter-spacing:.2em;text-transform:uppercase;font-size:12px}
+#loginMsg{min-height:1.4em;color:var(--red);font-size:13px}
+/* 概览 */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--rule)}
+.tile{padding:22px 0 18px}
+.tile+.tile{padding-left:24px;border-left:1px solid var(--rule)}
+.tile b{display:block;font-family:var(--en);font-weight:400;font-size:40px;line-height:1.1;font-variant-numeric:lining-nums tabular-nums}
+.plat{display:grid;gap:8px;padding:22px 0;border-bottom:1px solid var(--rule)}
+.pl{display:grid;grid-template-columns:96px 1fr 64px;gap:14px;align-items:center}
+.pl i{display:block;height:6px;background:var(--gold);border-radius:3px;min-width:2px}
+.pl span:last-child{text-align:right}
+/* 标签页 */
+.tabs{display:flex;gap:28px;padding:20px 0 4px;align-items:baseline;flex-wrap:wrap}
+.tabs button{background:none;border:0;padding:4px 0;font-family:var(--cn);font-size:16px;color:var(--ink3);border-bottom:1px solid transparent}
+.tabs button[aria-pressed=true]{color:var(--ink);border-color:var(--ink)}
+.tabs .sp{flex:1}
+.tabs select{font:inherit;background:transparent;border:0;border-bottom:1px solid var(--rule);color:var(--ink2);padding:2px 0}
+/* 访客 */
+.who{border-bottom:1px solid var(--hair)}
+.who>button{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:minmax(150px,1.3fr) 1fr 1.1fr 1.2fr 92px 120px;gap:14px;align-items:baseline;width:100%;padding:14px 0}
+.who>button:hover .nm{color:var(--red)}
+.nm{font-family:var(--cn);font-size:15px}
+.nm small{display:block;font-family:var(--sans);font-size:12px;color:var(--ink3)}
+.known{color:var(--gold)}
+.tl{display:none;margin:0 0 16px;padding:10px 16px;background:var(--mat);font-size:13px}
+.who.open .tl{display:block}
+.tl div{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:3px 0}
+.hd{display:grid;grid-template-columns:minmax(150px,1.3fr) 1fr 1.1fr 1.2fr 92px 120px;gap:14px;padding:12px 0 6px;border-bottom:1px solid var(--rule)}
+/* 留言 */
+.cm{display:grid;grid-template-columns:1fr 280px;gap:12px 32px;padding:20px 0;border-bottom:1px solid var(--hair)}
+.cm.hidden{opacity:.45}
+.cm .body{font-family:var(--cn);font-size:15px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 0 0}
+.cm .th{font-family:var(--cn);color:var(--ink2)}
+.cm dl{margin:0;display:grid;grid-template-columns:64px 1fr;gap:4px 10px;font-size:13px}
+.cm dt{color:var(--ink3)}
+.cm dd{margin:0;overflow-wrap:anywhere}
+.cm .act{display:flex;gap:18px;margin-top:10px}
+.tag{display:inline-block;font-size:11px;letter-spacing:.1em;padding:0 6px;border:1px solid var(--rule);color:var(--ink2);margin-left:8px;vertical-align:2px}
+/* 原始记录 */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:400;color:var(--ink3);padding:10px 8px 6px 0;border-bottom:1px solid var(--rule)}
+td{padding:8px 8px 8px 0;border-bottom:1px solid var(--hair);vertical-align:top;overflow-wrap:anywhere}
+.empty{padding:40px 0;color:var(--ink3)}
+.foot{padding:28px 0 60px;color:var(--ink3);font-size:12px}
+@media (max-width:820px){
+  .tiles{grid-template-columns:repeat(2,1fr)}.tile:nth-child(3){padding-left:0;border-left:0}
+  .hd{display:none}.who>button{grid-template-columns:1fr 1fr;gap:4px 14px}
+  .cm{grid-template-columns:1fr}
+  .tbl{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<form id="login" hidden>
+  <h1>后台</h1>
+  <span class="cap">Youcy Huang · Admin</span>
+  <input id="em" type="email" placeholder="邮箱" autocomplete="username" required>
+  <input id="pw" type="password" placeholder="密码" autocomplete="current-password" required>
+  <button type="submit">登录</button>
+  <div id="loginMsg" aria-live="polite"></div>
+</form>
+
+<div id="app" class="wrap" hidden>
+  <header><h1>后台<i>Visitors &amp; Notes</i></h1>
+    <div style="display:flex;gap:22px;align-items:baseline"><span class="num" id="me"></span><button class="lnk" id="reload">刷新</button><button class="lnk" id="logout">退出</button></div></header>
+  <div class="tiles" id="tiles"></div>
+  <div class="plat" id="plat"></div>
+  <div class="tabs" role="group">
+    <button data-tab="who" aria-pressed="true">访客</button>
+    <button data-tab="cm" aria-pressed="false">留言</button>
+    <button data-tab="raw" aria-pressed="false">访问记录</button>
+    <span class="sp"></span>
+    <select id="range" aria-label="时间范围"><option value="1">今天</option><option value="7">近 7 天</option><option value="30" selected>近 30 天</option><option value="90">近 90 天</option></select>
+  </div>
+  <div id="body"></div>
+  <p class="foot">“谁”：留过言并填了称呼的人，会在这里显示真名，对方在这台设备上之前、之后的每次访问也都会归到这个名字下；没留言的访客只能看到设备、平台和大致地区。<br>
+    想知道分享到哪个平台带来的人，可以在链接后面加标记，如 <code>…/youcy-portfolio/?from=xhs</code>，会显示在“标记”里。<br>
+    在这台浏览器登录过后台，你自己的访问就不会被记录。</p>
+</div>
+
+<!-- 用网站自己的数据把页面编号翻译成标题 -->
+<script src="essays.js"></script>
+<script src="paintings.js"></script>
+<script src="photos.js"></script>
+<script src="projects.js"></script>
+<script>
+/* 与 index.html 里的 SB 相同 */
+const SB={url:'https://otvrtarvuwtzruhjmrlv.supabase.co',key:'sb_publishable_BPU5LeBdBvL8yjm8X7vy4Q_E9qtaHDD'};
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const fmt=s=>{const d=new Date(s);return `${d.getMonth()+1}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`};
+const fmtFull=s=>{const d=new Date(s);return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`};
+
+/* ---------- 页面编号 → 标题 ---------- */
+const t0=t=>Array.isArray(t)?t[0]:t&&typeof t==='object'?(t.zh||t.en):t;
+const TITLES={index:'首页',painting:'绘画',photo:'摄影',projects:'项目',writing:'文字',about:'关于',diary:'随记',poems:'诗'};
+(window.ESSAYS||[]).forEach(x=>TITLES[x.id]='文 · '+t0(x.title));
+(window.PAINTINGS||[]).forEach(x=>TITLES[x.id]='画 · '+t0(x.title));
+(window.PROJECTS||[]).forEach(x=>TITLES[x.id]='项目 · '+t0(x.title));
+(window.PHSERIES||[]).forEach(x=>TITLES[x.key]='摄影 · '+t0(x.name));
+(window.PHOTOS||[]).forEach(x=>{if(!TITLES[x.id])TITLES[x.id]='照片 · '+x.id});
+const pageName=p=>TITLES[p]||p||'';
+
+/* ---------- 登录 ---------- */
+let sess=null;try{sess=JSON.parse(sessionStorage.getItem('yh-admin')||'null')}catch(e){}
+async function auth(body,grant){
+  const r=await fetch(`${SB.url}/auth/v1/token?grant_type=${grant}`,{method:'POST',headers:{apikey:SB.key,'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(j.error_description||j.msg||j.message||('登录失败 '+r.status));
+  sess={token:j.access_token,refresh:j.refresh_token,exp:Date.now()+(j.expires_in-60)*1000,email:j.user&&j.user.email};
+  sessionStorage.setItem('yh-admin',JSON.stringify(sess));
+  try{localStorage.setItem('yh-notrack','1')}catch(e){}
+}
+async function api(path,opt={}){
+  if(sess&&Date.now()>sess.exp)await auth({refresh_token:sess.refresh},'refresh_token');
+  const r=await fetch(`${SB.url}/rest/v1/${path}`,{...opt,headers:{apikey:SB.key,Authorization:'Bearer '+sess.token,'Content-Type':'application/json',...(opt.headers||{})}});
+  if(r.status===401){logout();throw new Error('登录已过期')}
+  if(!r.ok)throw new Error((await r.text())||r.status);
+  return r.status===204?null:r.json();
+}
+function logout(){sessionStorage.removeItem('yh-admin');sess=null;$('#app').hidden=true;$('#login').hidden=false}
+$('#login').addEventListener('submit',async e=>{
+  e.preventDefault();$('#loginMsg').textContent='';
+  try{await auth({email:$('#em').value.trim(),password:$('#pw').value},'password');$('#pw').value='';start()}
+  catch(err){$('#loginMsg').textContent=/Invalid login/i.test(err.message)?'邮箱或密码不对':err.message}
+});
+$('#logout').onclick=logout;
+$('#reload').onclick=()=>load();
+
+/* ---------- 数据 ---------- */
+let V=[],C=[],tab='who',range=30,opened=new Set();
+async function load(){
+  $('#body').innerHTML='<p class="empty">读取中…</p>';
+  try{
+    const since=new Date(Date.now()-90*864e5).toISOString();
+    [V,C]=await Promise.all([
+      api(`visits?select=*&at=gte.${since}&order=at.desc&limit=10000`),
+      api('comments?select=*&order=at.desc&limit=2000')]);
+    if(!V.length&&!C.length){
+      const ok=await api('admins?select=email');
+      if(!ok.length){$('#body').innerHTML='<p class="empty">这个账号还不是管理员：请在 Supabase 的 SQL Editor 里运行 setup.sql 最后那行，把你的邮箱加进 admins 表。</p>';return}
+    }
+    render();fillGeo();
+  }catch(err){$('#body').innerHTML=`<p class="empty">读取失败：${esc(err.message)}</p>`}
+}
+/* 同一个访客编号，只要留过言并写了称呼，就用这个称呼 */
+function names(){const m={};C.slice().reverse().forEach(c=>{if(c.vid&&c.name)m[c.vid]=c.name});return m}
+const inRange=a=>new Date(a)>=new Date(range===1?new Date().setHours(0,0,0,0):Date.now()-range*864e5);
+
+function render(){
+  const N=names(),dayStart=new Date().setHours(0,0,0,0),uniq=(l)=>new Set(l.map(v=>v.vid||v.ip)).size;
+  const vToday=V.filter(v=>new Date(v.at)>=dayStart),v7=V.filter(v=>new Date(v.at)>=Date.now()-7*864e5),v30=V.filter(v=>new Date(v.at)>=Date.now()-30*864e5);
+  $('#tiles').innerHTML=[['今日访客',uniq(vToday)],['近 7 天访客',uniq(v7)],['近 30 天访客',uniq(v30)],['留言',C.length]]
+    .map(([k,n])=>`<div class="tile"><span class="cap">${k}</span><b>${n}</b></div>`).join('');
+  /* 各平台带来的人数（按访客去重，取每人第一次来的平台） */
+  const R=V.filter(v=>inRange(v.at)),first={};
+  R.slice().reverse().forEach(v=>{const k=v.vid||v.ip;if(!(k in first))first[k]=v.platform||'未知'});
+  const cnt={};Object.values(first).forEach(p=>cnt[p]=(cnt[p]||0)+1);
+  const pl=Object.entries(cnt).sort((a,b)=>b[1]-a[1]),max=pl.length?pl[0][1]:1;
+  $('#plat').innerHTML=`<span class="cap">来源平台 · ${$('#range').selectedOptions[0].text}</span>`+(pl.length?pl.map(([p,n])=>`<div class="pl"><span>${esc(p)}</span><i style="width:${n/max*100}%"></i><span class="num">${n} 人</span></div>`).join(''):'<p class="empty" style="padding:8px 0">这段时间还没有人来过。</p>');
+  if(tab==='who')renderWho(R,N);else if(tab==='cm')renderCm();else renderRaw(R,N);
+}
+function renderWho(R,N){
+  const g={};R.forEach(v=>{const k=v.vid||('ip:'+v.ip);(g[k]=g[k]||[]).push(v)});
+  const rows=Object.entries(g).sort((a,b)=>new Date(b[1][0].at)-new Date(a[1][0].at));
+  if(!rows.length){$('#body').innerHTML='<p class="empty">这段时间还没有访客。</p>';return}
+  $('#body').innerHTML=`<div class="hd cap"><span>谁</span><span>来自</span><span>地区</span><span>设备</span><span>次数</span><span>最近</span></div>`+rows.map(([k,l])=>{
+    const last=l[0],fst=l[l.length-1],nm=N[last.vid],pages=[...new Set(l.map(v=>pageName(v.path)))];
+    const plats=[...new Set(l.map(v=>v.platform).filter(Boolean))].join('、'),srcs=[...new Set(l.map(v=>v.src).filter(Boolean))];
+    return `<div class="who${opened.has(k)?' open':''}" data-k="${esc(k)}"><button>
+      <span class="nm ${nm?'known':''}">${nm?esc(nm):'访客 #'+esc((last.vid||last.ip||'').slice(0,5))}<small>${esc(pages.slice(0,3).join(' · '))}${pages.length>3?` 等 ${pages.length} 页`:''}</small></span>
+      <span>${esc(plats)}${srcs.length?`<span class="tag">${esc(srcs.join(','))}</span>`:''}</span>
+      <span>${esc(last.geo||'')}<small class="num" style="display:block">${esc(last.ip||'')}</small></span>
+      <span>${esc(last.device||'')}</span>
+      <span class="num">${l.length} 次</span>
+      <span class="num">${fmt(last.at)}${fst!==last?`<small style="display:block">首次 ${fmt(fst.at)}</small>`:''}</span></button>
+      <div class="tl">${l.map(v=>`<div><span class="num">${fmtFull(v.at)}</span><span>${esc(pageName(v.path))} <span class="num">· ${esc(v.platform||'')}${v.referrer?' · '+esc(v.referrer):''}</span></span></div>`).join('')}</div></div>`}).join('');
+}
+function renderCm(){
+  if(!C.length){$('#body').innerHTML='<p class="empty">还没有留言。</p>';return}
+  $('#body').innerHTML=C.map(c=>`<div class="cm${c.hidden?' hidden':''}" data-id="${c.id}">
+    <div><span class="th">${esc(pageName(c.thread))}</span><span class="num" style="margin-left:12px">${fmtFull(c.at)}</span>${c.anonymous?'<span class="tag">匿名发布</span>':''}${c.hidden?'<span class="tag">已隐藏</span>':''}
+      <p class="body">${esc(c.body)}</p>
+      <div class="act"><button class="lnk" data-hide="${c.hidden?0:1}">${c.hidden?'重新公开':'隐藏'}</button><button class="lnk" data-del>删除</button></div></div>
+    <dl><dt>称呼</dt><dd>${c.name?esc(c.name):'<span class="num">未填</span>'}</dd><dt>联系方式</dt><dd>${c.contact?esc(c.contact):'<span class="num">未填</span>'}</dd>
+      <dt>来自</dt><dd>${esc(c.platform||'')}</dd><dt>地区</dt><dd>${esc(c.geo||'')} <span class="num">${esc(c.ip||'')}</span></dd><dt>设备</dt><dd>${esc(c.device||'')}</dd>
+      <dt>访客</dt><dd class="num">#${esc((c.vid||'').slice(0,5))} · 共访问 ${V.filter(v=>v.vid&&v.vid===c.vid).length} 次</dd></dl></div>`).join('');
+}
+function renderRaw(R,N){
+  if(!R.length){$('#body').innerHTML='<p class="empty">这段时间没有记录。</p>';return}
+  $('#body').innerHTML=`<div class="tbl"><table><tr><th>时间</th><th>谁</th><th>页面</th><th>来自</th><th>地区</th><th>设备</th></tr>${R.slice(0,1000).map(v=>`<tr><td class="num">${fmtFull(v.at)}</td><td>${N[v.vid]?`<span class="known">${esc(N[v.vid])}</span>`:'#'+esc((v.vid||'').slice(0,5))}</td><td>${esc(pageName(v.path))}</td><td>${esc(v.platform||'')}${v.src?`<span class="tag">${esc(v.src)}</span>`:''}</td><td>${esc(v.geo||'')} <span class="num">${esc(v.ip||'')}</span></td><td>${esc(v.device||'')}</td></tr>`).join('')}</table></div>`;
+}
+$('#body').addEventListener('click',async e=>{
+  const w=e.target.closest('.who>button');
+  if(w){const d=w.parentNode,k=d.dataset.k;d.classList.toggle('open');d.classList.contains('open')?opened.add(k):opened.delete(k);return}
+  const b=e.target.closest('button');if(!b)return;const card=b.closest('.cm');if(!card)return;const id=card.dataset.id;
+  try{
+    if(b.dataset.hide){await api(`comments?id=eq.${id}`,{method:'PATCH',body:JSON.stringify({hidden:b.dataset.hide==='1'})});C.find(c=>c.id==id).hidden=b.dataset.hide==='1'}
+    else if('del' in b.dataset){if(!confirm('删除这条留言？删除后找不回来。'))return;await api(`comments?id=eq.${id}`,{method:'DELETE'});C=C.filter(c=>c.id!=id)}
+    render();
+  }catch(err){alert('操作失败：'+err.message)}
+});
+document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;
+  document.querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-pressed',x===b));render()});
+$('#range').onchange=e=>{range=+e.target.value;render()};
+
+/* ---------- 由 IP 查大致地区（第一次看到时查一次，写回数据库） ---------- */
+let geoBusy=false;
+async function fillGeo(){
+  if(geoBusy)return;geoBusy=true;
+  const ips=[...new Set([...V,...C].filter(x=>x.ip&&!x.geo).map(x=>x.ip))].slice(0,40);
+  for(const ip of ips){
+    try{
+      const j=await (await fetch(`https://ipapi.co/${encodeURIComponent(ip)}/json/`)).json();
+      if(j.error)continue;
+      const geo=[j.country_name==='China'?'':j.country_name,j.region,j.city].filter((x,i,a)=>x&&a.indexOf(x)===i).join(' ')+(j.org?` · ${j.org}`:'');
+      if(!geo)continue;
+      const q=`ip=eq.${encodeURIComponent(ip)}&geo=is.null`;
+      await Promise.all([api('visits?'+q,{method:'PATCH',body:JSON.stringify({geo})}),api('comments?'+q,{method:'PATCH',body:JSON.stringify({geo})})]);
+      [...V,...C].forEach(x=>{if(x.ip===ip)x.geo=geo});render();
+    }catch(e){}
+    await new Promise(r=>setTimeout(r,700));
+  }
+  geoBusy=false;
+}
+
+function start(){$('#login').hidden=true;$('#app').hidden=false;$('#me').textContent=sess.email||'';load()}
+if(!SB.url||!SB.key){document.body.innerHTML='<p class="wrap empty">还没有填 Supabase 的项目地址和 key（admin.html 里的 SB）。</p>'}
+else if(sess)start();else $('#login').hidden=false;
+</script>
+</body>
+</html>

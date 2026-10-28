@@ -513,6 +513,28 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 .lb-cap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 20px;padding-top:14px;font-size:13px;color:var(--ink2)}
 .lb-nav{display:flex;gap:20px;align-items:center}
 .lb .btn[disabled]{opacity:.3;cursor:default}
+/* ============ 留言 ============ */
+.cmt{max-width:36em;margin:56px auto 0;padding-top:20px;border-top:1px solid var(--rule)}
+.reader .cmt{margin-top:48px}
+.cmt-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.cmt-list{list-style:none;margin:0 0 22px;padding:0}
+.cmt-list li{padding:16px 0;border-bottom:1px solid var(--hair)}
+.cmt-m{display:flex;gap:14px;align-items:baseline}
+.cmt-m b{font-family:var(--serif);font-weight:400;font-size:15px}
+.cmt-list p{margin:6px 0 0;font-family:var(--serif);font-size:15px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}
+.cmt-form{display:grid;gap:14px}
+.cmt-form[hidden]{display:none}
+.cmt-form textarea,.cmt-form input:not([type=checkbox]){font:inherit;font-family:var(--serif);font-size:15px;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--rule);padding:8px 0;width:100%;border-radius:0}
+.cmt-form textarea{border:1px solid var(--rule);padding:12px 14px;resize:vertical;min-height:120px;line-height:1.8}
+.cmt-form textarea:focus,.cmt-form input:focus{outline:none;border-color:var(--ink)}
+.cmt-row{display:grid;grid-template-columns:1fr 1.4fr;gap:12px 24px}
+.cmt-anon{display:flex;gap:10px;align-items:flex-start;font-size:14px;cursor:pointer}
+.cmt-anon input{margin-top:5px;accent-color:var(--ink)}
+.cmt-anon small{display:block;color:var(--ink3);font-size:12.5px}
+.cmt-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.cmt-act{display:flex;gap:18px;align-items:center}
+.cmt-note{margin:0;font-size:12px;line-height:1.7;color:var(--ink3)}
+@media (max-width:600px){.cmt-row{grid-template-columns:1fr}}
 </style>
 
 <div class="splash" id="splash">
@@ -598,6 +620,12 @@ const T={
   st:{shanshui:['绘画 · 山水系列','Painting · Shanshui Series'],benzhen:['绘画 · 本真系列','Painting · Authenticity Series'],install:['装置','Installation'],photo:['摄影 · 儒与酒','Photography · Confucians and Wine'],writing:['写作','Writing']}
 };
 T.heroSide=[`${PF.born?PF.born[0]:''}以绘画为核心，延伸到装置、摄影与写作；关注传统山水在当代绘画中的再生，以及半透明材料中图像的遮蔽与显现。`,`${PF.born?PF.born[1]:''} Painting is the core of her practice, extending into installation, photography and writing. She asks how the classical landscape can live again in contemporary painting, and how images are hidden and revealed in translucent material.`];
+T.cm={title:['留言','Notes'],write:['写留言','Leave a note'],count:[n=>`${n} 条`,n=>`${n} note${n>1?'s':''}`],
+  ph:['想说的话……','Your words…'],name:['称呼（选填）','Name (optional)'],contact:['联系方式（选填，只有作者能看到）','Contact (optional, only the author sees it)'],
+  anon:['匿名发布','Post anonymously'],anonTip:['公开显示为“匿名”；你的称呼只有作者能看到','Shown as “Anonymous”; only the author sees your name'],anonName:['匿名','Anonymous'],
+  send:['发布','Post'],sending:['发送中…','Sending…'],sent:['已发布，谢谢你。','Posted — thank you.'],fail:['没发出去，请稍后再试。','Could not post. Please try again.'],
+  rate:['留言太频繁了，过几分钟再试。','Too many notes — please wait a few minutes.'],
+  note:['留言会公开显示在这里。为了解读者，本站会记录访问的设备、来源平台和大致地区，只有作者可见。','Notes appear here publicly. To know its readers, this site records device, referring platform and rough location, visible only to the author.']};
 
 /* ================= 状态与工具 ================= */
 let store={};try{store=JSON.parse(localStorage.getItem('yh-archive')||'{}')}catch(e){}
@@ -862,7 +890,7 @@ function vPoems(){
   return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.poems)} · ${span}</small></h1><p>${L(T.poLead)}</p></section>
     ${wTabs()}
     ${lang==='en'?`<p class="empty">${L(T.dZh)}</p>`:''}
-    <div class="poems"><nav class="po-toc" aria-label="${L(T.poems)}"><span class="cap">${L(T.poemsN)(PO.length)} · ${L(T.asc)}</span><ol>${toc}</ol></nav><div class="po-list">${body}</div></div>`;
+    <div class="poems"><nav class="po-toc" aria-label="${L(T.poems)}"><span class="cap">${L(T.poemsN)(PO.length)} · ${L(T.asc)}</span><ol>${toc}</ol></nav><div class="po-list">${body}</div></div>${cmBox('poems')}`;
 }
 function deHTML(e){
   const body=e.p.map(p=>p.img?`<figure><img src="img/${p.img}" alt="" loading="lazy"></figure>`
@@ -884,7 +912,7 @@ function vDiary(){
     ${wTabs()}
     <div class="bar" style="border-top:0"><div class="chips" role="group">${['all',...years].map(k=>`<button class="chip" data-dy="${k}" aria-pressed="${dYear===k}">${k==='all'?L(T.all):k}</button>`).join('')}</div><span class="cap">${L(T.dOrder)}</span></div>
     ${lang==='en'?`<p class="empty">${L(T.dZh)}</p>`:''}
-    <div class="diary">${html}</div>`;
+    <div class="diary">${html}</div>${cmBox('diary')}`;
 }
 function vWriting(){
   if(wSec==='diary'&&DY.length)return vDiary();
@@ -921,6 +949,7 @@ function vReader(w){
       ${al==='zh'?`<div class="modes" role="group"><button data-r="h" aria-pressed="${!vert}">${L(T.horiz)}</button><button data-r="v" aria-pressed="${vert}">${L(T.vert)}</button></div>`:''}</div></div>
     <div class="prose ${vert?'vert':''}">${blocksHTML(w,al)}</div>
     ${al==='en'?`<p class="cap" style="margin-top:28px">${L(T.rSample)}</p>`:''}
+    ${cmBox(w.id)}
     <nav class="more">${prev?`<a href="#${prev.id}">← ${esc(L(prev.title))}</a>`:'<span></span>'}${next?`<a href="#${next.id}">${esc(L(next.title))} →</a>`:'<span></span>'}</nav>
   </article>`;
 }
@@ -1124,7 +1153,7 @@ const INK=(()=>{
   /* 字体最多等 3.5 秒，加载不到就用系统宋体 */
   Promise.race([Promise.all([document.fonts.load(`600 80px "Noto Serif SC"`,'黄鈺茜中文'),document.fonts.load(`italic 400 40px "EB Garamond"`,'Youcy'),
     document.fonts.load(`500 12px "EB Garamond"`,'PORTFOLIOEnglish/')]),new Promise(r=>setTimeout(r,3500))])
-    .catch(()=>{}).then(()=>{fontsReady=true;fontsAt=performance.now();drawText()});
+    .catch(()=>{}).then(()=>{fontsReady=true;fontsAt=performance.now();if(cssW)drawText()});
 
   /* ---- 水波高度场（CPU，低分辨率） ---- */
   const CELL=5,DAMP=.972;let gw,gh,A,B;
@@ -1204,7 +1233,7 @@ function route(scroll){
   document.getElementById('navlinks').innerHTML=Object.keys(T.nav).map(k=>`<a href="#${k}" class="${k===nav?'on':''}" style="--dc:${T.navCol[k]||'var(--ink)'}">${L(T.nav[k])}</a>`).join('');
   view.innerHTML=`<div class="view">${html}</div>`;
   const rows=document.getElementById('rows');if(rows)rows.innerHTML=rowsHTML();
-  initDeck();
+  initDeck();if(sbOn)initComments();logVisit(h);
   bindScroll();if(ph)openView('f:'+ph.id);else if(document.getElementById('lb'))closeView();
   if(scroll)window.scrollTo(0,0);
 }
@@ -1225,6 +1254,7 @@ view.addEventListener('click',e=>{
   else if(b.dataset.ps){curPh=b.dataset.ps;store.ph=curPh;save();route()}
   else if(b.dataset.pm){store.phmode=b.dataset.pm;save();route()}
   else if(b.dataset.view){openView(b.dataset.view)}
+  else if(b.hasAttribute('data-cmt-open')){const f=b.parentNode.querySelector('.cmt-form');f.hidden=false;b.hidden=true;f.elements.body.focus()}
   else if(b.dataset.wg){wGenre=b.dataset.wg;route()}
   else if(b.dataset.ws){wSec=b.dataset.ws;route()}
   else if(b.dataset.poem){const el=document.getElementById('po-'+b.dataset.poem);if(el){el.scrollIntoView({block:'start'});window.scrollBy(0,-96)}}
@@ -1241,6 +1271,88 @@ view.addEventListener('click',e=>{
 });
 view.addEventListener('input',e=>{if(e.target.id==='q'){query=e.target.value;document.getElementById('rows').innerHTML=rowsHTML()}});
 window.addEventListener('hashchange',()=>{artLang=null;route(true)});
+
+/* ================= 留言与访问记录（Supabase，后台见 admin.html） ================= */
+/* 项目地址和 publishable key 是公开的那一把，放在网页里没关系；数据的读写权限由数据库规则管着 */
+const SB={url:'https://otvrtarvuwtzruhjmrlv.supabase.co',key:'sb_publishable_BPU5LeBdBvL8yjm8X7vy4Q_E9qtaHDD'};
+const sbOn=!!(SB.url&&SB.key);
+function rpc(fn,args,keep){
+  return fetch(`${SB.url}/rest/v1/rpc/${fn}`,{method:'POST',keepalive:!!keep,headers:{apikey:SB.key,'Content-Type':'application/json'},body:JSON.stringify(args)})
+    .then(async r=>{const j=await r.json().catch(()=>null);if(!r.ok)throw new Error((j&&j.message)||r.status);return j});
+}
+/* 访客编号：随机生成存在浏览器里，同一个人的多次访问和留言就能连起来 */
+const VID=(()=>{let v=null;try{v=localStorage.getItem('yh-vid');if(!v){v=Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);localStorage.setItem('yh-vid',v)}}catch(e){}return v})();
+/* 从哪个平台点进来：先看 App 内置浏览器的标记，再看来源网址 */
+const CLIENT=(()=>{
+  const u=navigator.userAgent,ref=document.referrer;
+  let src=null;try{src=new URLSearchParams(location.search).get('from')||sessionStorage.getItem('yh-from');if(src)sessionStorage.setItem('yh-from',src)}catch(e){}
+  const app=[[/wxwork/i,'企业微信'],[/MicroMessenger/i,'微信'],[/xhsdiscover|XiaoHongShu/i,'小红书'],[/Weibo/i,'微博'],[/ QQ\//,'QQ'],[/aweme|Douyin/i,'抖音'],
+    [/BiliApp|bili-universal/i,'B站'],[/DingTalk/i,'钉钉'],[/Lark|Feishu/i,'飞书'],[/ZhihuHybrid/i,'知乎'],[/Instagram/,'Instagram'],[/FBAN|FBAV/,'Facebook'],[/LinkedInApp/,'LinkedIn']].find(([re])=>re.test(u));
+  const site=[[/xiaohongshu|xhslink/,'小红书'],[/weibo/,'微博'],[/zhihu/,'知乎'],[/douban/,'豆瓣'],[/bilibili/,'B站'],[/baidu/,'百度'],[/google\./,'Google'],[/bing\./,'Bing'],
+    [/(^|\.)t\.co$|twitter|x\.com/,'X'],[/instagram/,'Instagram'],[/facebook/,'Facebook'],[/linkedin/,'LinkedIn'],[/github/,'GitHub'],[/qq\.com/,'QQ']];
+  let host='';try{host=ref?new URL(ref).hostname:''}catch(e){}
+  const own=host&&host===location.hostname,s=!own&&host&&site.find(([re])=>re.test(host));
+  const platform=app?app[1]:s?s[1]:host&&!own?host:'直接打开';
+  const os=/iPhone/.test(u)?'iPhone':/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'iPad':/HarmonyOS|OpenHarmony/.test(u)?'鸿蒙'
+    :/Android/.test(u)?'Android':/Windows/.test(u)?'Windows':/Mac OS X/.test(u)?'Mac':/Linux/.test(u)?'Linux':'其他';
+  const model=/Android/.test(u)&&(u.match(/Android [\d.]+;(?:\s*[a-z]{2}[-_][a-z]{2};)?\s*([^;)]+?)(?:\sBuild|\))/i)||[])[1];
+  const br=app?'':/Edg\//.test(u)?'Edge':/QQBrowser/.test(u)?'QQ浏览器':/UCBrowser/.test(u)?'UC':/Quark/.test(u)?'夸克':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':'';
+  return{platform,src,device:[os,model,br].filter(Boolean).join(' · '),bot:/bot|spider|crawl|headless|lighthouse/i.test(u)||navigator.webdriver};
+})();
+/* 后台登录过的浏览器不记录（作者自己） */
+const noTrack=()=>{try{return localStorage.getItem('yh-notrack')==='1'}catch(e){return false}};
+let lastLog={p:null,t:0},firstLog=true;
+function logVisit(path){
+  if(!sbOn||CLIENT.bot||noTrack())return;
+  const now=Date.now();if(path===lastLog.p&&now-lastLog.t<4000)return;lastLog={p:path,t:now};
+  rpc('log_visit',{v:{vid:VID,path,platform:CLIENT.platform,src:CLIENT.src,referrer:firstLog&&document.referrer||null,device:CLIENT.device,
+    ua:navigator.userAgent,lang:navigator.language,screen:`${screen.width}×${screen.height}`}},true).catch(()=>{});
+  firstLog=false;
+}
+
+/* 留言：放在每篇文章、随记页、诗页的末尾 */
+const cmBox=thread=>sbOn?`<section class="cmt" data-thread="${esc(thread)}">
+  <div class="cmt-h"><span class="cap">${L(T.cm.title)}</span><span class="num" data-cmt-n></span></div>
+  <ol class="cmt-list" data-cmt-list></ol>
+  <button class="btn" data-cmt-open>${L(T.cm.write)}</button>
+  <form class="cmt-form" hidden>
+    <textarea name="body" rows="4" maxlength="2000" required placeholder="${L(T.cm.ph)}"></textarea>
+    <div class="cmt-row"><input name="name" maxlength="40" placeholder="${L(T.cm.name)}" value="${esc(store.cmName||'')}" autocomplete="nickname">
+      <input name="contact" maxlength="100" placeholder="${L(T.cm.contact)}" value="${esc(store.cmContact||'')}"></div>
+    <label class="cmt-anon"><input type="checkbox" name="anonymous"><span>${L(T.cm.anon)}<small>${L(T.cm.anonTip)}</small></span></label>
+    <input name="website" class="cmt-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="cmt-act"><button class="btn" type="submit">${L(T.cm.send)}</button><span class="cap" data-cmt-msg aria-live="polite"></span></div>
+    <p class="cmt-note">${L(T.cm.note)}</p>
+  </form>
+</section>`:'';
+const cmDate=s=>{const d=new Date(s);return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`};
+const cmItem=c=>`<li><div class="cmt-m"><b>${c.name?esc(c.name):L(T.cm.anonName)}</b><span class="num">${cmDate(c.at)}</span></div><p>${esc(c.body)}</p></li>`;
+function initComments(){
+  view.querySelectorAll('.cmt').forEach(box=>{
+    const list=box.querySelector('[data-cmt-list]'),n=box.querySelector('[data-cmt-n]');
+    rpc('get_comments',{t:box.dataset.thread}).then(rows=>{
+      list.innerHTML=rows.map(cmItem).join('');n.textContent=rows.length?L(T.cm.count)(rows.length):'';
+    }).catch(()=>{});
+  });
+}
+view.addEventListener('submit',e=>{
+  const f=e.target.closest('.cmt-form');if(!f)return;e.preventDefault();
+  const box=f.closest('.cmt'),msg=f.querySelector('[data-cmt-msg]'),btn=f.querySelector('[type=submit]'),v=k=>f.elements[k].value.trim();
+  if(v('website'))return;   /* 机器人才会填这个隐藏框 */
+  if(!v('body')){f.elements.body.focus();return}
+  const anonymous=f.elements.anonymous.checked;
+  store.cmName=v('name');store.cmContact=v('contact');save();
+  btn.disabled=true;msg.textContent=L(T.cm.sending);
+  rpc('add_comment',{c:{thread:box.dataset.thread,body:v('body'),name:v('name'),contact:v('contact'),anonymous,vid:VID,platform:CLIENT.platform,device:CLIENT.device,ua:navigator.userAgent}})
+    .then(c=>{
+      const list=box.querySelector('[data-cmt-list]');list.insertAdjacentHTML('beforeend',cmItem(c));
+      box.querySelector('[data-cmt-n]').textContent=L(T.cm.count)(list.children.length);
+      f.elements.body.value='';msg.textContent=L(T.cm.sent);f.hidden=true;
+      box.querySelector('[data-cmt-open]').hidden=false;list.lastElementChild.scrollIntoView({block:'nearest',behavior:'smooth'});
+    })
+    .catch(err=>{msg.textContent=/rate/.test(err.message)?L(T.cm.rate):L(T.cm.fail)})
+    .finally(()=>{btn.disabled=false});
+});
 
 chrome();route(false);
 if(location.hash.length>1){splash.hidden=true}else{startSplash()}
