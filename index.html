@@ -42,38 +42,25 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(-
 .num{font-family:var(--en);font-variant-numeric:lining-nums tabular-nums;letter-spacing:.06em;color:var(--ink3);font-size:13px}
 .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--dc,var(--ink));flex:none;vertical-align:middle}
 
-/* ============ 入口页 ============ */
-.splash{position:fixed;inset:0;z-index:40;background:var(--bg);overflow:hidden;transition:opacity .9s ease,visibility .9s}
-.splash.out{opacity:0;visibility:hidden}
-.sp-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 6s ease-out}
-.splash.ready .sp-art{transform:scale(1)}
-.veil{position:absolute;inset:0;background:var(--veil);-webkit-backdrop-filter:blur(26px) saturate(1.15);backdrop-filter:blur(26px) saturate(1.15);
-  --x:68%;--y:46%;--r:min(26vmax,420px);
-  -webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0,transparent 42%,#000 100%);
-          mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0,transparent 42%,#000 100%)}
-.sp-ui{position:relative;height:100%;display:grid;grid-template-rows:auto 1fr auto;padding-inline:clamp(18px,4.5vw,64px);padding-block:calc(env(safe-area-inset-top,0px) + 26px) calc(env(safe-area-inset-bottom,0px) + 26px);pointer-events:none}
-.sp-ui>*{pointer-events:auto}
-.sp-top{display:flex;justify-content:space-between;gap:16px}
-.sp-mid{align-self:center;display:grid;gap:10px;max-width:640px}
-.sp-name{margin:0;font-family:var(--cn);font-weight:600;font-size:clamp(46px,7vw,104px);line-height:1.05;letter-spacing:.16em}
-.sp-en{margin:0;font-family:var(--en);font-style:italic;font-size:clamp(22px,2.4vw,32px);color:var(--ink)}
-.sp-media{margin:18px 0 0;font-family:var(--cn);font-size:14px;letter-spacing:.3em;color:var(--ink)}
-.sp-media span{display:block;margin-top:4px}
-.sp-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 40px}
-.sp-lang{display:flex;gap:0;border-top:1px solid var(--ink)}
-.sp-lang button{background:none;border:0;padding:16px 40px 4px 0;text-align:left;display:grid;gap:2px}
-.sp-lang button+button{padding-left:28px;border-left:1px solid var(--rule)}
-.sp-lang .l{font-size:clamp(24px,2.6vw,34px);line-height:1.2}
-.sp-lang button:first-child .l{font-family:var(--cn);letter-spacing:.18em}
-.sp-lang button:last-child .l{font-family:var(--en)}
-.sp-lang .s{display:flex;align-items:center;gap:12px}
-.sp-lang .s i{display:block;height:1px;width:22px;background:currentColor;transition:width .5s cubic-bezier(.2,.7,.2,1)}
-.sp-lang button:hover .s,.sp-lang button:focus-visible .s{color:var(--c-p)}
-.sp-lang button:hover .s i,.sp-lang button:focus-visible .s i{width:60px}
-.sp-cap{margin:0;max-width:30em;text-align:right;font-family:var(--serif);font-size:13px;color:var(--ink2)}
-.splash .cap{color:var(--ink2)}
-.sp-hint{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);pointer-events:none}
-@media (max-width:700px){.sp-hint{display:none}.sp-cap{text-align:left}}
+/* ============ 入口页：留白 → 细线 → 水墨晕染（金边）→ 字从墨中浮现 ============ */
+.splash{position:fixed;inset:0;z-index:40;overflow:hidden;background:#FBFAF7}
+.splash.leaving{background:transparent}
+.sp-ink{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;outline:none}
+.splash.ready .sp-ink{cursor:pointer}
+/* 文字和按钮画在画布里；这里是给读屏和键盘用的同一份内容 */
+.sp-a11y{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sp-a11y h1,.sp-a11y p{margin:0}
+.sp-a11y button{background:none;border:0;padding:6px 10px}
+/* 不支持 WebGL2 时的简版：黑底，字淡入 */
+.splash.nogl{background:#0B0B0C;transition:opacity 1.5s ease;opacity:0}
+.splash.nogl.show{opacity:1}
+.splash.nogl .sp-a11y{position:absolute;inset:0;width:auto;height:auto;clip-path:none;display:grid;place-content:center;justify-items:center;gap:8px;color:#EFE9DE}
+.splash.nogl .sp-name{font-family:var(--cn);font-weight:600;font-size:clamp(46px,7vw,104px);letter-spacing:.2em;margin-right:-.2em}
+.splash.nogl .sp-en{font-family:var(--en);font-style:italic;font-size:clamp(26px,3.8vw,56px)}
+.splash.nogl .sp-pf{font-family:var(--en);font-size:12px;letter-spacing:.55em;color:#C9A24E;text-transform:uppercase}
+.splash.nogl .sp-lang{margin-top:28px;font-size:15px;color:rgba(239,233,222,.6)}
+.splash.nogl .sp-lang button{color:#EFE9DE}
+.splash.nogl .sp-lang button:hover{color:#E8B95A}
 
 /* ============ 页眉页脚 ============ */
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid var(--rule)}
@@ -529,24 +516,13 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 </style>
 
 <div class="splash" id="splash">
-  <img class="sp-art" id="spArt" alt="">
-  <div class="veil" id="veil"></div>
-  <div class="sp-ui">
-    <div class="sp-top"><span class="cap">Archive · 2021 — 2026</span><span class="cap">No fixed abode</span></div>
-    <div class="sp-mid">
-      <h1 class="sp-name">黄鈺茜</h1>
-      <p class="sp-en">Youcy Huang</p>
-      <p class="sp-media">绘画 · 装置 · 摄影 · 写作<span class="cap">Painting · Installation · Photography · Writing</span></p>
-    </div>
-    <div class="sp-bottom">
-      <div class="sp-lang" role="group" aria-label="选择语言 / Choose language">
-        <button data-lang="zh"><span class="l">中文</span><span class="s cap">进入<i></i></span></button>
-        <button data-lang="en"><span class="l">English</span><span class="s cap">Enter<i></i></span></button>
-      </div>
-      <p class="sp-cap" id="spCap"></p>
-    </div>
+  <canvas class="sp-ink" id="spInk" tabindex="0" aria-hidden="true"></canvas>
+  <div class="sp-a11y">
+    <h1 class="sp-name">黄鈺茜</h1>
+    <p class="sp-en">Youcy</p>
+    <p class="sp-pf">Portfolio</p>
+    <div class="sp-lang" role="group" aria-label="选择语言 / Choose language"><button data-lang="zh">中文</button> / <button data-lang="en">English</button></div>
   </div>
-  <p class="sp-hint cap" id="spHint">移动鼠标，掀开薄纱 · Move to lift the veil</p>
 </div>
 
 <header class="top">
@@ -578,8 +554,6 @@ const W=(window.ESSAYS||[]).map(e=>({...e,title:[e.title.zh,e.title.en],subtitle
 /* 系列颜色取自作品本身 */
 const SCOL={A2:'#C8452F',A1:'#9A922E',S:'#77706A',D:'#5F8A7A',W:'#6F93B4',E:'#3F3A52',B1:'#D3951B',B2:'#A4561F'};
 const TCOL={p:'var(--c-p)',f:'var(--c-f)',w:'var(--c-w)',d:'var(--c-d)'};
-/* 入口页固定用 b1-31 这张 */
-const SPLASH=[{src:'photo/B1/full/b1-31.jpg',ph:'B1-11'}];
 
 /* ================= 文案 ================= */
 const T={
@@ -1004,33 +978,198 @@ document.addEventListener('keydown',e=>{
   const a=view.querySelector(e.key==='ArrowLeft'?'[data-prev]':'[data-next]');if(a){e.preventDefault();location.hash=a.getAttribute('href')}
 });
 
-/* ================= 入口页：薄纱与掀开 ================= */
-const splash=document.getElementById('splash'),veil=document.getElementById('veil');
+/* ================= 入口页：留白 → 细线 → 水墨晕染（金边）→ 字从墨中浮现；鼠标划过起水波，点击墨散入站 ================= */
+const splash=document.getElementById('splash');
 const splashOpen=()=>!splash.hidden&&!splash.classList.contains('out');
-let tx=0,ty=0,cx=0,cy=0,lastMove=0,raf=0,t0=performance.now();
-function pickSplash(){
-  const s=SPLASH[Math.floor(Math.random()*SPLASH.length)],img=document.getElementById('spArt');
-  img.onload=()=>splash.classList.add('ready');img.src=s.src;
-  let cap=s.cap;if(s.id){const w=P.find(x=>x.id===s.id);cap=[`${w.title[0]} · ${w.year} · ${w.medium} · ${pSize(w)}`,`${w.title[1]} · ${w.year} · ${MED[w.medium]} · ${pSize(w)}`]}
-  if(s.ph){const p=PH.find(x=>x.id===s.ph),sr=phSer(p.set);cap=[`${sr.name[0]} · ${pad(p.n)} · ${p.year}`,`${sr.name[1]} · ${pad(p.n)} · ${p.year}`]}
-  document.getElementById('spCap').innerHTML=`${esc(cap[0])}<br><span style="font-family:var(--en)">${esc(cap[1])}</span>`;
-}
-function loop(now){
-  if(!splashOpen()){raf=0;return}
-  const W0=innerWidth,H0=innerHeight;
-  if(now-lastMove>2600){const t=(now-t0)/1000;tx=W0*(.66+.16*Math.sin(t*.23));ty=H0*(.48+.2*Math.sin(t*.31+1.3))}
-  cx+=(tx-cx)*.08;cy+=(ty-cy)*.08;
-  veil.style.setProperty('--x',cx+'px');veil.style.setProperty('--y',cy+'px');
-  raf=requestAnimationFrame(loop);
-}
-function startSplash(){
-  splash.hidden=false;splash.classList.remove('out');document.body.style.overflow='hidden';pickSplash();
-  cx=tx=innerWidth*.66;cy=ty=innerHeight*.48;
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){veil.style.setProperty('--x',cx+'px');veil.style.setProperty('--y',cy+'px');return}
-  if(!raf)raf=requestAnimationFrame(loop);
-}
-splash.addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;lastMove=performance.now();document.getElementById('spHint').style.opacity='0'});
-function enter(l){setLang(l);splash.classList.add('out');document.body.style.overflow='';setTimeout(()=>{if(splash.classList.contains('out'))splash.hidden=true},900)}
+const INK=(()=>{
+  const D={blank:1000,line:800,pause:250,spread:3000,text:1500,exit:1700};   /* 各段时长（毫秒） */
+  const cv=document.getElementById('spInk'),calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const gl=cv.getContext('webgl2',{premultipliedAlpha:true,alpha:true,antialias:false});
+  const ease={out3:t=>1-Math.pow(1-t,3),io3:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,ioS:t=>-(Math.cos(Math.PI*t)-1)/2,out2:t=>1-(1-t)*(1-t)};
+  const c01=v=>Math.max(0,Math.min(1,v));
+  let t0=0,exitAt=0,exitPos=[0,0],exitLang='zh',raf=0,rippleOn=0,textReady=false,hover=null,hoverAmt=0,hoverRect=[0,0,0,0],last=null;
+  let fontsReady=false,fontsAt=0,dpr=1,cssW=0,cssH=0,rects={};
+
+  function finish(){cancelAnimationFrame(raf);raf=0;splash.classList.add('out');splash.hidden=true;document.body.style.overflow=''}
+  function leave(l,x,y){
+    if(exitAt)return;
+    exitAt=performance.now();exitLang=l;exitPos=[x??innerWidth/2,y??innerHeight/2];
+    setLang(l);splash.classList.add('leaving');
+    if(!gl){splash.classList.remove('show');setTimeout(finish,calm?0:1500);return}
+    splat(exitPos[0],exitPos[1],-4,5);
+    if(calm)finish();
+  }
+  if(!gl){
+    splash.classList.add('nogl');
+    return{start(){exitAt=0;splash.classList.remove('show');setTimeout(()=>splash.classList.add('show'),calm?0:D.blank)},leave};
+  }
+
+  const VS=`#version 300 es
+  void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);gl_Position=vec4(p*2.-1.,0.,1.);}`;
+  const FS=`#version 300 es
+  precision highp float;
+  uniform vec2 uRes;uniform float uDpr,uTime,uLine,uSpread,uTextP,uExit,uHoverAmt,uCell,uRippleOn;
+  uniform vec2 uExitPos,uGrid;uniform vec4 uHover;uniform sampler2D uTextTex,uRipple;
+  out vec4 o;
+  float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+  float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
+    return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p=p*2.03+17.1;a*=.5;}return v;}
+  /* 金色：有明确色相，最亮处也不过曝成白 */
+  vec3 goldAt(vec2 q,float k){
+    float sh=smoothstep(.35,.85,fbm(q/42.+vec2(uTime*.22,k)));
+    vec3 c=mix(vec3(.70,.50,.17),vec3(.94,.76,.38),sh);
+    float sp=step(.993,hash(floor(q/2.5)+floor(uTime*4.)));   /* 稀疏、柔和的细碎金点 */
+    return mix(c,vec3(.99,.84,.50),sp*.55);
+  }
+  float rip(vec2 q){return texture(uRipple,(q/uCell+.5)/uGrid).r;}
+  void main(){
+    vec2 Q=vec2(gl_FragCoord.x,uRes.y-gl_FragCoord.y)/uDpr,S=uRes/uDpr,C=S*.5;   /* CSS 像素，左上原点 */
+    vec3 paper=vec3(.984,.980,.968);
+    float ink=1.,halo=0.,gold=0.;vec3 goldC=vec3(0.);
+    if(uSpread<1.){
+      float d=abs(Q.x-C.x),W=mix(.6,C.x+280.,uSpread),amp=min(W*.45,130.);
+      float n1=fbm(vec2(Q.y/260.,uTime*.05))-.5,n2=fbm(vec2(Q.y/52.,uTime*.07+3.7))-.5,n3=fbm(vec2(Q.y/14.,d/30.+9.1))-.5;
+      float e=W+n1*amp*1.7+n2*amp*.65+n3*min(W*.08,14.),soft=.6+min(W*.015,4.);
+      ink=smoothstep(e+soft,e-soft,d);
+      /* 宣纸上的淡墨洇开 */
+      float hw=min(W*.7,180.);
+      halo=smoothstep(e+hw,e,d)*(1.-ink)*(.25+.55*fbm(Q/80.+uTime*.02))*smoothstep(0.,.03,uSpread);
+      /* 细线生长阶段的上下边界 */
+      float L=uLine*(C.y+24.),v=smoothstep(L+1.5,L-1.5,abs(Q.y-C.y));
+      ink*=v;halo*=v;
+      /* 晕染边缘的金光 */
+      float bw=clamp(W*.028,1.,10.);
+      gold=exp(-pow((d-e)/bw,2.))*smoothstep(0.,.04,uSpread)*v*(.75+.25*fbm(vec2(Q.y/30.,uTime*.3)));
+      goldC=goldAt(Q,d/60.);
+    }
+    /* 水波：高度场梯度 → 折射偏移 + 微弱高光 */
+    vec2 grad=vec2(0.);
+    if(uRippleOn>0.){float t=uCell;grad=vec2(rip(Q+vec2(t,0.))-rip(Q-vec2(t,0.)),rip(Q+vec2(0.,t))-rip(Q-vec2(0.,t)))*uRippleOn;}
+    vec2 tq=Q+grad*22.;
+    vec3 inkC=vec3(.032,.030,.033)+(fbm(Q/90.)-.5)*.014;
+    vec3 col=mix(paper,vec3(.56,.555,.56),halo);
+    col=mix(col,inkC,ink);
+    col=mix(col,goldC,clamp(gold*.92,0.,1.));
+    /* 文字从墨中浮现：噪声溶解 + 由模糊到清晰 + 由墨灰到象牙白 */
+    if(uTextP>0.){
+      float m=1.;
+      if(uTextP<1.){float rn=fbm(Q/150.+2.3);m=smoothstep(rn-.2,rn+.2,uTextP*1.5-.25);}
+      vec4 tx;
+      if(m<1.){float r=(1.-m)*6.;
+        tx=(texture(uTextTex,tq/S)+texture(uTextTex,(tq+vec2(r,0.))/S)+texture(uTextTex,(tq-vec2(r,0.))/S)
+           +texture(uTextTex,(tq+vec2(0.,r))/S)+texture(uTextTex,(tq-vec2(0.,r))/S))*.2;
+      }else tx=texture(uTextTex,tq/S);
+      vec3 trgb=tx.a>0.?tx.rgb/tx.a:vec3(0.);
+      float inH=step(uHover.x,Q.x)*step(Q.x,uHover.z)*step(uHover.y,Q.y)*step(Q.y,uHover.w)*uHoverAmt;
+      float mx=max(max(trgb.r,trgb.g),.01);
+      trgb=mix(trgb/mx,vec3(.97,.79,.42),inH)*mix(mx,1.,inH);
+      trgb=mix(vec3(.17,.16,.16),trgb,m);
+      col=mix(col,trgb,tx.a*smoothstep(0.,.6,m)*ink);
+    }
+    /* 水波高光（偏暖金，很淡） */
+    col+=vec3(.85,.68,.40)*clamp(dot(grad,normalize(vec2(-1.)))*1.4,-.04,.22)*ink;
+    /* 退场：从点击处洇开，露出下面的网站 */
+    float a=1.;
+    if(uExit>0.){
+      float r=length(Q-uExitPos),E=uExit*(length(S)+320.),amp=min(E*.4,150.);
+      float e=E+(fbm(Q/210.+uTime*.04)-.5)*amp*1.6+(fbm(Q/48.+7.)-.5)*amp*.6;
+      float g=exp(-pow((r-e)/clamp(E*.025,1.,10.),2.))*step(uExit,.999);
+      col=mix(col,goldAt(Q,r/60.),g*.9);
+      a=max(smoothstep(e-3.,e+3.,r),g*.9);
+    }
+    o=vec4(col*a,a);
+  }`;
+  const sh=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw gl.getShaderInfoLog(s);return s};
+  const prog=gl.createProgram();
+  gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);gl.useProgram(prog);
+  gl.bindVertexArray(gl.createVertexArray());
+  const U={};['uRes','uDpr','uTime','uLine','uSpread','uTextP','uExit','uHoverAmt','uExitPos','uHover','uTextTex','uRipple','uGrid','uCell','uRippleOn'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+  function tex(unit){const t=gl.createTexture();gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,t);
+    [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]].forEach(([k,v])=>gl.texParameteri(gl.TEXTURE_2D,k,v));return t}
+  const textTex=tex(0);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array(4));
+  const rippleTex=tex(1);gl.uniform1i(U.uTextTex,0);gl.uniform1i(U.uRipple,1);
+
+  /* ---- 文字贴图：和网站同一套字体 ---- */
+  const tc=document.createElement('canvas'),tx=tc.getContext('2d');
+  const FZH=`"Noto Serif SC","Songti SC","STSong","SimSun",serif`,FEN=`"EB Garamond","Garamond","Times New Roman",serif`;
+  function spaced(s,cx,y,sp){const ch=[...s],ws=ch.map(c=>tx.measureText(c).width),tot=ws.reduce((a,b)=>a+b,0)+sp*(ch.length-1);
+    let x=cx-tot/2;ch.forEach((c,i)=>{tx.fillText(c,x,y);x+=ws[i]+sp})}
+  function drawText(){
+    tc.width=cv.width;tc.height=cv.height;tx.setTransform(dpr,0,0,dpr,0,0);tx.clearRect(0,0,cssW,cssH);
+    tx.textBaseline='middle';tx.textAlign='left';
+    const b=Math.max(44,Math.min(110,cssW*.085,cssH*.12)),cx=cssW/2,cy=cssH/2-b*.55;
+    tx.fillStyle='#EFE9DE';tx.font=`600 ${b}px ${FZH}`;spaced('黄鈺茜',cx,cy,b*.2);
+    tx.font=`italic 400 ${b*.56}px ${FEN}`;spaced('Youcy',cx,cy+b*.9,b*.02);
+    tx.fillStyle='rgba(201,162,78,.85)';tx.fillRect(cx-18,cy+b*1.45,36,1);
+    const ps=Math.max(11,b*.13);tx.font=`500 ${ps}px ${FEN}`;spaced('PORTFOLIO',cx,cy+b*1.72,ps*.55);
+    const ls=Math.max(14,b*.17),ly=cy+b*2.55,gap=ls*1.1,pad=12;
+    tx.fillStyle='rgba(239,233,222,.8)';tx.font=`400 ${ls}px ${FZH}`;const zw=tx.measureText('中文').width;tx.fillText('中文',cx-gap-zw,ly);
+    tx.fillStyle='rgba(239,233,222,.4)';tx.font=`400 ${ls}px ${FEN}`;tx.fillText('/',cx-tx.measureText('/').width/2,ly);
+    tx.fillStyle='rgba(239,233,222,.8)';tx.font=`400 ${ls*1.1}px ${FEN}`;const ew=tx.measureText('English').width;tx.fillText('English',cx+gap,ly);
+    rects.zh=[cx-gap-zw-pad,ly-ls*.8,cx-gap+pad*.5,ly+ls*.8];rects.en=[cx+gap-pad*.5,ly-ls*.8,cx+gap+ew+pad,ly+ls*.8];
+    gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,textTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tc);
+  }
+  /* 字体最多等 3.5 秒，加载不到就用系统宋体 */
+  Promise.race([Promise.all([document.fonts.load(`600 80px "Noto Serif SC"`,'黄鈺茜中文'),document.fonts.load(`italic 400 40px "EB Garamond"`,'Youcy'),
+    document.fonts.load(`500 12px "EB Garamond"`,'PORTFOLIOEnglish/')]),new Promise(r=>setTimeout(r,3500))])
+    .catch(()=>{}).then(()=>{fontsReady=true;fontsAt=performance.now();drawText()});
+
+  /* ---- 水波高度场（CPU，低分辨率） ---- */
+  const CELL=5,DAMP=.972;let gw,gh,A,B;
+  function initRipple(){gw=Math.ceil(cssW/CELL)+2;gh=Math.ceil(cssH/CELL)+2;A=new Float32Array(gw*gh);B=new Float32Array(gw*gh);
+    gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.R16F,gw,gh,0,gl.RED,gl.FLOAT,A)}
+  function splat(x,y,s,rad=2.6){const gx=x/CELL,gy=y/CELL,r=Math.ceil(rad);
+    for(let j=-r;j<=r;j++)for(let i=-r;i<=r;i++){const X=Math.round(gx)+i,Y=Math.round(gy)+j;
+      if(X<1||Y<1||X>=gw-1||Y>=gh-1)continue;const d=Math.hypot(X-gx,Y-gy);if(d>rad)continue;
+      A[Y*gw+X]+=s*(.5+.5*Math.cos(Math.PI*d/rad))}}
+  function stepRipple(){
+    for(let y=1;y<gh-1;y++){let i=y*gw+1;for(let x=1;x<gw-1;x++,i++)B[i]=((A[i-1]+A[i+1]+A[i-gw]+A[i+gw])*.5-B[i])*DAMP}
+    const t=A;A=B;B=t;gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,gw,gh,gl.RED,gl.FLOAT,A)}
+
+  function resize(){dpr=Math.min(devicePixelRatio||1,2);cssW=innerWidth;cssH=innerHeight;
+    cv.width=Math.round(cssW*dpr);cv.height=Math.round(cssH*dpr);gl.viewport(0,0,cv.width,cv.height);initRipple();if(fontsReady)drawText()}
+  addEventListener('resize',()=>{if(splashOpen())resize()});
+
+  /* ---- 交互 ---- */
+  const inR=(r,x,y)=>r&&x>=r[0]&&x<=r[2]&&y>=r[1]&&y<=r[3];
+  cv.addEventListener('pointermove',e=>{const x=e.clientX,y=e.clientY;
+    if(rippleOn&&!exitAt&&!calm){
+      if(last){const dx=x-last[0],dy=y-last[1],dist=Math.hypot(dx,dy),s=Math.min(1.6,.25+dist*.04),n=Math.max(1,Math.ceil(dist/(CELL*1.5)));
+        for(let k=1;k<=n;k++)splat(last[0]+dx*k/n,last[1]+dy*k/n,-s/Math.sqrt(n))}
+      last=[x,y]}
+    hover=textReady?(inR(rects.zh,x,y)?'zh':inR(rects.en,x,y)?'en':null):null;if(hover)hoverRect=rects[hover]});
+  cv.addEventListener('pointerleave',()=>{last=null;hover=null});
+  cv.addEventListener('pointerdown',e=>{if(textReady)leave(inR(rects.en,e.clientX,e.clientY)?'en':'zh',e.clientX,e.clientY)});
+  cv.addEventListener('keydown',e=>{if(e.key==='Enter'&&textReady)leave('zh')});
+
+  function frame(now){
+    const t=now-t0,tLine=D.blank,tSpread=tLine+D.line+D.pause,tText=tSpread+D.spread-150;
+    const line=ease.out3(c01((t-tLine)/D.line)),spread=ease.io3(c01((t-tSpread)/D.spread));
+    const textP=fontsReady?ease.out2(c01((t-Math.max(tText,fontsAt-t0))/D.text)):0;
+    if(spread>=1&&!calm)rippleOn=Math.min(1,rippleOn+.03);
+    if(textP>.35&&!textReady){textReady=true;splash.classList.add('ready')}
+    hoverAmt+=((hover?1:0)-hoverAmt)*.12;
+    let exit=0;
+    if(exitAt){exit=ease.ioS(c01((now-exitAt)/D.exit));if(exit>=1){finish();return}}
+    if(rippleOn)stepRipple();
+    gl.uniform2f(U.uRes,cv.width,cv.height);gl.uniform1f(U.uDpr,dpr);gl.uniform1f(U.uTime,t/1000);
+    gl.uniform1f(U.uLine,line);gl.uniform1f(U.uSpread,spread);gl.uniform1f(U.uTextP,textP);
+    gl.uniform1f(U.uExit,exit);gl.uniform2f(U.uExitPos,exitPos[0],exitPos[1]);
+    gl.uniform4f(U.uHover,...hoverRect);gl.uniform1f(U.uHoverAmt,hoverAmt);
+    gl.uniform2f(U.uGrid,gw,gh);gl.uniform1f(U.uCell,CELL);gl.uniform1f(U.uRippleOn,rippleOn);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    raf=requestAnimationFrame(frame);
+  }
+  function start(){
+    resize();t0=performance.now()-(calm?1e6:0);exitAt=0;rippleOn=0;textReady=false;hover=null;hoverAmt=0;last=null;
+    splash.classList.remove('ready');cv.focus({preventScroll:true});
+    if(!raf)raf=requestAnimationFrame(frame);
+  }
+  return{start,leave};
+})();
+function startSplash(){splash.hidden=false;splash.classList.remove('out','leaving');document.body.style.overflow='hidden';INK.start()}
+function enter(l){INK.leave(l)}
 splash.addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(b)enter(b.dataset.lang)});
 document.getElementById('toSplash').addEventListener('click',startSplash);
 
