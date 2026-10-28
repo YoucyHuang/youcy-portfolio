@@ -1009,7 +1009,7 @@ const INK=(()=>{
   const FS=`#version 300 es
   precision highp float;
   uniform vec2 uRes;uniform float uDpr,uTime,uLine,uSpread,uTextP,uExit,uHoverAmt,uCell,uRippleOn;
-  uniform vec2 uExitPos,uGrid;uniform vec4 uHover;uniform sampler2D uTextTex,uRipple;
+  uniform vec2 uExitPos,uGrid;uniform vec4 uHover;uniform sampler2D uTextTex,uRipple,uRimTex;
   out vec4 o;
   float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
   float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
@@ -1066,6 +1066,10 @@ const INK=(()=>{
       trgb=mix(trgb/mx,vec3(.97,.79,.42),inH)*mix(mx,1.,inH);
       trgb=mix(vec3(.17,.16,.16),trgb,m);
       col=mix(col,trgb,tx.a*smoothstep(0.,.6,m)*ink);
+      /* 字的金边：极细的一圈，等字差不多浮现了才亮起；一道很慢的流光斜着掠过 */
+      float rim=texture(uRimTex,tq/S).a*smoothstep(.45,1.,m);
+      float sw=exp(-pow((Q.x+Q.y*.6-mod(uTime*240.,S.x+S.y*.6+900.)+450.)/110.,2.));
+      col=mix(col,mix(vec3(.66,.48,.18),vec3(.96,.79,.43),.3+.7*sw),rim*.85*ink);
     }
     /* 水波高光（偏暖金，很淡） */
     col+=vec3(.85,.68,.40)*clamp(dot(grad,normalize(vec2(-1.)))*1.4,-.04,.22)*ink;
@@ -1084,31 +1088,38 @@ const INK=(()=>{
   const prog=gl.createProgram();
   gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);gl.useProgram(prog);
   gl.bindVertexArray(gl.createVertexArray());
-  const U={};['uRes','uDpr','uTime','uLine','uSpread','uTextP','uExit','uHoverAmt','uExitPos','uHover','uTextTex','uRipple','uGrid','uCell','uRippleOn'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+  const U={};['uRes','uDpr','uTime','uLine','uSpread','uTextP','uExit','uHoverAmt','uExitPos','uHover','uTextTex','uRipple','uRimTex','uGrid','uCell','uRippleOn'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
   function tex(unit){const t=gl.createTexture();gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,t);
     [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]].forEach(([k,v])=>gl.texParameteri(gl.TEXTURE_2D,k,v));return t}
   const textTex=tex(0);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array(4));
   const rippleTex=tex(1);gl.uniform1i(U.uTextTex,0);gl.uniform1i(U.uRipple,1);
+  const rimTex=tex(2);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array(4));gl.uniform1i(U.uRimTex,2);
 
   /* ---- 文字贴图：和网站同一套字体 ---- */
   const tc=document.createElement('canvas'),tx=tc.getContext('2d');
+  const rc=document.createElement('canvas'),rx=rc.getContext('2d');   /* 金边单独一张：描边后挖掉字身，只剩外侧半根线 */
   const FZH=`"Noto Serif SC","Songti SC","STSong","SimSun",serif`,FEN=`"EB Garamond","Garamond","Times New Roman",serif`;
-  function spaced(s,cx,y,sp){const ch=[...s],ws=ch.map(c=>tx.measureText(c).width),tot=ws.reduce((a,b)=>a+b,0)+sp*(ch.length-1);
-    let x=cx-tot/2;ch.forEach((c,i)=>{tx.fillText(c,x,y);x+=ws[i]+sp})}
+  function rimText(c,x,y,rw){if(!rw)return;rx.font=tx.font;rx.lineWidth=rw;rx.strokeText(c,x,y);
+    rx.globalCompositeOperation='destination-out';rx.fillText(c,x,y);rx.globalCompositeOperation='source-over'}
+  function put(c,x,y,rw){tx.fillText(c,x,y);rimText(c,x,y,rw)}
+  function spaced(s,cx,y,sp,rw){const ch=[...s],ws=ch.map(c=>tx.measureText(c).width),tot=ws.reduce((a,b)=>a+b,0)+sp*(ch.length-1);
+    let x=cx-tot/2;ch.forEach((c,i)=>{put(c,x,y,rw);x+=ws[i]+sp})}
   function drawText(){
     tc.width=cv.width;tc.height=cv.height;tx.setTransform(dpr,0,0,dpr,0,0);tx.clearRect(0,0,cssW,cssH);
-    tx.textBaseline='middle';tx.textAlign='left';
+    rc.width=cv.width;rc.height=cv.height;rx.setTransform(dpr,0,0,dpr,0,0);rx.strokeStyle='#fff';rx.lineJoin='round';
+    tx.textBaseline=rx.textBaseline='middle';tx.textAlign=rx.textAlign='left';
     const b=Math.max(44,Math.min(110,cssW*.085,cssH*.12)),cx=cssW/2,cy=cssH/2-b*.55;
-    tx.fillStyle='#EFE9DE';tx.font=`600 ${b}px ${FZH}`;spaced('黄鈺茜',cx,cy,b*.2);
-    tx.font=`italic 400 ${b*.56}px ${FEN}`;spaced('Youcy',cx,cy+b*.9,b*.02);
+    tx.fillStyle='#EFE9DE';tx.font=`600 ${b}px ${FZH}`;spaced('黄鈺茜',cx,cy,b*.2,1.1);
+    tx.font=`italic 400 ${b*.56}px ${FEN}`;spaced('Youcy',cx,cy+b*.9,b*.02,.75);
     tx.fillStyle='rgba(201,162,78,.85)';tx.fillRect(cx-18,cy+b*1.45,36,1);
     const ps=Math.max(11,b*.13);tx.font=`500 ${ps}px ${FEN}`;spaced('PORTFOLIO',cx,cy+b*1.72,ps*.55);
     const ls=Math.max(14,b*.17),ly=cy+b*2.55,gap=ls*1.1,pad=12;
-    tx.fillStyle='rgba(239,233,222,.8)';tx.font=`400 ${ls}px ${FZH}`;const zw=tx.measureText('中文').width;tx.fillText('中文',cx-gap-zw,ly);
+    tx.fillStyle='rgba(239,233,222,.8)';tx.font=`400 ${ls}px ${FZH}`;const zw=tx.measureText('中文').width;put('中文',cx-gap-zw,ly,.6);
     tx.fillStyle='rgba(239,233,222,.4)';tx.font=`400 ${ls}px ${FEN}`;tx.fillText('/',cx-tx.measureText('/').width/2,ly);
-    tx.fillStyle='rgba(239,233,222,.8)';tx.font=`400 ${ls*1.1}px ${FEN}`;const ew=tx.measureText('English').width;tx.fillText('English',cx+gap,ly);
+    tx.fillStyle='rgba(239,233,222,.8)';tx.font=`400 ${ls*1.1}px ${FEN}`;const ew=tx.measureText('English').width;put('English',cx+gap,ly,.6);
     rects.zh=[cx-gap-zw-pad,ly-ls*.8,cx-gap+pad*.5,ly+ls*.8];rects.en=[cx+gap-pad*.5,ly-ls*.8,cx+gap+ew+pad,ly+ls*.8];
     gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,textTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tc);
+    gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,rimTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,rc);
   }
   /* 字体最多等 3.5 秒，加载不到就用系统宋体 */
   Promise.race([Promise.all([document.fonts.load(`600 80px "Noto Serif SC"`,'黄鈺茜中文'),document.fonts.load(`italic 400 40px "EB Garamond"`,'Youcy'),
