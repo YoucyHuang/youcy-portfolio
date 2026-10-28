@@ -621,11 +621,11 @@ const T={
 };
 T.heroSide=[`${PF.born?PF.born[0]:''}以绘画为核心，延伸到装置、摄影与写作；关注传统山水在当代绘画中的再生，以及半透明材料中图像的遮蔽与显现。`,`${PF.born?PF.born[1]:''} Painting is the core of her practice, extending into installation, photography and writing. She asks how the classical landscape can live again in contemporary painting, and how images are hidden and revealed in translucent material.`];
 T.cm={title:['留言','Notes'],write:['写留言','Leave a note'],count:[n=>`${n} 条`,n=>`${n} note${n>1?'s':''}`],
-  ph:['想说的话……','Your words…'],name:['称呼（选填）','Name (optional)'],contact:['联系方式（选填，只有作者能看到）','Contact (optional, only the author sees it)'],
-  anon:['匿名发布','Post anonymously'],anonTip:['公开显示为“匿名”；你的称呼只有作者能看到','Shown as “Anonymous”; only the author sees your name'],anonName:['匿名','Anonymous'],
+  ph:['想说的话……','Your words…'],name:['称呼（选填）','Name (optional)'],contact:['联系方式（选填）','Contact (optional)'],
+  anon:['匿名发布','Post anonymously'],anonTip:['公开显示为“匿名”','Shown as “Anonymous”'],anonName:['匿名','Anonymous'],
   send:['发布','Post'],sending:['发送中…','Sending…'],sent:['已发布，谢谢你。','Posted — thank you.'],fail:['没发出去，请稍后再试。','Could not post. Please try again.'],
   rate:['留言太频繁了，过几分钟再试。','Too many notes — please wait a few minutes.'],
-  note:['留言会公开显示在这里。为了解读者，本站会记录访问的设备、来源平台和大致地区，只有作者可见。','Notes appear here publicly. To know its readers, this site records device, referring platform and rough location, visible only to the author.']};
+  note:['留言会公开显示在这里。本站会记录访问的设备、来源平台和大致地区。','Notes appear here publicly. This site records device, referring platform and rough location.']};
 
 /* ================= 状态与工具 ================= */
 let store={};try{store=JSON.parse(localStorage.getItem('yh-archive')||'{}')}catch(e){}
