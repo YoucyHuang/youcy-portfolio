@@ -513,6 +513,8 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 .lb-cap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 20px;padding-top:14px;font-size:13px;color:var(--ink2)}
 .lb-nav{display:flex;gap:20px;align-items:center}
 .lb .btn[disabled]{opacity:.3;cursor:default}
+/* ============ 金闪 ============ */
+.sparkle{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
 /* ============ 留言 ============ */
 .cmt{max-width:36em;margin:56px auto 0;padding-top:20px;border-top:1px solid var(--rule)}
 .reader .cmt{margin-top:48px}
@@ -1171,19 +1173,26 @@ const INK=(()=>{
     .catch(()=>{}).then(()=>{fontsReady=true;fontsAt=performance.now();if(cssW)drawText()});
 
   /* ---- 水波高度场（CPU，低分辨率） ---- */
-  /* WET：水痕，涟漪经过时被“打湿”，之后每帧慢慢变干（约 5 秒） */
-  const CELL=5,DAMP=.972,DRY=.992;let gw,gh,A,B,WET;
-  function initRipple(){gw=Math.ceil(cssW/CELL)+2;gh=Math.ceil(cssH/CELL)+2;A=new Float32Array(gw*gh);B=new Float32Array(gw*gh);WET=new Float32Array(gw*gh);
-    gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.R16F,gw,gh,0,gl.RED,gl.FLOAT,A);
+  /* A/B：会向外传开的涟漪。涟漪一传开，划过的地方很快就平了，所以另有：
+     TR：划过时压下去的一道浅痕，不传开，只是慢慢变淡、微微晕开（约 5 秒）；画面用 A+TR 折射
+     WET：水痕，涟漪或浅痕在的地方被“打湿”，里面闪金星 */
+  const CELL=5,DAMP=.972,DRY=.992,TRK=.4,TRF=.993,TRB=.015;let gw,gh,A,B,TR,T2,H,WET;
+  function initRipple(){gw=Math.ceil(cssW/CELL)+2;gh=Math.ceil(cssH/CELL)+2;const n=gw*gh;
+    A=new Float32Array(n);B=new Float32Array(n);TR=new Float32Array(n);T2=new Float32Array(n);H=new Float32Array(n);WET=new Float32Array(n);
+    gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.R16F,gw,gh,0,gl.RED,gl.FLOAT,H);
     gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,trailTex);gl.texImage2D(gl.TEXTURE_2D,0,gl.R16F,gw,gh,0,gl.RED,gl.FLOAT,WET)}
   function splat(x,y,s,rad=2.6){const gx=x/CELL,gy=y/CELL,r=Math.ceil(rad);
     for(let j=-r;j<=r;j++)for(let i=-r;i<=r;i++){const X=Math.round(gx)+i,Y=Math.round(gy)+j;
       if(X<1||Y<1||X>=gw-1||Y>=gh-1)continue;const d=Math.hypot(X-gx,Y-gy);if(d>rad)continue;
-      A[Y*gw+X]+=s*(.5+.5*Math.cos(Math.PI*d/rad))}}
+      const k=s*(.5+.5*Math.cos(Math.PI*d/rad));A[Y*gw+X]+=k;TR[Y*gw+X]+=k*TRK}}
   function stepRipple(){
-    for(let y=1;y<gh-1;y++){let i=y*gw+1;for(let x=1;x<gw-1;x++,i++)B[i]=((A[i-1]+A[i+1]+A[i-gw]+A[i+gw])*.5-B[i])*DAMP}
-    const t=A;A=B;B=t;gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,gw,gh,gl.RED,gl.FLOAT,A);
-    for(let i=0;i<A.length;i++){const a=Math.abs(A[i]),w=a<.12?0:Math.min(1,(a-.12)*2.2),d=WET[i]*DRY;WET[i]=w>d?w:d}
+    for(let y=1;y<gh-1;y++){let i=y*gw+1;for(let x=1;x<gw-1;x++,i++){
+      B[i]=((A[i-1]+A[i+1]+A[i-gw]+A[i+gw])*.5-B[i])*DAMP;
+      T2[i]=(TR[i]*(1-TRB)+(TR[i-1]+TR[i+1]+TR[i-gw]+TR[i+gw])*.25*TRB)*TRF}}
+    let t=A;A=B;B=t;t=TR;TR=T2;T2=t;
+    for(let i=0;i<A.length;i++){H[i]=A[i]+TR[i];
+      const a=Math.abs(A[i]),w=Math.max(a<.12?0:(a-.12)*2.2,Math.abs(TR[i])*3),d=WET[i]*DRY;WET[i]=w>d?Math.min(1,w):d}
+    gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,rippleTex);gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,gw,gh,gl.RED,gl.FLOAT,H);
     gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,trailTex);gl.texSubImage2D(gl.TEXTURE_2D,0,0,0,gw,gh,gl.RED,gl.FLOAT,WET)}
 
   function resize(){dpr=Math.min(devicePixelRatio||1,2);cssW=innerWidth;cssH=innerHeight;
@@ -1372,6 +1381,41 @@ view.addEventListener('submit',e=>{
     .catch(err=>{msg.textContent=/rate/.test(err.message)?L(T.cm.rate):L(T.cm.fail)})
     .finally(()=>{btn.disabled=false});
 });
+
+/* ================= 金闪：进站后，鼠标或手指经过的地方落下细碎金点 ================= */
+(()=>{
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const cv=document.createElement('canvas');cv.className='sparkle';cv.setAttribute('aria-hidden','true');document.body.appendChild(cv);
+  const g=cv.getContext('2d');let dpr=1,sw=0,sh=0,ps=[],raf=0,prev=0,last=null;
+  function size(){dpr=Math.min(devicePixelRatio||1,2);sw=innerWidth;sh=innerHeight;cv.width=Math.round(sw*dpr);cv.height=Math.round(sh*dpr);g.setTransform(dpr,0,0,dpr,0,0)}
+  addEventListener('resize',size);size();
+  function spawn(x,y,n){
+    for(let i=0;i<n&&ps.length<180;i++)ps.push({x:x+(Math.random()-.5)*8,y:y+(Math.random()-.5)*8,vx:(Math.random()-.5)*.3,vy:.12+Math.random()*.3,
+      r:.6+Math.random()*1.2,life:0,max:900+Math.random()*1000,ph:Math.random()*6.283,tw:1.5+Math.random()*2.5});
+    if(!raf)raf=requestAnimationFrame(tick);
+  }
+  addEventListener('pointermove',e=>{
+    if(splashOpen()){last=null;return}
+    const x=e.clientX,y=e.clientY;if(!last){last=[x,y];return}
+    const d=Math.hypot(x-last[0],y-last[1]);if(d<7)return;
+    spawn(x,y,Math.min(3,1+(d/45|0)));last=[x,y];
+  },{passive:true});
+  addEventListener('pointerdown',e=>{if(!splashOpen())spawn(e.clientX,e.clientY,5)},{passive:true});
+  function tick(t){
+    const dt=prev?Math.min(50,t-prev):16,f=dt/16;prev=t;
+    g.clearRect(0,0,sw,sh);
+    ps=ps.filter(p=>(p.life+=dt)<p.max);
+    for(const p of ps){
+      p.x+=p.vx*f;p.y+=p.vy*f;p.vy+=.003*f;p.vx*=.995;   /* 慢慢飘落 */
+      const k=p.life/p.max,fade=k<.12?k/.12:1-(k-.12)/.88,a=fade*(.55+.45*Math.sin(p.ph+p.life/1000*p.tw*6.283));
+      g.globalAlpha=a*.22;g.fillStyle='#E2B65A';g.beginPath();g.arc(p.x,p.y,p.r*2.8,0,6.283);g.fill();   /* 光晕 */
+      g.globalAlpha=a;g.fillStyle='#CF9A3A';g.beginPath();g.arc(p.x,p.y,p.r,0,6.283);g.fill();            /* 金芯 */
+      if(p.r>1.3){g.globalAlpha=a*.55;g.fillRect(p.x-p.r*3,p.y-.3,p.r*6,.6);g.fillRect(p.x-.3,p.y-p.r*3,.6,p.r*6)}   /* 十字星芒 */
+    }
+    g.globalAlpha=1;
+    if(ps.length)raf=requestAnimationFrame(tick);else{raf=0;prev=0}
+  }
+})();
 
 chrome();route(false);
 if(location.hash.length>1){splash.hidden=true}else{startSplash()}
