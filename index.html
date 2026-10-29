@@ -1382,7 +1382,7 @@ view.addEventListener('submit',e=>{
     .finally(()=>{btn.disabled=false});
 });
 
-/* ================= 金闪：进站后，鼠标或手指经过的地方落下细碎金点 ================= */
+/* ================= 金闪：进站后，鼠标或手指经过的地方落下细碎金点；点击处荡开水波纹 ================= */
 (()=>{
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const cv=document.createElement('canvas');cv.className='sparkle';cv.setAttribute('aria-hidden','true');document.body.appendChild(cv);
@@ -1400,10 +1400,22 @@ view.addEventListener('submit',e=>{
     const d=Math.hypot(x-last[0],y-last[1]);if(d<7)return;
     spawn(x,y,Math.min(3,1+(d/45|0)));last=[x,y];
   },{passive:true});
-  addEventListener('pointerdown',e=>{if(!splashOpen())spawn(e.clientX,e.clientY,5)},{passive:true});
+  /* 点击处荡开水波纹：三圈先后漾开，暗线 + 内侧一道金色亮边，像水面折光 */
+  let rs=[];
+  addEventListener('pointerdown',e=>{if(splashOpen())return;
+    if(rs.length<12)rs.push({x:e.clientX,y:e.clientY,life:0,R:70+Math.min(sw,sh)*.08});
+    spawn(e.clientX,e.clientY,5)},{passive:true});
   function tick(t){
     const dt=prev?Math.min(50,t-prev):16,f=dt/16;prev=t;
     g.clearRect(0,0,sw,sh);
+    rs=rs.filter(r=>(r.life+=dt)<2400);
+    for(const r of rs)for(let n=0;n<3;n++){
+      const k=(r.life-n*220)/1900;if(k<=0||k>=1)continue;
+      const e=1-Math.pow(1-k,2.2),rad=4+r.R*(1-n*.12)*e,a=Math.pow(1-k,1.6)*(1-n*.25),w=1.6*(1-k*.6);
+      g.lineWidth=w;
+      g.globalAlpha=a*.16;g.strokeStyle='#2A2621';g.beginPath();g.arc(r.x,r.y,rad,0,6.283);g.stroke();        /* 暗线 */
+      g.globalAlpha=a*.5;g.strokeStyle='#D9AE55';g.beginPath();g.arc(r.x,r.y,Math.max(1,rad-w*1.4),0,6.283);g.stroke();   /* 金色亮边 */
+    }
     ps=ps.filter(p=>(p.life+=dt)<p.max);
     for(const p of ps){
       p.x+=p.vx*f;p.y+=p.vy*f;p.vy+=.003*f;p.vx*=.995;   /* 慢慢飘落 */
@@ -1413,7 +1425,7 @@ view.addEventListener('submit',e=>{
       if(p.r>1.3){g.globalAlpha=a*.55;g.fillRect(p.x-p.r*3,p.y-.3,p.r*6,.6);g.fillRect(p.x-.3,p.y-p.r*3,.6,p.r*6)}   /* 十字星芒 */
     }
     g.globalAlpha=1;
-    if(ps.length)raf=requestAnimationFrame(tick);else{raf=0;prev=0}
+    if(ps.length||rs.length)raf=requestAnimationFrame(tick);else{raf=0;prev=0}
   }
 })();
 
