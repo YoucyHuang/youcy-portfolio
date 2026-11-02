@@ -8,7 +8,7 @@ window.PROJECTS = [
   place: ['杭州临安 · 太阳镇枫树岭村', 'Fengshuling Village, Taiyang, Lin’an, Hangzhou'],
   role: ['项目负责人 · 设计', 'Project lead · Design'],
   context: ['乡村产业共富类（“土特产”）', 'Rural industry and common prosperity (local specialties)'],
-  cover: 'sheshan-box', heroSet: ['sheshan-box', 'sheshan-poster', 'sheshan-dihuang'],
+  cover: 'sheshan-plum', heroSet: ['sheshan-plum', 'sheshan-dihuang'],
   lead: ['让畲山好物，走出枫树岭。以「贴纸替代换瓶」的低成本路径，让真材实料的好物在货架与直播间被一眼看见。', 'Let the good things of the She mountains leave Fengshuling. By replacing labels instead of containers, honest products become visible at a glance, on the shelf and in the livestream.'],
   /* 这个项目用品牌案例版式（index.html 里的 vBrand），不走通用的 sections */
   layout: 'brand',
@@ -35,11 +35,11 @@ window.PROJECTS = [
       marks: [['sheshan-mark', ['三笔凤凰标志', 'Three-stroke phoenix mark']], ['sheshan-seal', ['凤凰封口贴', 'Phoenix seal']], ['sheshan-ribbon', ['畲族彩带纹样', 'She ribbon pattern'], 'rib']] },
     products: [
       { name: ['十六味酸梅汤', 'Sixteen-herb plum drink'], dir: ['本草留白', 'Herbal white space'],
-        p: ['把酸梅汤从“夏日饮料”重新定位为具东方养生文化属性的植物饮品。以大量留白、纸张肌理、植物线描与低饱和色彩，营造温润、克制、安静的气质。', 'The drink is repositioned from summer beverage to a plant tonic in the Eastern tradition of food as medicine. Generous white space, paper texture, botanical line drawing and soft colour give it a warm, restrained, quiet character.'],
+        p: ['把酸梅汤从“夏日饮料”重新定位为具东方养生文化属性的植物饮品。以大量留白、纸张肌理、植物线描与低饱和色彩，营造温润、克制、安静的气质。新包装只换贴纸：透明袋上一张半透明宣纸贴，挖一扇月窗，露出汤本来的琥珀色；礼盒用通用牛皮纸盒，加一条封签、一方朱印。', 'The drink is repositioned from summer beverage to a plant tonic in the Eastern tradition of food as medicine. Generous white space, paper texture, botanical line drawing and soft colour give it a warm, restrained, quiet character. The new packaging changes only the labels: a translucent rice-paper label on the clear pouch, cut with a round moon window so the amber of the drink shows through; and a plain kraft box with a paper seal strip and a red seal.'],
         keep: [['留白', 'White space'], ['纸张肌理', 'Paper texture'], ['植物线描', 'Botanical line'], ['低饱和色彩', 'Soft colour']],
         drop: [['水果插画', 'Fruit illustration'], ['飞溅液体', 'Splashes'], ['冰块', 'Ice']],
         herbs: { list: [['#B9897F', ['乌梅', 'Smoked plum']], ['#A0705A', ['山楂', 'Hawthorn']], ['#B8483A', ['陈皮', 'Aged tangerine peel']], ['#D99A3E', ['桂花', 'Osmanthus']]], more: ['…… 等十六味本草', '… sixteen herbs in all'] },
-        imgs: ['sheshan-box', 'sheshan-poster'], labels: [['礼盒 · 透见贴', 'Box · see-through label'], ['海报 · 本草留白', 'Poster · herbal white space']], cap: ['「透·见」贴纸与「本草留白」方向', '“See-through” label and “Herbal white space” direction'] },
+        imgs: ['sheshan-plum-board'], wide: true, cap: ['「月窗」袋贴与「封签」盒贴 · 设计说明', '“Moon window” pouch label and “Seal strip” box label · design notes'] },
       { name: ['九制地黄', 'Nine-times-steamed rehmannia'], dir: ['畲山 · 黄土', 'She Mountain · Yellow Earth'],
         p: ['米白手工纸底色传递有温度的农产品；左侧一条畲族彩带纹样如古籍“书口”，暗示有来处的配方。', 'A handmade rice-paper ground for a warm farm product, with a strip of She ribbon pattern on the left like the fore-edge of an old book: a recipe with an origin.'],
         keep: [['米白手工纸', 'Rice paper'], ['畲族彩带', 'She ribbon'], ['古籍书口', 'Book fore-edge']],
@@ -100,4 +100,4 @@ window.PROJECTS = [
   ]
 }
 ];
-window.PROJDIMS={"solitude-elevation.svg":[760,640],"solitude-render.jpg":[874,518],"sheshan-box":[655,995],"sheshan-poster":[673,897],"sheshan-dihuang":[545,682],"sheshan-jar":[939,626],"sheshan-before":[465,488],"sheshan-village":[576,422],"sheshan-ribbon":[43,656],"sheshan-seal":[88,88],"sheshan-mark":[140,80]};
+window.PROJDIMS={"solitude-elevation.svg":[760,640],"solitude-render.jpg":[874,518],"sheshan-box":[655,995],"sheshan-poster":[673,897],"sheshan-dihuang":[545,682],"sheshan-jar":[939,626],"sheshan-before":[465,488],"sheshan-village":[576,422],"sheshan-ribbon":[43,656],"sheshan-seal":[88,88],"sheshan-mark":[140,80],"sheshan-plum":[1400,1380],"sheshan-plum-board":[1800,1150]};
