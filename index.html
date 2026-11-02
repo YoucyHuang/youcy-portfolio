@@ -546,6 +546,9 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 .de-b p.v+p:not(.v){margin-top:1.1em}
 .de-b figure{margin:1.4em 0;background:var(--mat);padding:clamp(12px,2.4vw,24px)}
 .de-b figure img{display:block;max-width:100%;max-height:64vh;margin:0 auto}
+.de-b figure.de-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(6px,1.2vw,12px)}
+.de-b figure.de-g img{width:100%;max-height:none;aspect-ratio:3/4;object-fit:cover}
+@media (max-width:640px){.de-b figure.de-g{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .de-b h3{margin:1.6em 0 .7em;font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.08em}
 .de-b h3:first-child{margin-top:0}
 .de-b .de-n{text-indent:0;margin:1.4em 0 .4em;font-family:var(--en);font-size:13px;color:var(--ink3);letter-spacing:.2em}
@@ -650,13 +653,13 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 <main class="wrap" id="view"></main>
 <footer><div class="wrap foot"><span id="foot1"></span><span id="foot2"></span></div></footer>
 
-<script src="essays.js?v=20261102d"></script>
-<script src="paintings.js?v=20261102d"></script>
-<script src="photos.js?v=20261102d"></script>
-<script src="projects.js?v=20261102d"></script>
-<script src="profile.js?v=20261102d"></script>
-<script src="diary.js?v=20261102d"></script>
-<script src="poems.js?v=20261102d"></script>
+<script src="essays.js?v=20261102e"></script>
+<script src="paintings.js?v=20261102e"></script>
+<script src="photos.js?v=20261102e"></script>
+<script src="projects.js?v=20261102e"></script>
+<script src="profile.js?v=20261102e"></script>
+<script src="diary.js?v=20261102e"></script>
+<script src="poems.js?v=20261102e"></script>
 <script>
 /* ================= 数据 ================= */
 const MED={'纸上水彩':'Watercolour on paper','纸面水彩':'Watercolour on paper','纸上综合材料':'Mixed media on paper','纸上油画棒':'Oil pastel on paper','纸上丙烯':'Acrylic on paper','布面丙烯':'Acrylic on canvas','布面综合材料':'Mixed media on canvas','PE布面综合材料':'Mixed media on PE canvas','铜板飞尘':'Aquatint on copper','铜板线腐蚀':'Line etching on copper'};
@@ -1017,10 +1020,10 @@ function vPoems(){
     <div class="poems"><nav class="po-toc" aria-label="${L(T.poems)}"><span class="cap">${L(T.poemsN)(PO.length)} · ${L(T.asc)}</span><ol>${toc}</ol></nav><div class="po-list">${body}</div></div>${cmBox('poems')}`;
 }
 function deHTML(e){
-  const body=e.p.map(p=>p.img?`<figure><img src="img/${p.img}" alt="" loading="lazy"></figure>`
+  const body=e.p.map(p=>p.imgs?`<figure class="de-g">${p.imgs.map(s=>`<img src="img/${s}" alt="" loading="lazy">`).join('')}</figure>`:p.img?`<figure><img src="img/${p.img}" alt="" loading="lazy"></figure>`
     :p.sep?'<hr class="de-sep">':p.br?'<span class="de-br"></span>':p.h?`<h3>${esc(p.h)}</h3>`:p.n?`<p class="de-n">${esc(p.n)}</p>`
     :`<p${p.v?' class="v"':''}>${esc(p.t)}</p>`).join('');
-  const long=e.p.filter(p=>p.t).length>6;
+  const long=e.p.filter(p=>p.t&&!p.v).length>6;
   return `<article class="de${long&&!dOpen.has(e.key+e.note)?' fold':''}" id="d-${e.key}"><div class="de-d"><span>${e.date}</span>${e.note?`<small>${esc(e.note)}</small>`:''}</div>
     <div class="de-b" lang="zh-CN">${body}${long?`<button class="btn de-more" data-dopen="${e.key+e.note}">${dOpen.has(e.key+e.note)?L(T.dLess):L(T.dMore)(e.p.filter(p=>p.t).length)}</button>`:''}</div></article>`;
 }
