@@ -7,7 +7,7 @@
 :root{
   --bg:#FFFFFF; --ink:#191817; --ink2:#5E5A55; --ink3:#9A958E; --rule:#E5E1DB; --hair:#F0EDE9; --mat:#F4F3F1;
   --veil:rgba(255,255,255,.46); --bar:rgba(255,255,255,.78);
-  /* 取自作品的颜色：本真的朱红、诗影的金、畲山养物的绿、风起东坂的蓝 */
+  /* 取自作品的颜色：本真的朱红、诗影的金、畲山养物的绿、文字的蓝 */
   --c-p:#C8452F; --c-f:#D3951B; --c-d:#5E7F4E; --c-w:#2F5D8A;
   --cn:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
   --en:"EB Garamond","Garamond","Times New Roman",serif;
@@ -221,9 +221,10 @@ html{overflow-x:clip}
 .card .k{margin-top:-8px;font-size:12.5px;color:var(--ink3)}
 .card:hover .t{color:var(--dc)}
 .tools{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center}
-.chips{display:flex;flex-wrap:wrap;gap:8px 20px}
-.chip{background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink3)}
-:lang(en) .chip{font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:10px 30px}
+.chip{background:none;border:0;border-bottom:2px solid transparent;padding:4px 0;display:inline-flex;align-items:center;gap:8px;font-family:var(--serif);font-size:18px;letter-spacing:.08em;color:var(--ink2)}
+.chip:hover{color:var(--ink)}
+:lang(en) .chip{font-size:20px;letter-spacing:0}
 .chip .dot{opacity:.4}
 .chip[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
 .chip[aria-pressed="true"] .dot{opacity:1}
@@ -413,6 +414,96 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 .pj-fig .ims img{display:block;width:100%;height:auto;background:var(--mat)}
 .pj-fig.solo .ims{max-width:1100px}
 @media (max-width:640px){.pj-fig .ims{grid-template-columns:1fr}}
+/* 品牌案例版式（畲山养物）：松墨、米白、黄铜金、凤凰朱，左缘一条畲族彩带像古籍书口 */
+.bd{--pine:#2F3B30;--gold:#9A7642;--zhu:#A8412B;--paper:#F3EDE0;--sp:clamp(64px,9vw,128px)}
+.bd img{display:block;max-width:100%;height:auto}
+.bd-k{display:flex;align-items:baseline;gap:14px;margin:0 0 28px;padding-top:16px;border-top:1px solid var(--ink);font-family:var(--serif);font-weight:400;font-size:clamp(20px,1.9vw,26px)}
+.bd-k .num{color:var(--dc)}
+.bd-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,6vw,96px);align-items:center;margin-bottom:var(--sp)}
+.bd-hero figure{margin:0;background:var(--mat);display:flex;justify-content:center;padding:clamp(16px,3vw,40px)}
+.bd-hero figure img{max-height:76vh;width:auto}
+.bd-hero h2{margin:0 0 28px;font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.8vw,72px);line-height:1.3;letter-spacing:.06em}
+:lang(en) .bd-hero h2{letter-spacing:0;line-height:1.15}
+.bd-hero p{margin:0;max-width:24em;font-family:var(--serif);font-size:clamp(17px,1.5vw,20px);line-height:2;color:var(--ink2)}
+:lang(en) .bd-hero p{line-height:1.5}
+.bd-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-block:1px solid var(--rule);margin-bottom:var(--sp)}
+.bd-facts div{display:grid;gap:10px;align-content:start;padding:24px clamp(12px,1.6vw,24px);border-left:1px solid var(--rule)}
+.bd-facts div:first-child{border-left:0;padding-left:0}
+.bd-facts b{font-family:var(--en);font-weight:400;font-size:clamp(32px,3.6vw,52px);line-height:1;color:var(--dc);white-space:nowrap}
+.bd-facts span{font-size:14px;line-height:1.6;color:var(--ink2)}
+.bd-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px);margin-bottom:var(--sp)}
+.bd-two figure{margin:0 0 20px;display:grid;gap:10px}
+.bd-two figure img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--mat)}
+.bd-two h3{margin:0 0 12px;font-family:var(--serif);font-weight:400;font-size:22px}
+.bd-two p{margin:0;font-family:var(--serif);font-size:16px;line-height:2}
+:lang(en) .bd-two p{font-size:19px;line-height:1.6}
+.bd-two .big{font-size:clamp(22px,2.2vw,30px);line-height:1.5;margin-bottom:18px}
+.bd-x{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--rule)}
+.bd-x li{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--rule);font-family:var(--serif);font-size:17px}
+.bd-x li::before{content:"✕";color:var(--zhu);font-family:var(--sans);font-size:13px}
+.bd-panel{position:relative;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .28 0 0 0 0 .16 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .16' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .31 0 0 0 0 .17 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),var(--paper);color:var(--pine);padding:clamp(32px,6vw,88px) clamp(24px,6vw,88px) clamp(32px,6vw,88px) calc(clamp(24px,6vw,88px) + 34px);margin:0 calc(clamp(16px,4vw,56px) * -1) var(--sp)}
+.bd-panel::before{content:"";position:absolute;inset:0 auto 0 0;width:30px;background:url(projimg/sheshan-ribbon.jpg) repeat-y 0 0/100% auto}
+.bd-panel .bd-k{border-top-color:var(--pine)}
+.bd-panel .bd-k .num{color:var(--gold)}
+.bd-panel .bd-quote{margin:0 0 28px;font-family:var(--serif);font-weight:400;font-size:clamp(34px,5vw,72px);line-height:1.25;letter-spacing:.08em}
+:lang(en) .bd-panel .bd-quote{letter-spacing:0}
+.bd-panel>p{margin:0 0 clamp(48px,6vw,80px);max-width:34em;font-family:var(--serif);font-size:clamp(16px,1.4vw,19px);line-height:2}
+:lang(en) .bd-panel>p{line-height:1.6}
+.bd-panel h3{margin:0 0 20px;font-family:var(--serif);font-weight:400;font-size:20px}
+.bd-sw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.6vw,20px);margin-bottom:clamp(28px,4vw,48px)}
+.bd-sw div{display:grid;gap:8px}
+.bd-sw i{display:block;aspect-ratio:3/2;box-shadow:inset 0 0 0 1px rgba(47,59,48,.18)}
+.bd-sw b{font-family:var(--serif);font-weight:400;font-size:17px}
+.bd-sw .num{color:rgba(47,59,48,.6)}
+.bd-mk{display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,56px);align-items:end}
+.bd-mk figure{margin:0;display:grid;gap:10px;justify-items:start}
+.bd-mk img{height:88px;width:auto}
+.bd-mk .rib{grid-template-columns:auto auto;align-items:end;gap:14px}
+.bd-mk .rib img{height:140px;width:36px;object-fit:cover;object-position:0 0}
+.bd-mk figcaption{font-size:13.5px}
+/* 产品：一页一页的册页。宣纸底 + 装裱的图 + 竖排品名 + 朱印 */
+.bd-prod{display:grid;grid-template-columns:auto minmax(0,4fr) minmax(0,7fr);gap:28px clamp(28px,4.5vw,72px);align-items:start;padding-top:28px;border-top:1px solid var(--rule);margin-bottom:var(--sp)}
+.bd-ph{display:grid;justify-items:center;gap:18px;align-content:start}
+.bd-ph .n{font-family:var(--en);font-size:15px;letter-spacing:.2em;color:var(--dc)}
+.bd-ph h3{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(30px,3vw,44px);line-height:1.15;letter-spacing:.22em;writing-mode:vertical-rl;text-orientation:upright}
+:lang(en) .bd-ph{justify-items:start}
+:lang(en) .bd-ph h3{writing-mode:horizontal-tb;letter-spacing:0;font-size:clamp(26px,2.4vw,34px);max-width:7em}
+.bd-seal{display:inline-grid;grid-template-rows:repeat(2,1.1em);grid-auto-flow:column;direction:rtl;gap:1px 3px;padding:5px 6px;border:2px solid var(--zhu);border-radius:3px;color:var(--zhu);font-family:var(--serif);font-size:15px;line-height:1.12;letter-spacing:.04em;transform:rotate(-4deg);opacity:.88}
+.bd-pb{display:grid;gap:18px;padding-top:6px}
+.bd-pb .dir{margin:0;font-family:var(--serif);font-size:clamp(22px,2vw,28px);letter-spacing:.12em;color:var(--gold)}
+:lang(en) .bd-pb .dir{letter-spacing:0}
+.bd-pb>p{margin:0;font-family:var(--serif);font-size:16px;line-height:2.05}
+:lang(en) .bd-pb>p{font-size:19px;line-height:1.6}
+.bd-herbs{margin:0;padding-block:12px;border-block:1px solid var(--rule);font-family:var(--serif);font-size:15px;line-height:2.1}
+.bd-herbs>span{white-space:nowrap;margin-right:16px}
+.bd-herbs i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle}
+.bd-herbs .etc{color:var(--ink3)}
+.bd-tags{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bd-tags .cap{margin-right:4px}
+.bd-tags span:not(.cap){padding:2px 12px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:2px;font-family:var(--serif);font-size:14px}
+.bd-tags.drop span:not(.cap){border-color:var(--rule);color:var(--ink3);text-decoration:line-through;text-decoration-color:var(--zhu)}
+.bd-mount{grid-column:3;grid-row:1 / span 2;margin:0;display:grid;gap:12px}
+.bd-mount .sh{position:relative;display:grid;grid-template-columns:repeat(var(--n,1),minmax(0,1fr));gap:clamp(16px,2.6vw,36px);align-items:start;padding:clamp(24px,4vw,60px);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .28 0 0 0 0 .16 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .16' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .31 0 0 0 0 .17 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),var(--paper)}
+.bd-mount .sh::after{content:"";position:absolute;inset:10px;border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);pointer-events:none}
+.bd-mount figure{margin:0;display:grid;gap:10px;justify-items:center}
+.bd-mount img{width:100%;max-height:70vh;object-fit:contain;padding:clamp(6px,.8vw,12px);background:#FBF8F1;box-shadow:0 0 0 1px rgba(154,118,66,.25),0 22px 40px -26px rgba(60,40,15,.55)}
+.bd-mount .two figure:nth-child(2){margin-top:16%}
+.bd-mount figure figcaption{font-family:var(--serif);font-size:13px;letter-spacing:.14em;color:color-mix(in srgb,var(--pine) 70%,transparent)}
+.bd-prod.wide .bd-mount{grid-column:1 / -1;grid-row:auto}
+.bd-ba{grid-template-columns:minmax(0,4fr) auto minmax(0,5fr)!important;align-items:center!important}
+.bd-ba .ar{font-size:26px;color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bd{--paper:#1E221C;--pine:#E6DECB;--gold:#C9A266}}
+:root[data-theme="dark"] .bd{--paper:#1E221C;--pine:#E6DECB;--gold:#C9A266}
+@media (max-width:900px){
+  .bd-hero,.bd-two{grid-template-columns:1fr}
+  .bd-prod{grid-template-columns:auto minmax(0,1fr)}
+  .bd-mount,.bd-prod.wide .bd-mount{grid-column:1 / -1;grid-row:auto}
+  .bd-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bd-facts div{border-left:0;padding-left:0;border-top:1px solid var(--rule)}
+  .bd-facts div:nth-child(-n+2){border-top:0}
+  .bd-sw{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){.bd-mount .sh,.bd-ba{grid-template-columns:1fr!important}.bd-mount .two figure:nth-child(2){margin-top:0}.bd-ba .ar{transform:rotate(90deg);justify-self:center}.bd-ba figure:first-child{width:62%;justify-self:center}.bd-prod{column-gap:20px}}
 
 /* ============ 文字 ============ */
 .wrow{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:4px 22px;align-items:baseline;padding-block:22px;border-bottom:1px solid var(--hair);text-decoration:none;transition:padding .3s}
@@ -490,13 +581,14 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 
 /* ============ 关于 ============ */
 .about{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:32px clamp(32px,7vw,120px);padding-block:8px 96px;align-items:start}
-@media (max-width:900px){.about{grid-template-columns:1fr}.side{position:static}}  /* 窄屏上下排列时左栏不再固定，避免和右栏叠在一起 */
 .side{display:grid;gap:26px;position:sticky;top:96px}
 .side .blk{display:grid;gap:8px;padding-top:14px;border-top:1px solid var(--ink)}
 .side p{margin:0}
 .side ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .side li{display:grid;gap:2px}
 .side code{font-family:var(--en);font-size:17px;user-select:all}
+/* 窄屏上下排列时左栏不再固定，避免和右栏叠在一起（要写在 .side 之后才能覆盖 sticky） */
+@media (max-width:900px){.about{grid-template-columns:1fr;gap:48px}.side{position:static;top:auto}}
 .btn{background:none;border:0;border-bottom:1px solid var(--ink);padding:1px 0;font-family:var(--en);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase}
 .btn:hover{color:var(--c-p);border-color:var(--c-p)}
 .stmt{display:grid;gap:56px}
@@ -504,8 +596,6 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 .stmt h2{margin:0;display:flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.2vw,28px)}
 .stmt p{margin:0;font-family:var(--serif);font-size:16.5px;line-height:2.05}
 :lang(en) .stmt p{font-size:19px;line-height:1.6}
-.stmt .ims{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:6px}
-.stmt .ims img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:var(--mat)}
 
 /* ============ 大图查看 ============ */
 .lb{position:fixed;inset:0;z-index:50;background:var(--bg);display:grid;grid-template-rows:minmax(0,1fr) auto;padding:calc(env(safe-area-inset-top,0px) + 24px) clamp(16px,4vw,48px) calc(env(safe-area-inset-bottom,0px) + 18px)}
@@ -560,13 +650,13 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 <main class="wrap" id="view"></main>
 <footer><div class="wrap foot"><span id="foot1"></span><span id="foot2"></span></div></footer>
 
-<script src="essays.js?v=20261023a"></script>
-<script src="paintings.js?v=20261023a"></script>
-<script src="photos.js?v=20261023a"></script>
-<script src="projects.js?v=20261023a"></script>
-<script src="profile.js?v=20261023a"></script>
-<script src="diary.js?v=20261023a"></script>
-<script src="poems.js?v=20261023a"></script>
+<script src="essays.js?v=20261102c"></script>
+<script src="paintings.js?v=20261102c"></script>
+<script src="photos.js?v=20261102c"></script>
+<script src="projects.js?v=20261102c"></script>
+<script src="profile.js?v=20261102c"></script>
+<script src="diary.js?v=20261102c"></script>
+<script src="poems.js?v=20261102c"></script>
 <script>
 /* ================= 数据 ================= */
 const MED={'纸上水彩':'Watercolour on paper','纸面水彩':'Watercolour on paper','纸上综合材料':'Mixed media on paper','纸上油画棒':'Oil pastel on paper','纸上丙烯':'Acrylic on paper','布面丙烯':'Acrylic on canvas','布面综合材料':'Mixed media on canvas','PE布面综合材料':'Mixed media on PE canvas','铜板飞尘':'Aquatint on copper','铜板线腐蚀':'Line etching on copper'};
@@ -602,7 +692,7 @@ const T={
   zoom:['查看大图','View large'],close:['关闭','Close'],keys:['← → 翻页 · 点击图片放大','← → to browse · select image to enlarge'],
   phLead:['两组摄影，器材为 Canon EOS 7D 与 EF 24–105mm f/4L IS USM。','Two photographic series, made with a Canon EOS 7D and EF 24–105mm f/4L IS USM.'],
   seq:['序列','Sequence'],sheet:['印样','Contact sheet'],sheetHint:['点击任意一帧全屏查看','Select any frame to view it full screen'],
-  dLead:['公共艺术、品牌与工作室项目。每个项目从地方的风、海、山、人出发。','Public art, branding and studio projects. Each begins with the wind, sea, mountains and people of a place.'],
+  dLead:['绘画装置、公共艺术与乡村品牌项目。每个项目从一个地方和那里的人出发。','Painting installation, public art and rural branding. Each begins with a place and the people who live there.'],
   view:['查看项目','View project'],pmeta:[['类型','时间','地点','角色'],['Type','Date','Place','Role']],context:['背景','Context'],next:['下一个项目','Next project'],
   essays:['文章','Essays'],diary:['随记','Notebook'],poems:['诗','Poems'],poemsN:[n=>`${n} 首`,n=>`${n} poems`],untitled:['无题','Untitled'],
   poLead:['从随记里挑出的分行诗，按写作时间由早到晚排列。','Poems gathered from the notebooks, in the order they were written.'],
@@ -611,7 +701,7 @@ const T={
   pickSeries:['选择系列','Series'],pickSection:['选择栏目','Sections'],tapSwitch:['点击卡片切换','Select a card to switch'],
   viewing:['正在浏览','Viewing'],goSwitch:['点击切换','Switch'],
   dLead:['这几年随手写下的念头、梦和路上的见闻。年份由近到远，每一年里从一月读起。','Thoughts, dreams and notes from the road, written over the past few years. Newest year first; within each year, from January on.'],
-  dOrder:['年份由近到远 · 年内由早到晚','Years newest first · each year from January'],
+  dOrder:['年份由近到远 · 年内也由晚到早','Newest first'],
   dMore:[n=>`展开全文 · ${n} 段`,n=>`Read all · ${n} paragraphs`],dLess:['收起','Collapse'],
   dZh:['','These notebook entries are in Chinese only.'],
   wLead:['论文、评论与随笔，按写作时间排列。每篇都可以切换中文或英文阅读，中文还可以竖排。','Papers, criticism and essays, in the order they were written. Every piece can be read in Chinese or English.'],
@@ -664,7 +754,7 @@ function switcher(items,attr,cur,label){
 const ENTRY=[
   {k:'painting',img:'paint/full/c7-d1.jpg',sub:()=>`${L(T.nSeries)(PSERIES.length)} · ${L(T.works)(P.length)}`},
   {k:'photo',img:'photo/B1/full/b1-33.jpg',sub:()=>`${L(T.nSeries)(PHS.length)} · ${L(T.frames)(PH.length)}`},
-  {k:'projects',img:'projimg/dongban-hero.jpg',sub:()=>L(T.nProj)(PR.length)},
+  {k:'projects',img:'projimg/solitude-render.jpg',sub:()=>L(T.nProj)(PR.length)},
   {k:'writing',img:'img/e09-02.png',sub:()=>[W.length&&`${L(T.essays)} ${W.length}`,DY.length&&`${L(T.diary)} ${DY.length}`,PO.length&&`${L(T.poems)} ${PO.length}`].filter(Boolean).join(' · ')}
 ];
 function vIndex(){
@@ -725,7 +815,7 @@ function initDeck(){
 }
 /* 旧首页（作品条带、系列卡片、作品总目），先留着备用，目前不显示 */
 function vIndexOld(){
-  const band=['A2-b4','A1-c6','B1-16','D-2026-02','A2-b13','B2-06','A1-c7','A2-00','D-2026-01','A2-b9','B1-31','A1-c5','D-2026-03','A2-01'].map(id=>{
+  const band=['A2-b4','A1-c6','B1-16','D-2026-04','A2-b13','B2-06','A1-c7','A2-00','A2-b9','B1-31','A1-c5','D-2026-03','A2-01'].map(id=>{
     const ph=PH.find(p=>p.id===id);if(ph)return `<a href="#${ph.set}" title="${esc(L(phSer(ph.set).name))}"><img src="${phImg(ph,'thumb')}" alt="" loading="lazy">${dot(SCOL[ph.set])}</a>`;
     const x=BYID[id];if(!x)return '';
     if(x.type==='d')return `<a href="#${x.id}" title="${esc(L(x.title))}"><img src="${prImg(x.cover)}" alt="" loading="lazy">${dot(x.col)}</a>`;
@@ -859,16 +949,48 @@ function vProjects(){
     <div class="plist">${PR.map(p=>`<a class="prow" href="#${p.id}" style="--dc:${p.color}"><span class="pim ${p.heroSet?'set':''}">${(p.heroSet||[p.cover]).map(n=>`<img src="${prImg(n)}" alt="" loading="lazy">`).join('')}</span>
       <span class="ptx"><span class="num">${dot(p.color)} ${p.id} · ${p.date}</span><h2>${esc(L(p.title))}</h2><p class="sub">${esc(L(p.sub))}</p><p>${esc(L(p.lead))}</p><span class="cap">${esc(L(p.kind))} · ${esc(L(p.place))}</span><span class="go">${L(T.view)}<i></i></span></span></a>`).join('')}</div>`;
 }
+/* 品牌案例版式：主视觉 → 数字 → 村庄与问题 → 策略与视觉基因 → 逐个产品 */
+function vBrand(p){
+  const B=p.brand,im=(n,alt,cls)=>`<img src="${prImg(n)}" alt="${esc(alt||'')}" width="${(PRDIM[n]||[])[0]||''}" height="${(PRDIM[n]||[])[1]||''}" loading="lazy"${cls?` class="${cls}"`:''}>`;
+  const k=(n,t)=>`<h2 class="bd-k"><span class="num">${n}</span>${esc(L(t))}</h2>`;
+  const tags=(lab,l,cls)=>l&&l.length?`<div class="bd-tags ${cls||''}"><span class="cap">${lab}</span>${l.map(x=>`<span>${esc(L(x))}</span>`).join('')}</div>`:'';
+  const seal=d=>`<span class="bd-seal" aria-hidden="true">${[...d[0].replace(/[\s·]/g,'')].map(c=>`<span>${esc(c)}</span>`).join('')}</span>`;
+  const prod=(x,j)=>{
+    const sh=x.before
+      ?`<div class="sh bd-ba"><figure>${im(x.before,L(B.problem.cap))}<figcaption>${esc(L(B.problem.cap))}</figcaption></figure><span class="ar" aria-hidden="true">→</span><figure>${im(x.imgs[0],L(x.name))}<figcaption>${esc(L(x.dir))}</figcaption></figure></div>`
+      :`<div class="sh ${x.imgs.length===2?'two':''}" style="--n:${x.imgs.length}">${x.imgs.map((n,i)=>`<figure>${im(n,L(x.name))}${x.labels?`<figcaption>${esc(L(x.labels[i]))}</figcaption>`:''}</figure>`).join('')}</div>`;
+    const herbs=x.herbs?`<p class="bd-herbs"><span class="cap">${lang==='en'?'Herbs':'本草'}</span>${x.herbs.list.map(e=>`<span><i style="background:${e[0]}"></i>${esc(L(e[1]))}</span>`).join('')}<span class="etc">${esc(L(x.herbs.more))}</span></p>`:'';
+    return `<section class="bd-prod ${x.wide?'wide':''}">
+      <header class="bd-ph"><span class="n">${pad(j+1)}</span><h3>${esc(L(x.name))}</h3>${seal(x.dir)}</header>
+      <div class="bd-pb"><p class="dir">「${esc(L(x.dir))}」</p><p>${esc(L(x.p))}</p>${herbs}${tags(lang==='en'?'Use':'用',x.keep)}${tags(lang==='en'?'Avoid':'不用',x.drop,'drop')}</div>
+      <figure class="bd-mount">${sh}<figcaption class="cap">${esc(L(x.cap))}</figcaption></figure></section>`};
+  return `<div class="bd" style="--dc:${p.color}">
+  <section class="bd-hero"><figure>${im(p.cover,L(p.title))}</figure><div><h2>${L(B.slogan)}</h2><p>${esc(L(B.leadSub))}</p></div></section>
+  <div class="bd-facts">${B.facts.map(f=>`<div><b>${f[0]}</b><span>${esc(L(f[1]))}</span></div>`).join('')}</div>
+  ${k('01',[`${B.village.h[0]}与${B.problem.h[0]}`,`${B.village.h[1]} and ${B.problem.h[1].toLowerCase()}`])}
+  <div class="bd-two">
+    <div><figure>${im(B.village.img,L(B.village.cap))}<figcaption class="cap">${esc(L(B.village.cap))}</figcaption></figure><h3>${esc(L(B.village.h))}</h3><p>${esc(L(B.village.p))}</p></div>
+    <div><figure>${im(B.problem.img,L(B.problem.cap))}<figcaption class="cap">${esc(L(B.problem.cap))}</figcaption></figure><h3>${esc(L(B.problem.h))}</h3><p class="big">${esc(L(B.problem.p))}</p><ul class="bd-x">${B.problem.list.map(x=>`<li>${esc(L(x))}</li>`).join('')}</ul></div>
+  </div>
+  <section class="bd-panel">${k('02',B.strategy.h)}<p class="bd-quote">${esc(L(B.strategy.quote))}</p><p>${esc(L(B.strategy.p))}</p>
+    <h3>${esc(L(B.dna.h))}</h3>
+    <div class="bd-sw">${B.dna.colors.map(c=>`<div><i style="background:${c[0]}"></i><b>${esc(L(c[1]))}</b><span class="num">${c[0]}</span></div>`).join('')}</div>
+    <div class="bd-mk">${B.dna.marks.map(m=>`<figure class="${m[2]||''}">${im(m[0],L(m[1]))}<figcaption>${esc(L(m[1]))}</figcaption></figure>`).join('')}</div>
+  </section>
+  ${k('03',[`三款产品`,`Three products`])}
+  ${B.products.map(prod).join('')}
+  </div>`;
+}
 function vProject(p){
   const i=PR.indexOf(p),nx=PR[(i+1)%PR.length],lb=L(T.pmeta);
   const fig=(names,cap,solo)=>`<figure class="pj-fig ${solo?'solo':''}"><div class="ims" style="--n:${names.length}">${names.map(n=>`<img src="${prImg(n)}" alt="${esc(L(cap||p.title))}" loading="lazy">`).join('')}</div>${cap?`<figcaption class="cap">${esc(L(cap))}</figcaption>`:''}</figure>`;
   return `<a class="back cap" href="#projects">← ${L(T.nav.projects)}</a>
   <section class="pj-head" style="--dc:${p.color}"><span class="num">${dot(p.color)} ${p.id}</span><h1>${esc(L(p.title))}</h1><p class="sub">${esc(L(p.sub))}</p></section>
   <dl class="pj-meta"><div><dt class="cap">${lb[0]}</dt><dd>${esc(L(p.kind))}</dd></div><div><dt class="cap">${lb[1]}</dt><dd>${p.date}</dd></div><div><dt class="cap">${lb[2]}</dt><dd>${esc(L(p.place))}</dd></div><div><dt class="cap">${lb[3]}</dt><dd>${esc(L(p.role))}</dd></div></dl>
-  <figure class="pj-hero ${p.heroSet?'set':''}">${(p.heroSet||[p.cover]).map(n=>`<img src="${prImg(n)}" alt="${esc(L(p.title))}" width="${(PRDIM[n]||[])[0]||''}" height="${(PRDIM[n]||[])[1]||''}">`).join('')}</figure>
+  ${p.layout==='brand'?vBrand(p):`  <figure class="pj-hero ${p.heroSet?'set':''}">${(p.heroSet||[p.cover]).map(n=>`<img src="${prImg(n)}" alt="${esc(L(p.title))}" width="${(PRDIM[n]||[])[0]||''}" height="${(PRDIM[n]||[])[1]||''}">`).join('')}</figure>
   <p class="pj-lead">${esc(L(p.lead))}</p>
   ${p.sections.map((s,k)=>`<section class="pj-sec" style="--dc:${p.color}"><h2><span class="num">${pad(k+1)}</span>${esc(L(s.h))}</h2><div class="tx">${(s.p||[]).map(x=>`<p>${esc(L(x))}</p>`).join('')}${s.list?`<ol>${s.list.map(x=>`<li>${esc(L(x))}</li>`).join('')}</ol>`:''}${(s.pAfter||[]).map(x=>`<p>${esc(L(x))}</p>`).join('')}</div></section>
-    ${s.img&&s.img!==p.cover?fig([s.img],s.cap,true):''}${s.imgs?fig(s.imgs,s.cap):''}`).join('')}
+    ${s.img&&s.img!==p.cover?fig([s.img],s.cap,true):''}${s.imgs?fig(s.imgs,s.cap):''}`).join('')}`}
   <p class="cap" style="margin-top:24px">${L(T.context)} · ${esc(L(p.context))}</p>
   <nav class="more"><span></span><a href="#${nx.id}">${L(T.next)} · ${esc(L(nx.title))} →</a></nav>`;
 }
@@ -904,8 +1026,8 @@ function deHTML(e){
 }
 function vDiary(){
   const years=[...new Set(DY.map(e=>e.key.slice(0,4)))].sort().reverse();
-  /* 年份由近到远；每一年里从一月读起（同一天保持原文顺序） */
-  const list=years.filter(y=>dYear==='all'||y===dYear).flatMap(y=>DY.filter(e=>e.key.startsWith(y)).sort((a,b)=>a.key.localeCompare(b.key)));
+  /* 年份由近到远；年内也由晚到早（同一天保持原文顺序） */
+  const list=years.filter(y=>dYear==='all'||y===dYear).flatMap(y=>DY.filter(e=>e.key.startsWith(y)).sort((a,b)=>b.key.localeCompare(a.key)));
   const span=years.length?`${years[years.length-1]} — ${years[0]}`:'';
   let html='',y=null;
   list.forEach(e=>{const ey=e.key.slice(0,4);if(ey!==y){if(y)html+='</section>';y=ey;html+=`<section class="dy"><div class="dy-h"><h2>${ey}</h2><span class="num">${L(T.texts)(DY.filter(x=>x.key.startsWith(ey)).length)}</span></div>`}html+=deHTML(e)});
@@ -971,7 +1093,7 @@ function vAbout(){
     <div class="stmt">
       ${sec('shanshui',SCOL.A1,S.shanshui)}
       ${sec('benzhen',SCOL.A2,S.benzhen)}
-      ${sec('install','var(--c-d)',S.install,`<div class="ims"><a href="#D-2026-02"><img src="${prImg('studio-detail')}" alt="" loading="lazy"></a><a href="#D-2026-01"><img src="${prImg('dongban-hero')}" alt="" loading="lazy"></a><a href="#D-2026-02"><img src="${prImg('studio-sites')}" alt="" loading="lazy"></a></div>`)}
+      ${sec('install','var(--c-d)',S.install)}
       ${b2?sec('photo',SCOL.B2,[[b2.text[0]],[b2.text[1]]]):''}
       ${sec('writing','var(--c-w)',S.writing)}
     </div>

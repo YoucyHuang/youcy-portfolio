@@ -1,94 +1,5 @@
-/* 黄鈺茜 · 项目（文字整理自三份项目书 PDF） */
+/* 黄鈺茜 · 项目（文字整理自项目书 PDF） */
 window.PROJECTS = [
-{
-  id: 'D-2026-01', key: 'dongban', year: 2026, date: '2026.07', color: '#2F6E8E',
-  title: ['风起东坂', 'Wind over Dongban'],
-  sub: ['东坂村河鲀美食街互动公共艺术景观设计', 'Interactive public art for the pufferfish food street of Dongban Village'],
-  kind: ['公共艺术 · 景观装置', 'Public art · Landscape installation'],
-  place: ['福建漳浦 · 佛昙镇东坂村', 'Dongban Village, Fotan, Zhangpu, Fujian'],
-  role: ['设计', 'Design'],
-  context: ['第四届中国研究生「美丽中国」创新设计大赛 · 赛道 D7-1', '4th China Graduate “Beautiful China” Innovation Design Competition · Track D7-1'],
-  cover: 'dongban-hero',
-  lead: ['这不是一件静止的雕塑，而是一件会随着海风不断变化的景观。让海风吹动文化，让文化走进生活。', 'Not a still sculpture but a landscape that keeps changing with the sea wind. Let the wind move the culture, and let the culture walk into daily life.'],
-  sections: [
-    { h: ['设计说明', 'Design statement'], p: [
-      ['《风起东坂》以东坂村“中国河鲀第一村”的产业特色为核心，提取河鲀、海浪、闽南古厝、渔船、渔网等地域文化元素，构建“1 座核心地标 + 1 组互动小品”的公共艺术景观体系。', 'Wind over Dongban starts from the village’s identity as “China’s No. 1 pufferfish village”. It draws on pufferfish, waves, southern-Fujian red-brick houses, fishing boats and nets to build a system of one central landmark and one family of small interactive pieces.'],
-      ['核心装置采用半透明艺术膜与耐候钢（或防腐木）框架组合，形成可随海风轻盈摆动的“漂浮画卷”，游客可自由穿行其中，感受光影、风与文化交织的沉浸式体验；夜间结合暖色灯光从下方投射，画布整体发光，营造具有烟火气的滨海美食街氛围。', 'The main piece combines translucent art membranes with a weathering-steel (or treated timber) frame, a “floating scroll” that sways lightly in the sea wind. Visitors walk freely between the sheets, inside a play of light, wind and culture. At night warm light is cast upward and the whole canvas glows, giving the seaside food street its lively evening atmosphere.']
-    ], img: 'dongban-hero', cap: ['《风起东坂》方案效果图 · 日景 / 夜景', 'Wind over Dongban, renderings · day / night'] },
-    { h: ['设计理念 · 风让文化流动', 'Concept · the wind lets culture flow'], p: [
-      ['东坂最大的特点不是建筑。是海。有风。有潮汐。有渔网。有晒网。有旗帜。', 'What defines Dongban is not its buildings. It is the sea. Wind. Tides. Fishing nets, nets drying in the sun, flags.'],
-      ['把闽南文化、河鲀产业、滨海渔业共同绘制在轻盈的半透明画布上。海风吹过时，画布起伏如海浪——文化像风一样自然流动，每一次经过，都是一次不同的观看。让游客真正“走进”作品，而不是站在前面拍照。', 'Southern-Fujian culture, the pufferfish trade and coastal fishing are painted together on light, translucent canvas. When the wind blows, the canvas rises and falls like waves, and culture moves as naturally as the wind. Every walk-through is a different way of looking. Visitors step into the work instead of standing in front of it for a photo.']
-    ] },
-    { h: ['核心地标装置', 'The landmark'], p: [
-      ['连续悬挂的半透明艺术画布，高约 4 米、总长约 10–15 米，由 5–7 片独立画幅组成，中间高两侧低、波浪式错落，形成海浪起伏的视觉效果。画布间距允许游客自由穿行——不是“站在前面看”，而是“走进去、穿过去、被画布包围”。', 'A continuous row of translucent painted canvases, about 4 m high and 10–15 m long, made of 5–7 separate sheets that are higher in the middle and lower at the sides, staggered like waves. The gaps let visitors pass through: not looking from the front, but walking in, walking through, surrounded by painting.'],
-      ['白天，阳光透过半透明画布，图案在逆光下呈现水墨般的层次，正反两面呈现“双面绣”逻辑；夜晚，3000K 暖白光自下而上投射，画布如悬浮在夜色中的暖色灯笼。', 'By day, sunlight passes through the canvas and the image takes on the layered depth of ink wash, reading from both sides like double-sided embroidery. By night, 3000K warm light from below turns the canvases into lanterns floating in the dark.']
-    ] },
-    { h: ['互动小品《河鲀泡泡》', 'Pufferfish Bubbles'], p: [
-      ['以河鲀“膨胀”的动态瞬间为原型，在街区散点布置充气装置。游客可近距离互动、合影，成为美食街的趣味记忆点与社交传播素材。', 'Inflatable pieces modelled on the moment a pufferfish puffs up, scattered through the street. Visitors can touch them and take photographs; they become playful landmarks of the food street and material for social media.']
-    ], img: 'dongban-puffer', cap: ['《河鲀泡泡》互动小品示意', 'Pufferfish Bubbles, interactive pieces (visualisation)'] },
-    { h: ['材料与落地', 'Materials and feasibility'], p: [
-      ['碳化防腐木与钢制配重底座、户外级 PVC 张拉膜、304 不锈钢索具与 3000K LED 地埋洗墙灯，抗高温、耐日晒、防高湿、耐腐蚀。画面采用“数字印刷 + 局部艺术创作”双层制作，避免喷绘的廉价感；模块化预制，现场 3–7 天组装，台风预警时可快速拆卸收纳。', 'Carbonised timber with steel ballast bases, outdoor-grade PVC tensile membrane, 304 stainless rigging and 3000K in-ground LED wall-washers: resistant to heat, sun, humidity and salt. The image is digitally printed and then worked by hand in places, so it never looks like a cheap printed banner. Prefabricated modules are assembled on site in 3–7 days and can be taken down quickly when a typhoon warning comes.']
-    ] }
-  ]
-},
-{
-  id: 'D-2026-02', key: 'studio', year: 2026, date: '2026', color: '#C0623B',
-  title: ['山水游痕', 'Traces of Landscape'],
-  sub: ['青岛山海身体记忆艺术快闪项目', 'An art pop-up on Qingdao’s mountains, sea and bodily memory'],
-  kind: ['公共艺术 · 艺术快闪 · 商业美陈', 'Public art · Art pop-up · Retail installation'],
-  place: ['青岛 · 五四广场与青岛万象城', 'Qingdao · May Fourth Square and MixC'],
-  role: ['发起 · 艺术创作', 'Initiator · Artist'],
-  context: ['山水游痕艺术工作室 · 首个城市样板项目', 'Shan Shui Art Studio · first city pilot project'],
-  cover: 'studio-seaside',
-  lead: ['以青岛的山、海与城市记忆为母题，让艺术家的现场创作成为一次城市事件；观众从广场一路走进商场，在行走中完成对这座城市的观看。', 'Qingdao’s mountains, sea and city memory are the subject. The artist’s live painting becomes an event in the city, and visitors walk from the square into the mall, looking at the city as they go.'],
-  sections: [
-    { h: ['项目说明', 'Project statement'], p: [
-      ['《山水游痕》以青岛的山、海与城市记忆为核心，连接五四广场附近的室外公共空间与青岛万象城的商业空间，形成“室外现场创作 + 商场艺术美陈 + 文创市集 + 影像传播”的双场景联动。', 'Traces of Landscape takes Qingdao’s mountains, sea and city memory as its core. It links the open space near May Fourth Square with the MixC mall in a two-site project: live painting outdoors, an art installation in the mall, a design market, and film.'],
-      ['项目希望达成四个目标：', 'The project sets out to:']
-    ], list: [
-      ['让公共艺术成为商业空间可持续的引流内容', 'make public art a lasting draw for commercial space'],
-      ['让艺术家的现场创作成为城市事件，并沉淀为影像资产', 'turn the artist’s live painting into a city event, and keep it as film'],
-      ['以文创市集和品牌联名形成初步的商业闭环', 'close a first commercial loop through a design market and brand collaborations'],
-      ['形成可复制到下一座城市、下一处乡村或商业空间的样板', 'become a model that can travel to the next city, village or commercial space']
-    ], img: 'studio-seaside', cap: ['《山水游痕》滨海装置效果图', 'Traces of Landscape, seaside rendering'] },
-    { h: ['设计理念 · 山水转译', 'Concept · translating the landscape'], p: [
-      ['山水不只是自然景观，也是一种观看世界、感知地方、理解身体与记忆的方式。项目先进入青岛做田野调查，记录这里的地形、海风、光线、建筑与人的行走路径，再把它们转译为绘画语言与空间结构。', 'Landscape is not only scenery; it is a way of seeing the world, sensing a place, and understanding the body and memory. The project begins with fieldwork in Qingdao, recording its terrain, sea wind, light, buildings and the paths people walk, then translates them into painting and spatial structure.'],
-      ['装置以现代艺术形式为手法，融入中国传统双面绣的呈现理念；视觉上融合托姆布雷、琼·米切尔、罗伯特·莱曼的绘画观念，同时扎根于写意、骨法用笔与东方哲学。艺术家的在场与作品的肉身性，让这件装置只属于青岛这一座城市。', 'The installation uses contemporary forms shaped by the idea of Chinese double-sided embroidery. Visually it draws on Cy Twombly, Joan Mitchell and Robert Ryman, while staying rooted in xieyi, the “bone method” of the brush and Eastern philosophy. The artist’s presence and the bodily quality of the work make it belong to Qingdao alone.']
-    ], img: 'studio-detail', cap: ['装置画稿局部', 'Painting for the installation, detail'] },
-    { h: ['双场景结构', 'Two sites'], list: [
-      ['五四广场附近 · 室外现场创作 —— 艺术家连续约 3 天现场作画，形成城市公共艺术事件；观众围观、拍摄，扫码领取艺术地图；影像团队记录创作前、中、后的全过程。', 'Near May Fourth Square · live painting outdoors: the artist paints on site for about three days, creating a public art event. Visitors watch, film and scan a code for an art map; a film crew records the work before, during and after.'],
-      ['青岛万象城 · 艺术美陈与文创市集 —— 设置可进入、可拍照的艺术美陈；搭建小型艺术品与文创市集；与咖啡、餐饮、潮玩及生活方式品牌联动。', 'MixC Qingdao · installation and design market: an installation visitors can walk into and photograph, a small market for art and design goods, and collaborations with coffee, food, toy and lifestyle brands.']
-    ], img: 'studio-board', cap: ['项目总图', 'Project board'] },
-    { h: ['观众动线', 'Visitor route'], list: [
-      ['在五四广场附近观看艺术家现场作画', 'Watch the artist painting near May Fourth Square'],
-      ['扫码领取艺术地图与打卡任务', 'Scan a code for the art map and route'],
-      ['步行约 5 分钟前往青岛万象城', 'Walk about five minutes to MixC'],
-      ['进入商场内的艺术美陈装置，拍照打卡', 'Enter the installation in the mall and take photographs'],
-      ['逛文创市集，参与咖啡与餐饮联名', 'Browse the design market and the coffee and food collaborations'],
-      ['在小红书、抖音、朋友圈分享', 'Share on Xiaohongshu, Douyin and WeChat']
-    ] },
-    { h: ['艺术装置', 'The installation'], p: [
-      ['装置以半透明画布与金属结构构成可进入、可停留、可拍照的空间。画布正反两面依照双面绣的逻辑绘制，光线穿过时，图像在遮蔽与显现之间变化；观众必须走动，才能看全这片山海。', 'Translucent painted canvases on a metal frame form a space visitors can enter, linger in and photograph. Both sides are painted in the manner of double-sided embroidery; as light passes through, the image shifts between hidden and revealed, and visitors have to move to see the whole of the mountains and sea.'],
-      ['同一套装置语言可以随场地延展：放在海边，画布与海平线相接；放进水乡，画布倒映在水面上。', 'The same language adapts to each site: by the sea the canvases meet the horizon; in a water town they are reflected in the canals.']
-    ], img: 'studio-sites', cap: ['装置在滨海与水乡场景中的延展', 'The installation by the sea and in a water town'] },
-    { h: ['文创与联名', 'Design goods and collaborations'], p: [
-      ['将装置纹理、地方色彩、艺术家笔触与城市记忆转化为明信片、版画、托特包、丝巾与礼盒；与咖啡品牌推出限定杯套等联名产品。文创采用小批量现货、预售与限量编号。', 'The textures of the installation, local colours, the artist’s brushwork and city memories become postcards, prints, tote bags, silk scarves and gift boxes, with limited cup sleeves made with a coffee brand. Goods are produced in small batches, on pre-order and in numbered editions.']
-    ], img: 'studio-sku', cap: ['文创方向 · 山水 · 身息', 'Product direction · Landscape, Breath'] },
-    { h: ['执行流程', 'Process'], list: [
-      ['前期沟通 —— 确认场地、时间节点、审批条件与合作方式', 'Planning: confirm sites, schedule, permits and partners'],
-      ['调研策划 —— 地方文化、客流动线、空间限制与传播目标', 'Research: local culture, visitor flow, site limits and media goals'],
-      ['方案设计 —— 装置效果、平面动线、文创方向与传播计划', 'Design: installation renderings, route plan, products and media plan'],
-      ['制作搭建 —— 施工、物料、文创打样、陈列、导视与现场安全', 'Production: building, materials, product samples, display, signage and safety'],
-      ['现场运营 —— 现场作画、拍摄记录、社交媒体发布与销售', 'On site: live painting, filming, social media and sales'],
-      ['复盘 —— 数据复盘、案例影像与下一站方案', 'Review: data, case film and a proposal for the next stop']
-    ] },
-    { h: ['风险预案', 'Contingencies'], list: [
-      ['审批 —— 室外部分采用轻量化、可移动的方式，提前确认场地、城管、安保与拍摄要求', 'Permits: the outdoor work is light and movable; site, city management, security and filming are cleared in advance'],
-      ['天气 —— 设置风雨预案与可快速撤场的结构，并准备室内备用内容', 'Weather: wind and rain plans, structures that can be struck quickly, and indoor alternatives'],
-      ['库存 —— 文创小批量生产，结合预售、限量编号与补货机制', 'Stock: small batches, pre-orders, numbered editions and restocking']
-    ] }
-  ]
-},
 {
   id: 'D-2026-03', key: 'sheshan', year: 2026, date: '2026.07', color: '#5E7F4E',
   title: ['畲山养物', 'Sheshan Yangwu'],
@@ -99,20 +10,47 @@ window.PROJECTS = [
   context: ['乡村产业共富类（“土特产”）', 'Rural industry and common prosperity (local specialties)'],
   cover: 'sheshan-box', heroSet: ['sheshan-box', 'sheshan-poster', 'sheshan-dihuang'],
   lead: ['让畲山好物，走出枫树岭。以「贴纸替代换瓶」的低成本路径，让真材实料的好物在货架与直播间被一眼看见。', 'Let the good things of the She mountains leave Fengshuling. By replacing labels instead of containers, honest products become visible at a glance, on the shelf and in the livestream.'],
-  sections: [
-    { h: ['村庄与问题', 'The village and the problem'], p: [
-      ['枫树岭村是临安区 5 个民族村之一，畲族人口占 26%，森林覆盖率超 80%。村集体培育的“畲和”品牌五年累积助农销售超 500 万元，主打十六味酸梅汤、九制黄精、黄精黑芝麻丸，真材实料、古法炮制。但包装廉价、缺乏辨识度，在直播屏幕里也没有视觉焦点。', 'Fengshuling is one of five ethnic-minority villages in Lin’an; 26% of its people are She, and forests cover over 80% of its land. The collective brand “Shehe” has sold more than 5 million yuan of produce in five years: sixteen-herb plum drink, nine-times-steamed rehmannia and polygonatum black-sesame balls, made with real ingredients and old methods. But the packaging looked cheap, had no identity, and disappeared on a phone screen.']
-    ], img: 'sheshan-before', cap: ['现有包装', 'Existing packaging'] },
-    { h: ['策略 · 产品即画布', 'Strategy · the product is the canvas'], p: [
-      ['村里无力承担整包重新印刷，方案因此只换贴纸、不换容器：用透明 / 半透明贴纸让酸梅汤的琥珀色、芝麻丸的金色透出来，成为视觉的一部分。共享一套视觉基因——松墨、米白、黄铜金、凤凰朱；三笔凤凰标志与畲族彩带纹样。', 'The village could not afford new containers, so the design changes only the labels. Clear and translucent stickers let the amber of the plum drink and the gold of the sesame balls show through and become part of the design. All products share one visual DNA: pine-ink, rice-white, brass-gold and phoenix-red, a three-stroke phoenix mark and She ribbon patterns.']
-    ] },
-    { h: ['十六味酸梅汤', 'Sixteen-herb plum drink'], p: [
-      ['「本草留白」：把酸梅汤从“夏日饮料”重新定位为具东方养生文化属性的植物饮品。避免水果插画、飞溅液体、冰块等饮料化符号，以大量留白、纸张肌理、植物线描与低饱和色彩，营造温润、克制、安静的气质。', '“Herbal white space” repositions the drink from summer beverage to a plant tonic in the Eastern tradition of food as medicine. No fruit illustrations, splashes or ice: generous white space, paper texture, botanical line drawing and soft colour give it a warm, restrained, quiet character.']
-    ], imgs: ['sheshan-box', 'sheshan-poster'], cap: ['「透·见」贴纸与「本草留白」方向', '“See-through” label and “Herbal white space” direction'] },
-    { h: ['九制地黄 · 黄精黑芝麻丸', 'Rehmannia · Black-sesame balls'], p: [
-      ['「畲山 · 黄土」：米白手工纸底色传递有温度的农产品，左侧一条畲族彩带纹样如古籍“书口”，暗示有来处的配方。「金田」：罐身中下部一条 5cm 环绕腰封，不遮住罐内金色丸子——透过透明罐看进去像金色的田野；腰封告诉消费者，这些金色，是枫树岭的。', '“She Mountain · Yellow Earth” uses a handmade rice-paper ground for a warm farm product, with a strip of She ribbon pattern on the left like the fore-edge of an old book: a recipe with an origin. “Golden Field” is a 5 cm band around the lower jar that leaves the gold balls visible, so looking into the jar is like looking at a golden field; the band simply says that this gold comes from Fengshuling.']
-    ], imgs: ['sheshan-dihuang', 'sheshan-jar'], cap: ['「畲山 · 黄土」整包贴与「金田」腰封', '“She Mountain · Yellow Earth” label and “Golden Field” band'] }
-  ]
+  /* 这个项目用品牌案例版式（index.html 里的 vBrand），不走通用的 sections */
+  layout: 'brand',
+  brand: {
+    slogan: ['让畲山好物，<br>走出枫树岭。', 'Let the good things of the She mountains<br>leave Fengshuling.'],
+    leadSub: ['以「贴纸替代换瓶」的低成本路径，让真材实料的好物在货架与直播间被一眼看见。', 'By replacing labels instead of containers, honest products become visible at a glance, on the shelf and in the livestream.'],
+    facts: [
+      ['1 / 5', ['临安区五个民族村之一', 'One of five ethnic-minority villages in Lin’an']],
+      ['26%', ['畲族人口', 'She population']],
+      ['80%+', ['森林覆盖率', 'Forest cover']],
+      ['500万+', ['「畲和」五年助农销售（元）', 'Yuan of produce sold by “Shehe” in five years']],
+      ['3', ['款主打产品', 'Core products']]
+    ],
+    village: { img: 'sheshan-village', h: ['村庄', 'The village'], cap: ['枫树岭村村委会', 'Fengshuling village office'],
+      p: ['枫树岭村是临安区 5 个民族村之一，畲族人口占 26%，森林覆盖率超 80%。村集体培育的“畲和”品牌五年累积助农销售超 500 万元，主打十六味酸梅汤、九制黄精、黄精黑芝麻丸，真材实料、古法炮制。', 'Fengshuling is one of five ethnic-minority villages in Lin’an; 26% of its people are She, and forests cover over 80% of its land. The collective brand “Shehe” has sold more than 5 million yuan of produce in five years: sixteen-herb plum drink, nine-times-steamed rehmannia and polygonatum black-sesame balls, made with real ingredients and old methods.'] },
+    problem: { img: 'sheshan-before', h: ['问题', 'The problem'], cap: ['现有包装', 'Existing packaging'],
+      p: ['好东西，却没有被看见。', 'Good products that nobody noticed.'],
+      list: [['包装廉价', 'The packaging looked cheap'], ['缺乏辨识度', 'It had no identity'], ['在直播屏幕里没有视觉焦点', 'It disappeared on a phone screen']] },
+    strategy: { h: ['策略 · 产品即画布', 'Strategy · the product is the canvas'],
+      quote: ['只换贴纸，不换容器。', 'Change the label, not the container.'],
+      p: ['村里无力承担整包重新印刷，方案因此只换贴纸、不换容器：用透明 / 半透明贴纸让酸梅汤的琥珀色、芝麻丸的金色透出来，成为视觉的一部分。', 'The village could not afford new containers, so the design changes only the labels. Clear and translucent stickers let the amber of the plum drink and the gold of the sesame balls show through and become part of the design.'] },
+    dna: { h: ['共享一套视觉基因', 'One shared visual DNA'],
+      colors: [['#2F3B30', ['松墨', 'Pine-ink']], ['#EDE4D0', ['米白', 'Rice-white']], ['#B08A4F', ['黄铜金', 'Brass-gold']], ['#A8412B', ['凤凰朱', 'Phoenix-red']]],
+      marks: [['sheshan-mark', ['三笔凤凰标志', 'Three-stroke phoenix mark']], ['sheshan-seal', ['凤凰封口贴', 'Phoenix seal']], ['sheshan-ribbon', ['畲族彩带纹样', 'She ribbon pattern'], 'rib']] },
+    products: [
+      { name: ['十六味酸梅汤', 'Sixteen-herb plum drink'], dir: ['本草留白', 'Herbal white space'],
+        p: ['把酸梅汤从“夏日饮料”重新定位为具东方养生文化属性的植物饮品。以大量留白、纸张肌理、植物线描与低饱和色彩，营造温润、克制、安静的气质。', 'The drink is repositioned from summer beverage to a plant tonic in the Eastern tradition of food as medicine. Generous white space, paper texture, botanical line drawing and soft colour give it a warm, restrained, quiet character.'],
+        keep: [['留白', 'White space'], ['纸张肌理', 'Paper texture'], ['植物线描', 'Botanical line'], ['低饱和色彩', 'Soft colour']],
+        drop: [['水果插画', 'Fruit illustration'], ['飞溅液体', 'Splashes'], ['冰块', 'Ice']],
+        herbs: { list: [['#B9897F', ['乌梅', 'Smoked plum']], ['#A0705A', ['山楂', 'Hawthorn']], ['#B8483A', ['陈皮', 'Aged tangerine peel']], ['#D99A3E', ['桂花', 'Osmanthus']]], more: ['…… 等十六味本草', '… sixteen herbs in all'] },
+        imgs: ['sheshan-box', 'sheshan-poster'], labels: [['礼盒 · 透见贴', 'Box · see-through label'], ['海报 · 本草留白', 'Poster · herbal white space']], cap: ['「透·见」贴纸与「本草留白」方向', '“See-through” label and “Herbal white space” direction'] },
+      { name: ['九制地黄', 'Nine-times-steamed rehmannia'], dir: ['畲山 · 黄土', 'She Mountain · Yellow Earth'],
+        p: ['米白手工纸底色传递有温度的农产品；左侧一条畲族彩带纹样如古籍“书口”，暗示有来处的配方。', 'A handmade rice-paper ground for a warm farm product, with a strip of She ribbon pattern on the left like the fore-edge of an old book: a recipe with an origin.'],
+        keep: [['米白手工纸', 'Rice paper'], ['畲族彩带', 'She ribbon'], ['古籍书口', 'Book fore-edge']],
+        before: 'sheshan-before', imgs: ['sheshan-dihuang'], cap: ['原包装 → 「畲山 · 黄土」整包贴', 'Before → “She Mountain · Yellow Earth” label'] },
+      { name: ['黄精黑芝麻丸', 'Polygonatum black-sesame balls'], dir: ['金田', 'Golden Field'],
+        p: ['罐身中下部一条 5cm 环绕腰封，不遮住罐内金色丸子——透过透明罐看进去像金色的田野。腰封告诉消费者：这些金色，是枫树岭的。', 'A 5 cm band around the lower jar leaves the gold balls visible, so looking into the jar is like looking at a golden field. The band simply says that this gold comes from Fengshuling.'],
+        keep: [['透明罐', 'Clear jar'], ['5cm 腰封', '5 cm band'], ['朱红封口贴', 'Red seal']],
+        imgs: ['sheshan-jar'], wide: true, cap: ['「金田」腰封与展开图', '“Golden Field” band and its layout'] }
+    ]
+  },
+  sections: []
 },
 {
   id: 'D-2026-04', key: 'solitude', year: 2026, date: '2026', color: '#8A4B2A',
@@ -162,4 +100,4 @@ window.PROJECTS = [
   ]
 }
 ];
-window.PROJDIMS={"solitude-elevation.svg":[760,640],"solitude-render.jpg":[874,518],"dongban-hero":[768,512],"dongban-puffer":[1800,1008],"studio-detail":[1800,1199],"studio-seaside":[955,609],"studio-sites":[1315,788],"studio-board":[1536,1024],"studio-sku":[1329,1183],"sheshan-box":[655,995],"sheshan-poster":[673,897],"sheshan-dihuang":[545,682],"sheshan-jar":[939,626],"sheshan-before":[465,488],"sheshan-village":[576,422]};
+window.PROJDIMS={"solitude-elevation.svg":[760,640],"solitude-render.jpg":[874,518],"sheshan-box":[655,995],"sheshan-poster":[673,897],"sheshan-dihuang":[545,682],"sheshan-jar":[939,626],"sheshan-before":[465,488],"sheshan-village":[576,422],"sheshan-ribbon":[43,656],"sheshan-seal":[88,88],"sheshan-mark":[140,80]};
