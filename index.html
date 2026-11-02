@@ -584,11 +584,11 @@ const T={
   nav:{index:['首页','Home'],painting:['绘画','Painting'],photo:['摄影','Photography'],projects:['项目','Projects'],writing:['文字','Writing'],about:['关于','About']},
   navCol:{painting:'var(--c-p)',photo:'var(--c-f)',projects:'var(--c-d)',writing:'var(--c-w)'},
   foot1:['© 黄鈺茜 Youcy Huang · 2026','© Youcy Huang 黄鈺茜 · 2026'],
-  foot2:['最近更新 2026-10-19','Updated 19 October 2026'],
+  foot2:['',''],
   /* 首页引文：两行，作者自己定的句子 */
-  quote:['向外凝视的目光，向内审视着。<br>而意义，来源于对此在的深深投入。','A gaze turned outward, examining inward.<br>And meaning comes from a deep immersion in being-there.'],
-  /* 引文下面放另一种语言的译文：中文页显示英文，英文页显示中文原文 */
-  quoteBy:['A gaze turned outward, examining inward.<br>And meaning comes from a deep immersion in being-there.','向外凝视的目光，向内审视着。<br>而意义，来源于对此在的深深投入。'],
+  quote:['依其本源而居者，终难离其原位。','What dwells near its origin is loath to leave the place.'],
+  /* 引文出处 */
+  quoteBy:['——荷尔德林','— Friedrich Hölderlin'],
   series:['系列','Series'],index:['作品总目','Index of works'],all:['全部','All'],search:['检索标题、材料、年份','Search title, medium, year'],
   empty:[q=>`没有找到包含“${q}”的条目，换个关键词试试。`,q=>`No entries match “${q}”. Try another word.`],
   works:[n=>`${n} 件`,n=>`${n} works`],frames:[n=>`${n} 张`,n=>`${n} frames`],texts:[n=>`${n} 篇`,n=>`${n} texts`],
@@ -621,7 +621,7 @@ const T={
   edu:['教育','Education'],contact:['联系','Contact'],copy:['复制邮箱','Copy email'],copied:['已复制','Copied'],selected:['已选中，按 Ctrl+C 复制','Selected. Press Ctrl+C to copy'],
   st:{shanshui:['绘画 · 山水系列','Painting · Shanshui Series'],benzhen:['绘画 · 本真系列','Painting · Authenticity Series'],install:['装置','Installation'],photo:['摄影 · 儒与酒','Photography · Confucians and Wine'],writing:['写作','Writing']}
 };
-T.heroSide=[`${PF.born?PF.born[0]:''}以绘画为核心，延伸到装置、摄影与写作；关注传统山水在当代绘画中的再生，以及半透明材料中图像的遮蔽与显现。`,`${PF.born?PF.born[1]:''} Painting is the core of her practice, extending into installation, photography and writing. She asks how the classical landscape can live again in contemporary painting, and how images are hidden and revealed in translucent material.`];
+T.heroSide=[`${PF.born?PF.born[0]:''}以绘画为核心，延伸到摄影与写作；山水系列关注传统山水与当代绘画语言的结合，以及半透明材料遮蔽与显现的肉身性。本真系列和儒与酒系列关注捕捉人的存在状态和饭桌上人与人之间的微妙关系。`,`${PF.born?PF.born[1]:''} Painting is the core of her practice, extending into photography and writing. The Shanshui series joins the classical landscape with the language of contemporary painting, and looks at the bodily quality of what translucent material hides and reveals. The Authenticity series and the Confucians and Wine series try to catch how people exist, and the subtle relations between people at the dinner table.`];
 T.cm={title:['留言','Notes'],write:['写留言','Leave a note'],count:[n=>`${n} 条`,n=>`${n} note${n>1?'s':''}`],
   ph:['想说的话……','Your words…'],name:['称呼（选填）','Name (optional)'],contact:['联系方式（选填）','Contact (optional)'],
   anon:['匿名发布','Post anonymously'],anonTip:['公开显示为“匿名”','Shown as “Anonymous”'],anonName:['匿名','Anonymous'],
@@ -737,7 +737,7 @@ function vIndexOld(){
   ];
   const latest=W.slice().sort((a,b)=>b.date.localeCompare(a.date))[0];
   return `<section class="hero">
-      <div><q>${L(T.quote)}</q><p class="by cap">— ${L(T.quoteBy)}</p></div>
+      <div><q>${L(T.quote)}</q><p class="by cap">${L(T.quoteBy)}</p></div>
       <div class="hero-side"><span class="cap">${L(PF.media)}</span><p>${L(T.heroSide)}</p>
         <div class="links">${['painting','photo','projects','writing'].map(k=>`<a href="#${k}">${dot(T.navCol[k])}${L(T.nav[k])}</a>`).join('')}</div></div>
     </section>
