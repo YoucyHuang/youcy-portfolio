@@ -656,13 +656,13 @@ figure.de-g img{width:100%;max-height:none;aspect-ratio:3/4;object-fit:cover}
 <main class="wrap" id="view"></main>
 <footer><div class="wrap foot"><span id="foot1"></span><span id="foot2"></span></div></footer>
 
-<script src="essays.js?v=20261102f"></script>
-<script src="paintings.js?v=20261102f"></script>
-<script src="photos.js?v=20261102f"></script>
-<script src="projects.js?v=20261102f"></script>
-<script src="profile.js?v=20261102f"></script>
-<script src="diary.js?v=20261102f"></script>
-<script src="poems.js?v=20261102f"></script>
+<script src="essays.js?v=20261103a"></script>
+<script src="paintings.js?v=20261103a"></script>
+<script src="photos.js?v=20261103a"></script>
+<script src="projects.js?v=20261103a"></script>
+<script src="profile.js?v=20261103a"></script>
+<script src="diary.js?v=20261103a"></script>
+<script src="poems.js?v=20261103a"></script>
 <script>
 /* ================= 数据 ================= */
 const MED={'纸上水彩':'Watercolour on paper','纸面水彩':'Watercolour on paper','纸上综合材料':'Mixed media on paper','纸上油画棒':'Oil pastel on paper','纸上丙烯':'Acrylic on paper','布面丙烯':'Acrylic on canvas','布面综合材料':'Mixed media on canvas','PE布面综合材料':'Mixed media on PE canvas','铜板飞尘':'Aquatint on copper','铜板线腐蚀':'Line etching on copper'};
@@ -701,12 +701,11 @@ const T={
   dLead:['绘画装置、公共艺术与乡村品牌项目。每个项目从一个地方和那里的人出发。','Painting installation, public art and rural branding. Each begins with a place and the people who live there.'],
   view:['查看项目','View project'],pmeta:[['类型','时间','地点','角色'],['Type','Date','Place','Role']],context:['背景','Context'],next:['下一个项目','Next project'],
   essays:['文章','Essays'],diary:['随记','Notebook'],poems:['诗','Poems'],poemsN:[n=>`${n} 首`,n=>`${n} poems`],untitled:['无题','Untitled'],
-  poLead:['从随记里挑出的分行诗，按写作时间由早到晚排列。','Poems gathered from the notebooks, in the order they were written.'],
+  poLead:['从随记里挑出的分行诗，按写作时间由晚到早排列。','Poems gathered from the notebooks, newest first.'],
   drumHint:['左右拖动转一转，点正面的一张进入','Drag to turn, open the card facing you'],
   nSeries:[n=>`${n} 个系列`,n=>`${n} series`],nProj:[n=>`${n} 个项目`,n=>`${n} projects`],
   pickSeries:['选择系列','Series'],pickSection:['选择栏目','Sections'],tapSwitch:['点击卡片切换','Select a card to switch'],
   viewing:['正在浏览','Viewing'],goSwitch:['点击切换','Switch'],
-  dLead:['这几年随手写下的念头、梦和路上的见闻。年份由近到远，每一年里从一月读起。','Thoughts, dreams and notes from the road, written over the past few years. Newest year first; within each year, from January on.'],
   dOrder:['年份由近到远 · 年内也由晚到早','Newest first'],
   dMore:[n=>`展开全文 · ${n} 段`,n=>`Read all · ${n} paragraphs`],dLess:['收起','Collapse'],
   dZh:['','These notebook entries are in Chinese only.'],
@@ -766,7 +765,7 @@ const ENTRY=[
 function vIndex(){
   return `<div class="home"><section class="hero">
       <div><q>${L(T.quote)}</q><p class="by tr">${L(T.quoteBy)}</p></div>
-      <div class="hero-side"><span class="cap">${L(PF.media)}</span><p>${L(T.heroSide)}</p></div>
+      <div class="hero-side"><span class="cap">${L(PF.media)}</span></div>
     </section>
     <section class="drum-wrap" aria-label="${lang==='en'?'Sections':'栏目'}">
       <div class="table-h"><span class="cap">${L(T.drumHint)}</span><span class="cap" id="drumNow"></span></div>
@@ -834,7 +833,7 @@ function vIndexOld(){
   const latest=W.slice().sort((a,b)=>b.date.localeCompare(a.date))[0];
   return `<section class="hero">
       <div><q>${L(T.quote)}</q><p class="by cap">${L(T.quoteBy)}</p></div>
-      <div class="hero-side"><span class="cap">${L(PF.media)}</span><p>${L(T.heroSide)}</p>
+      <div class="hero-side"><span class="cap">${L(PF.media)}</span>
         <div class="links">${['painting','photo','projects','writing'].map(k=>`<a href="#${k}">${dot(T.navCol[k])}${L(T.nav[k])}</a>`).join('')}</div></div>
     </section>
     <div class="band" aria-label="${lang==='en'?'Selected works':'作品选'}">${band}</div>
@@ -1004,7 +1003,7 @@ function vProject(p){
 /* ================= 文字 ================= */
 const sortedW=()=>W.slice().sort((a,b)=>a.date.localeCompare(b.date));
 /* 文字下分三块：文章 / 随记 / 诗 */
-const DY=window.DIARY||[],PO=window.POEMS||[];
+const DY=window.DIARY||[],PO=(window.POEMS||[]).map((p,i)=>[p,i]).sort((a,b)=>b[0].key.localeCompare(a[0].key)||a[1]-b[1]).map(x=>x[0]);
 const wTabs=()=>switcher([
   {k:'essays',name:L(T.essays),glyph:'文',col:'var(--c-w)',n:L(T.texts)(W.length),c:W.length},
   {k:'diary',name:L(T.diary),glyph:'记',col:'var(--c-w)',n:L(T.texts)(DY.length),c:DY.length},
@@ -1013,14 +1012,14 @@ const wTabs=()=>switcher([
 const CNUM='〇一二三四五六七八九十';
 const poTitle=p=>p.title||(p.no?`${L(T.untitled)} · ${lang==='en'?'No. '+p.no:'其'+CNUM[p.no]}`:L(T.untitled));
 function vPoems(){
-  const span=PO.length?`${PO[0].key.slice(0,4)} — ${PO[PO.length-1].key.slice(0,4)}`:'';
+  const span=PO.length?`${PO[PO.length-1].key.slice(0,4)} — ${PO[0].key.slice(0,4)}`:'';
   const toc=PO.map((p,i)=>`<li><button data-poem="${i}"><span class="num">${p.date.replace(/年|月/g,'.').replace('日','')}</span><b>${esc(poTitle(p))}</b></button></li>`).join('');
   const body=PO.map((p,i)=>`<article class="poem" id="po-${i}"><header><span class="cap">${p.date}${p.note?' · '+esc(p.note):''}</span><h2>${esc(poTitle(p))}</h2></header>
     <div class="po-l" lang="zh-CN">${p.lines.map(l=>l?`<p>${esc(l)}</p>`:'<span class="po-br"></span>').join('')}</div>${p.imgs?`<figure class="po-ph de-g">${p.imgs.map(s=>`<img src="img/${s}" alt="" loading="lazy">`).join('')}</figure>`:''}${p.img?`<figure class="po-ph"><img src="img/${p.img}" alt="" loading="lazy"></figure>`:''}</article>`).join('<div class="po-orn" aria-hidden="true">✦</div>');
   return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.poems)} · ${span}</small></h1><p>${L(T.poLead)}</p></section>
     ${wTabs()}
     ${lang==='en'?`<p class="empty">${L(T.dZh)}</p>`:''}
-    <div class="poems"><nav class="po-toc" aria-label="${L(T.poems)}"><span class="cap">${L(T.poemsN)(PO.length)} · ${L(T.asc)}</span><ol>${toc}</ol></nav><div class="po-list">${body}</div></div>${cmBox('poems')}`;
+    <div class="poems"><nav class="po-toc" aria-label="${L(T.poems)}"><span class="cap">${L(T.poemsN)(PO.length)} · ${L(T.desc)}</span><ol>${toc}</ol></nav><div class="po-list">${body}</div></div>${cmBox('poems')}`;
 }
 function deHTML(e){
   const body=e.p.map(p=>p.imgs?`<figure class="de-g">${p.imgs.map(s=>`<img src="img/${s}" alt="" loading="lazy">`).join('')}</figure>`:p.img?`<figure><img src="img/${p.img}" alt="" loading="lazy"></figure>`
@@ -1038,7 +1037,7 @@ function vDiary(){
   let html='',y=null;
   list.forEach(e=>{const ey=e.key.slice(0,4);if(ey!==y){if(y)html+='</section>';y=ey;html+=`<section class="dy"><div class="dy-h"><h2>${ey}</h2><span class="num">${L(T.texts)(DY.filter(x=>x.key.startsWith(ey)).length)}</span></div>`}html+=deHTML(e)});
   if(y)html+='</section>';
-  return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.diary)} · ${span}</small></h1><p>${L(T.dLead)}</p></section>
+  return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.diary)} · ${span}</small></h1></section>
     ${wTabs()}
     <div class="bar" style="border-top:0"><div class="chips" role="group">${['all',...years].map(k=>`<button class="chip" data-dy="${k}" aria-pressed="${dYear===k}">${k==='all'?L(T.all):k}</button>`).join('')}</div><span class="cap">${L(T.dOrder)}</span></div>
     ${lang==='en'?`<p class="empty">${L(T.dZh)}</p>`:''}
