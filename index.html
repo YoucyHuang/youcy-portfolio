@@ -632,6 +632,17 @@ figure.de-g img{width:100%;max-height:none;aspect-ratio:3/4;object-fit:cover}
 .prose th,.prose td{border-bottom:1px solid var(--rule);padding:10px 12px;text-align:left;vertical-align:top}
 .prose th{font-weight:500;border-bottom:1px solid var(--ink)}
 .prose .refs{margin:2.4em 0 0;padding:1.2em 0 0 1.4em;border-top:1px solid var(--rule);font-size:13px;color:var(--ink2);line-height:1.8;display:grid;gap:.4em}
+.prose.fic h2{text-align:center;font-weight:400;font-size:clamp(20px,2vw,24px);letter-spacing:.32em;margin:3.6em 0 1.8em}
+.prose.fic h2:first-child{margin-top:.6em}
+.prose .psec{font-family:var(--serif);font-weight:400;font-size:15px;letter-spacing:.24em;color:var(--ink2);text-align:center;margin:2.8em 0 1.4em}
+.prose .psign{text-indent:0;text-align:right;margin-top:1.6em}
+.prose .pend{text-indent:0;text-align:center;color:var(--ink3);letter-spacing:.3em;margin-top:3em}
+.ftoc{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px;padding-block:4px 26px;margin-bottom:8px;border-bottom:1px solid var(--rule)}
+.ftoc .cap{margin-right:6px}
+.ftoc button{background:none;border:0;padding:2px 0;font-family:var(--serif);font-size:15px;color:var(--ink2);border-bottom:1px solid transparent}
+.ftoc button:hover{color:var(--ink);border-bottom-color:var(--c-w)}
+.prose.vert.fic h2{margin:0 1.6em 0 1.6em}
+.prose.vert .psec{margin:0 1.2em}
 .prose.vert{writing-mode:vertical-rl;height:min(64vh,560px);overflow-x:auto;max-width:100%;padding:6px 2px;letter-spacing:.06em}
 .prose.vert h2{margin:0 0 0 1.2em}
 .prose.vert figure,.prose.vert .tbl{writing-mode:horizontal-tb;margin:0 1.5em}
@@ -714,13 +725,16 @@ figure.de-g img{width:100%;max-height:none;aspect-ratio:3/4;object-fit:cover}
 <script src="profile.js?v=20261103d"></script>
 <script src="diary.js?v=20261103d"></script>
 <script src="poems.js?v=20261103d"></script>
+<script src="fiction.js?v=20261103f"></script>
 <script>
 /* ================= 数据 ================= */
 const MED={'纸上水彩':'Watercolour on paper','纸面水彩':'Watercolour on paper','纸上综合材料':'Mixed media on paper','纸上油画棒':'Oil pastel on paper','纸上丙烯':'Acrylic on paper','布面丙烯':'Acrylic on canvas','布面综合材料':'Mixed media on canvas','PE布面综合材料':'Mixed media on PE canvas','铜板飞尘':'Aquatint on copper','铜板线腐蚀':'Line etching on copper'};
-const GENRE={'论文':'Papers','评论':'Criticism','随笔':'Essays'};
+const GENRE={'论文':'Papers','评论':'Criticism','随笔':'Essays','小说':'Fiction'};
 const PSERIES=window.PSERIES||[],P=window.PAINTINGS||[];
 const PHS=window.PHSERIES||[],PH=window.PHOTOS||[],CAMERA=window.PHCAMERA||'';
 const PR=window.PROJECTS||[],PF=window.PROFILE||{},PRDIM=window.PROJDIMS||{};
+const toW=e=>({...e,title:[e.title.zh,e.title.en],subtitle:e.subtitle?[e.subtitle.zh,e.subtitle.en]:null,summary:[e.summary.zh,e.summary.en],year:+e.date.slice(0,4)});
+const FI=(window.FICTION||[]).map(toW);
 const W=(window.ESSAYS||[]).map(e=>({...e,title:[e.title.zh,e.title.en],subtitle:e.subtitle?[e.subtitle.zh,e.subtitle.en]:null,summary:[e.summary.zh,e.summary.en],year:+e.date.slice(0,4)}));
 /* 系列颜色取自作品本身 */
 const SCOL={A2:'#C8452F',A1:'#9A922E',S:'#77706A',D:'#5F8A7A',W:'#6F93B4',E:'#3F3A52',B1:'#D3951B',B2:'#A4561F'};
@@ -751,7 +765,7 @@ const T={
   seq:['序列','Sequence'],sheet:['印样','Contact sheet'],sheetHint:['点击任意一帧全屏查看','Select any frame to view it full screen'],
   dLead:['绘画装置、公共艺术与乡村品牌项目。每个项目从一个地方和那里的人出发。','Painting installation, public art and rural branding. Each begins with a place and the people who live there.'],
   view:['查看项目','View project'],pmeta:[['类型','时间','地点','角色'],['Type','Date','Place','Role']],context:['背景','Context'],next:['下一个项目','Next project'],
-  essays:['文章','Essays'],diary:['随记','Notebook'],poems:['诗','Poems'],poemsN:[n=>`${n} 首`,n=>`${n} poems`],untitled:['无题','Untitled'],
+  essays:['文章','Essays'],fiction:['小说','Fiction'],fLead:['虚构写作。目前只有中文，可以横排或竖排阅读。','Fiction. Chinese only for now; it can be read horizontally or vertically.'],fZh:['','This novel is in Chinese only.'],fToc:['目录','Contents'],diary:['随记','Notebook'],poems:['诗','Poems'],poemsN:[n=>`${n} 首`,n=>`${n} poems`],untitled:['无题','Untitled'],
   poLead:['从随记里挑出的分行诗，按写作时间由晚到早排列。','Poems gathered from the notebooks, newest first.'],
   idxHint:['目录','Contents'],
   nSeries:[n=>`${n} 个系列`,n=>`${n} series`],nProj:[n=>`${n} 个项目`,n=>`${n} projects`],
@@ -794,7 +808,7 @@ const ALL=[
   ...P.map(x=>({...x,type:'p',col:SCOL[x.series],sub:()=>[L(ser(x.series).short),med(x)].filter(Boolean).join(' · ')})),
   ...PHS.map(x=>{const l=PH.filter(p=>p.set===x.key);return {id:x.key,type:'f',col:SCOL[x.key],title:x.name,year:Math.max(...l.map(p=>p.year)),sub:()=>L(T.frames)(l.length)+' · '+pYears(l)}}),
   ...PR.map(x=>({...x,type:'d',col:'var(--c-d)',sub:()=>L(x.kind)})),
-  ...W.map(x=>({...x,type:'w',col:'var(--c-w)',sub:()=>(lang==='en'?GENRE[x.genre]:x.genre)+' · '+L(T.chars)(x.words)}))
+  ...[...W,...FI].map(x=>({...x,type:'w',col:'var(--c-w)',sub:()=>(lang==='en'?GENRE[x.genre]:x.genre)+' · '+L(T.chars)(x.words)}))
 ].sort((a,b)=>(b.year||0)-(a.year||0)||b.id.localeCompare(a.id));
 const BYID=Object.fromEntries(ALL.map(x=>[x.id,x]));
 const NAV={p:'painting',f:'photo',w:'writing',d:'projects'};
@@ -812,7 +826,7 @@ const ENTRY=[
   {k:'painting',img:`paint/thumb/c7-d1.jpg?v=${IMGV}`,wh:[900,600],sub:()=>`${L(T.nSeries)(PSERIES.length)} · ${L(T.works)(P.length)}`},
   {k:'photo',img:'photo/B1/mid/b1-33.jpg',wh:[1000,1500],sub:()=>`${L(T.nSeries)(PHS.length)} · ${L(T.frames)(PH.length)}`},
   {k:'projects',img:'projimg/sheshan-plum.jpg',wh:[1400,1380],sub:()=>L(T.nProj)(PR.length)},
-  {k:'writing',poem:true,sub:()=>[W.length&&`${L(T.essays)} ${W.length}`,DY.length&&`${L(T.diary)} ${DY.length}`,PO.length&&`${L(T.poems)} ${PO.length}`].filter(Boolean).join(' · ')}
+  {k:'writing',poem:true,sub:()=>[W.length&&`${L(T.essays)} ${W.length}`,FI.length&&`${L(T.fiction)} ${FI.length}`,DY.length&&`${L(T.diary)} ${DY.length}`,PO.length&&`${L(T.poems)} ${PO.length}`].filter(Boolean).join(' · ')}
 ];
 function plateInner(e){
   if(e.img)return `<img class="base" src="${e.img}" alt="" width="${e.wh[0]}" height="${e.wh[1]}" loading="lazy" decoding="async" draggable="false"><img class="ink" src="${e.img}" alt="" decoding="async" draggable="false">`;
@@ -1053,6 +1067,7 @@ const sortedW=()=>W.slice().sort((a,b)=>a.date.localeCompare(b.date));
 const DY=window.DIARY||[],PO=(window.POEMS||[]).map((p,i)=>[p,i]).sort((a,b)=>b[0].key.localeCompare(a[0].key)||a[1]-b[1]).map(x=>x[0]);
 const wTabs=()=>switcher([
   {k:'essays',name:L(T.essays),glyph:'文',col:'var(--c-w)',n:L(T.texts)(W.length),c:W.length},
+  {k:'fiction',name:L(T.fiction),glyph:'说',col:'var(--c-w)',n:L(T.texts)(FI.length),c:FI.length},
   {k:'diary',name:L(T.diary),glyph:'记',col:'var(--c-w)',n:L(T.texts)(DY.length),c:DY.length},
   {k:'poems',name:L(T.poems),glyph:'诗',col:'var(--c-w)',n:L(T.poemsN)(PO.length),c:PO.length}].filter(x=>x.c),'ws',wSec,L(T.pickSection));
 /* 诗：由早到晚；左边是目录，右边一首一首排下来 */
@@ -1090,7 +1105,16 @@ function vDiary(){
     ${lang==='en'?`<p class="empty">${L(T.dZh)}</p>`:''}
     <div class="diary">${html}</div>${cmBox('diary')}`;
 }
+/* 小说：一部一行，点进去用和文章相同的阅读页 */
+function vFiction(){
+  const total=FI.reduce((s,x)=>s+x.words,0);
+  return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.fiction)} · ${lang==='en'?total.toLocaleString('en')+' characters':(total/10000).toFixed(1)+' 万字'}</small></h1><p>${L(T.fLead)}</p></section>
+    ${wTabs()}
+    ${lang==='en'?`<p class="empty">${L(T.fZh)}</p>`:''}
+    <div class="wlist">${FI.map(x=>`<a class="wrow" href="#${x.id}"><span class="num">${x.id}</span><span class="wt">${esc(x.title[0])}${x.subtitle?`<small>${esc(x.subtitle[0])}</small>`:''}</span><span class="wm">${L(T.fiction)} · ${L(T.chars)(x.words)} · ${x.date.replace(/-/g,'.')}</span><p class="wx" lang="zh-CN">${esc(x.summary[0])}</p></a>`).join('')}</div>`;
+}
 function vWriting(){
+  if(wSec==='fiction'&&FI.length)return vFiction();
   if(wSec==='diary'&&DY.length)return vDiary();
   if(wSec==='poems'&&PO.length)return vPoems();
   const total=W.reduce((s,x)=>s+x.words,0),gl=g=>lang==='en'?GENRE[g]:g;
@@ -1102,7 +1126,7 @@ function vWriting(){
     <div class="wlist">${list.map(x=>`<a class="wrow" href="#${x.id}"><span class="num">${x.id}</span><span class="wt">${esc(L(x.title))}${x.subtitle?`<small>${esc(L(x.subtitle))}</small>`:''}</span><span class="wm">${gl(x.genre)} · ${L(T.chars)(x.words)} · ${x.date.replace(/-/g,'.')}</span><p class="wx">${esc(L(x.summary))}</p></a>`).join('')}</div>`;
 }
 function blocksHTML(w,al){
-  const k=al==='en'?'en':'zh';let out='',refs=[];
+  const k=al==='en'?'en':'zh';let out='',refs=[],hn=0;
   const flush=()=>{if(refs.length){out+=`<ol class="refs">${refs.map(r=>`<li>${esc(r)}</li>`).join('')}</ol>`;refs=[]}};
   for(const b of w.blocks){
     if(b.t==='ref'){refs.push(b[k]||b.zh);continue}
@@ -1111,19 +1135,26 @@ function blocksHTML(w,al){
     if(b.t==='table'){out+=`<div class="tbl"><table>${b.rows.map((r,ri)=>`<tr>${r.map(c=>{const tg=ri===0?'th':'td';return `<${tg}${c.span>1?` colspan="${c.span}"`:''}>${esc(c[k]||c.zh).replace(/\n/g,'<br>')}</${tg}>`}).join('')}</tr>`).join('')}</table></div>`;continue}
     if(b.t==='cap'){out+=`<p class="cp">${esc(b[k]||b.zh)}</p>`;continue}
     const t=esc(b[k]||b.zh||'');
-    out+=b.t==='h'?`<h2>${t}</h2>`:b.t==='quote'?`<blockquote>${t}</blockquote>`:b.t==='label'?`<p class="plabel">${t}</p>`:`<p>${t}</p>`;
+    if(b.t==='sec'){out+=`<h3 class="psec">${t}</h3>`;continue}
+    if(b.t==='sign'){out+=`<p class="psign">${t}</p>`;continue}
+    if(b.t==='end'){out+=`<p class="pend">${t}</p>`;continue}
+    out+=b.t==='h'?`<h2 id="ch-${hn++}">${t}</h2>`:b.t==='quote'?`<blockquote>${t}</blockquote>`:b.t==='label'?`<p class="plabel">${t}</p>`:`<p>${t}</p>`;
   }
   flush();return out;
 }
 function vReader(w){
-  const al=artLang||lang,vert=al==='zh'&&readMode==='v',gl=lang==='en'?GENRE[w.genre]:w.genre,all=sortedW(),i=all.indexOf(w),prev=all[i-1],next=all[i+1];
+  const fic=w.genre==='小说';if(fic)wSec='fiction';else if(wSec==='fiction')wSec='essays';
+  const al=fic?'zh':(artLang||lang),vert=al==='zh'&&readMode==='v',gl=lang==='en'?GENRE[w.genre]:w.genre,all=fic?FI:sortedW(),i=all.indexOf(w),prev=all[i-1],next=all[i+1];
+  const chs=fic?w.blocks.filter(b=>b.t==='h').map(b=>b.zh):[];
   return `<a class="back cap" href="#writing">← ${L(T.nav.writing)} / ${gl}</a>
   <article class="reader" lang="${al==='en'?'en':'zh-CN'}"><span class="num">${w.id}</span><h1>${esc(al==='en'?w.title[1]:w.title[0])}</h1>
     ${w.subtitle?`<p class="rsub">${esc(al==='en'?w.subtitle[1]:w.subtitle[0])}</p>`:''}
     <div class="rbar"><span>${gl} · ${L(T.chars)(w.words)} · ${w.date.replace(/-/g,'.')}</span>
-      <div style="display:flex;gap:26px;flex-wrap:wrap"><div class="modes" role="group"><button data-al="zh" aria-pressed="${al==='zh'}">中</button><button data-al="en" aria-pressed="${al==='en'}">EN</button></div>
+      <div style="display:flex;gap:26px;flex-wrap:wrap">${fic?'':`<div class="modes" role="group"><button data-al="zh" aria-pressed="${al==='zh'}">中</button><button data-al="en" aria-pressed="${al==='en'}">EN</button></div>`}
       ${al==='zh'?`<div class="modes" role="group"><button data-r="h" aria-pressed="${!vert}">${L(T.horiz)}</button><button data-r="v" aria-pressed="${vert}">${L(T.vert)}</button></div>`:''}</div></div>
-    <div class="prose ${vert?'vert':''}">${blocksHTML(w,al)}</div>
+    ${fic&&lang==='en'?`<p class="empty">${L(T.fZh)}</p>`:''}
+    ${chs.length?`<nav class="ftoc" aria-label="${L(T.fToc)}"><span class="cap">${L(T.fToc)}</span>${chs.map((h,j)=>`<button data-ch="${j}">${esc(h)}</button>`).join('')}</nav>`:''}
+    <div class="prose ${vert?'vert':''} ${fic?'fic':''}">${blocksHTML(w,al)}</div>
     ${al==='en'?`<p class="cap" style="margin-top:28px">${L(T.rSample)}</p>`:''}
     ${cmBox(w.id)}
     <nav class="more">${prev?`<a href="#${prev.id}">← ${esc(L(prev.title))}</a>`:'<span></span>'}${next?`<a href="#${next.id}">${esc(L(next.title))} →</a>`:'<span></span>'}</nav>
@@ -1460,6 +1491,7 @@ view.addEventListener('click',e=>{
   else if(b.dataset.wg){wGenre=b.dataset.wg;route()}
   else if(b.dataset.ws){wSec=b.dataset.ws;route()}
   else if(b.dataset.poem){const el=document.getElementById('po-'+b.dataset.poem);if(el){el.scrollIntoView({block:'start'});window.scrollBy(0,-96)}}
+  else if(b.dataset.ch){const el=document.getElementById('ch-'+b.dataset.ch);if(el){if(el.closest('.vert'))el.scrollIntoView({block:'nearest',inline:'start'});else window.scrollTo({top:el.getBoundingClientRect().top+scrollY-96})}}
   else if(b.dataset.dy){dYear=b.dataset.dy;route()}
   else if(b.dataset.dopen){const k=b.dataset.dopen,art=b.closest('.de');if(dOpen.has(k)){dOpen.delete(k);art.classList.add('fold');b.textContent=L(T.dMore)(art.querySelectorAll('.de-b>p:not(.de-n)').length);art.scrollIntoView({block:'start'});window.scrollBy(0,-90)}else{dOpen.add(k);art.classList.remove('fold');b.textContent=L(T.dLess)}}
   else if(b.dataset.wo){wOrder=b.dataset.wo;store.wOrder=wOrder;save();route()}
