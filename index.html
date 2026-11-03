@@ -167,7 +167,7 @@ html{overflow-x:clip}
 .card3{position:absolute;inset:0;display:block;overflow:hidden;background:var(--mat);color:#fff;text-decoration:none;backface-visibility:hidden;
   box-shadow:0 2px 4px rgba(0,0,0,.08),0 24px 50px -20px rgba(0,0,0,.4);
   filter:brightness(calc(.55 + .45 * max(var(--f,1), 0))) saturate(calc(.5 + .5 * max(var(--f,1), 0)))}
-.card3 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.card3 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:.5}
 .card3::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--dc);z-index:2}
 .card3::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.72),rgba(10,9,8,0) 58%)}
 .card3 .et{position:absolute;left:0;right:0;bottom:0;z-index:1;display:grid;gap:5px;padding:clamp(14px,1.8vw,24px)}
@@ -182,6 +182,8 @@ html{overflow-x:clip}
 /* 地面上的一圈淡影，让滚筒“落”在页面上 */
 .drum::after{content:"";position:absolute;left:50%;bottom:26px;width:min(70%,640px);height:34px;transform:translateX(-50%);
   background:radial-gradient(closest-side,rgba(120,72,20,.20),transparent);pointer-events:none}
+/* 滚筒两侧向外涌出的细浪与泡沫（画在 canvas 上，排在卡片后面） */
+.foam{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 @media (max-width:640px){.drum{--cw:52vw;perspective:900px}}
 .entries{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.4vw,20px);padding-block:8px 104px}
 .entry{position:relative;display:block;aspect-ratio:3/4;max-width:100%;overflow:hidden;background:var(--mat);text-decoration:none;color:#fff}
@@ -656,13 +658,13 @@ figure.de-g img{width:100%;max-height:none;aspect-ratio:3/4;object-fit:cover}
 <main class="wrap" id="view"></main>
 <footer><div class="wrap foot"><span id="foot1"></span><span id="foot2"></span></div></footer>
 
-<script src="essays.js?v=20261103b"></script>
-<script src="paintings.js?v=20261103b"></script>
-<script src="photos.js?v=20261103b"></script>
-<script src="projects.js?v=20261103b"></script>
-<script src="profile.js?v=20261103b"></script>
-<script src="diary.js?v=20261103b"></script>
-<script src="poems.js?v=20261103b"></script>
+<script src="essays.js?v=20261103c"></script>
+<script src="paintings.js?v=20261103c"></script>
+<script src="photos.js?v=20261103c"></script>
+<script src="projects.js?v=20261103c"></script>
+<script src="profile.js?v=20261103c"></script>
+<script src="diary.js?v=20261103c"></script>
+<script src="poems.js?v=20261103c"></script>
 <script>
 /* ================= 数据 ================= */
 const MED={'纸上水彩':'Watercolour on paper','纸面水彩':'Watercolour on paper','纸上综合材料':'Mixed media on paper','纸上油画棒':'Oil pastel on paper','纸上丙烯':'Acrylic on paper','布面丙烯':'Acrylic on canvas','布面综合材料':'Mixed media on canvas','PE布面综合材料':'Mixed media on PE canvas','铜板飞尘':'Aquatint on copper','铜板线腐蚀':'Line etching on copper'};
@@ -769,7 +771,7 @@ function vIndex(){
     </section>
     <section class="drum-wrap" aria-label="${lang==='en'?'Sections':'栏目'}">
       <div class="table-h"><span class="cap">${L(T.drumHint)}</span><span class="cap" id="drumNow"></span></div>
-      <div class="drum" id="drum"><div class="ring" id="ring">${ENTRY.map((e,i)=>`<a class="card3" href="#${e.k}" draggable="false" data-i="${i}" style="--dc:${T.navCol[e.k]}">
+      <div class="drum" id="drum"><canvas class="foam" id="foam" aria-hidden="true"></canvas><div class="ring" id="ring">${ENTRY.map((e,i)=>`<a class="card3" href="#${e.k}" draggable="false" data-i="${i}" style="--dc:${T.navCol[e.k]}">
         <img src="${e.img}" alt="" draggable="false"><span class="et"><span class="en">${pad(i+1)} · ${T.nav[e.k][1]}</span><b>${L(T.nav[e.k])}<i aria-hidden="true">→</i></b><small>${e.sub()}</small></span></a>`).join('')}</div></div>
     </section></div>`;
 }
@@ -791,13 +793,36 @@ function initDeck(){
     if(bi!==front){front=bi;cards.forEach((c,i)=>{c.classList.toggle('front',i===bi);c.tabIndex=i===bi?0:-1});
       const el=document.getElementById('drumNow');if(el)el.textContent=`${pad(bi+1)} / ${pad(n)} · ${L(T.nav[ENTRY[bi].k])}`}
   }
+  /* 浪花：从滚筒左右两缘不断生出，向外飘散、上浮、变淡。小圆圈是泡沫，小弧线是浪尖 */
+  const cv=document.getElementById('foam'),cx=cv&&!calm?cv.getContext('2d'):null,P=[];
+  let fw=0,fh=0,foamCol='120,150,160';
+  function fsize(){if(!cx)return;const d=Math.min(2,devicePixelRatio||1);fw=drum.clientWidth;fh=drum.clientHeight;cv.width=fw*d;cv.height=fh*d;cx.setTransform(d,0,0,d,0,0);
+    foamCol=matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement.dataset.theme!=='light'||document.documentElement.dataset.theme==='dark'?'200,222,228':'92,130,145'}
+  function foam(dt){
+    if(!cx)return;
+    const dr=drum.getBoundingClientRect();let l=1e9,r=-1e9,tp=1e9,bt=-1e9;
+    cards.forEach(c=>{if(+c.style.getPropertyValue('--f')<-.05)return;const b=c.getBoundingClientRect();l=Math.min(l,b.left);r=Math.max(r,b.right);tp=Math.min(tp,b.top);bt=Math.max(bt,b.bottom)});
+    l-=dr.left;r-=dr.left;tp-=dr.top;bt-=dr.top;
+    const rate=52+Math.min(140,Math.abs(vel)*.8);   /* 每秒每侧生出几颗；拖得越快越多 */
+    for(const side of [-1,1]){let k=rate*dt;while(k>0){if(Math.random()<k){
+      const y=tp+(bt-tp)*(.12+Math.random()*.86),arc=Math.random()<.28;
+      P.push({x:(side<0?l:r)+side*Math.random()*4,y,vx:side*(18+Math.random()*60),vy:-6-Math.random()*16,r:arc?5+Math.random()*9:1+Math.random()*3.4,
+        life:0,max:1.4+Math.random()*2.2,arc,side,fill:!arc&&Math.random()<.45})}k-=1}}
+    cx.clearRect(0,0,fw,fh);
+    for(let i=P.length-1;i>=0;i--){const p=P[i];p.life+=dt;if(p.life>p.max||p.x<-20||p.x>fw+20){P.splice(i,1);continue}
+      p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=Math.pow(.55,dt);p.vy-=4*dt;
+      const k=p.life/p.max,a=(k<.15?k/.15:1-(k-.15)/.85)*.8;
+      cx.strokeStyle=cx.fillStyle=`rgba(${foamCol},${a.toFixed(3)})`;cx.lineWidth=p.arc?1.3:1;cx.beginPath();
+      if(p.arc){const rr=p.r*(1+k*.6);cx.arc(p.x,p.y,rr,p.side<0?Math.PI*.95:-Math.PI*.35,p.side<0?Math.PI*1.35:Math.PI*.05);cx.stroke()}
+      else{cx.arc(p.x,p.y,p.r*(1+k*.5),0,Math.PI*2);p.fill?cx.fill():cx.stroke()}}
+  }
   function tick(t){
     const dt=Math.min(.05,(t-last)/1000);last=t;
     if(!drag&&!auto){
       if(Math.abs(vel)>.5){ang+=vel*dt;vel*=Math.pow(.04,dt)}        /* 拖完的惯性 */
       else ang+=SPEED*dt;   /* 一直转，鼠标停上去也不停 */
     }
-    paint();raf=requestAnimationFrame(tick);
+    paint();foam(dt);raf=requestAnimationFrame(tick);
   }
   drum.addEventListener('pointerdown',e=>{if(e.button>0||auto)return;drag={x:e.clientX,a:ang,t:performance.now(),lx:e.clientX};moved=false});
   drum.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;
@@ -815,7 +840,7 @@ function initDeck(){
   drum.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();ang+=e.key==='ArrowLeft'?step:-step;
     setTimeout(()=>cards[front]&&cards[front].focus(),0)}});
   size();paint();raf=requestAnimationFrame(tick);
-  const ro=window.ResizeObserver?new ResizeObserver(size):null;if(ro)ro.observe(drum);
+  fsize();const ro=window.ResizeObserver?new ResizeObserver(()=>{size();fsize()}):null;if(ro)ro.observe(drum);
   drumStop=()=>{cancelAnimationFrame(raf);if(ro)ro.disconnect()};
 }
 /* 旧首页（作品条带、系列卡片、作品总目），先留着备用，目前不显示 */
