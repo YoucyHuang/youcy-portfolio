@@ -766,7 +766,7 @@ const T={
   dLead:['绘画装置、公共艺术与乡村品牌项目。每个项目从一个地方和那里的人出发。','Painting installation, public art and rural branding. Each begins with a place and the people who live there.'],
   view:['查看项目','View project'],pmeta:[['类型','时间','地点','角色'],['Type','Date','Place','Role']],context:['背景','Context'],next:['下一个项目','Next project'],
   essays:['文章','Essays'],fiction:['小说','Fiction'],fLead:['虚构写作。目前只有中文，可以横排或竖排阅读。','Fiction. Chinese only for now; it can be read horizontally or vertically.'],fZh:['','This novel is in Chinese only.'],fToc:['目录','Contents'],diary:['随记','Notebook'],poems:['诗','Poems'],poemsN:[n=>`${n} 首`,n=>`${n} poems`],untitled:['无题','Untitled'],
-  poLead:['从随记里挑出的分行诗，按写作时间由晚到早排列。','Poems gathered from the notebooks, newest first.'],
+  poLead:['从随记里挑出的分行诗，按写作时间由早到晚排列。','Poems gathered from the notebooks, oldest first.'],
   idxHint:['目录','Contents'],
   nSeries:[n=>`${n} 个系列`,n=>`${n} series`],nProj:[n=>`${n} 个项目`,n=>`${n} projects`],
   pickSeries:['选择系列','Series'],pickSection:['选择栏目','Sections'],tapSwitch:['点击卡片切换','Select a card to switch'],
@@ -1064,7 +1064,7 @@ function vProject(p){
 /* ================= 文字 ================= */
 const sortedW=()=>W.slice().sort((a,b)=>a.date.localeCompare(b.date));
 /* 文字下分三块：文章 / 随记 / 诗 */
-const DY=window.DIARY||[],PO=(window.POEMS||[]).map((p,i)=>[p,i]).sort((a,b)=>b[0].key.localeCompare(a[0].key)||a[1]-b[1]).map(x=>x[0]);
+const DY=window.DIARY||[],PO=(window.POEMS||[]).map((p,i)=>[p,i]).sort((a,b)=>a[0].key.localeCompare(b[0].key)||a[1]-b[1]).map(x=>x[0]);
 const wTabs=()=>switcher([
   {k:'essays',name:L(T.essays),glyph:'文',col:'var(--c-w)',n:L(T.texts)(W.length),c:W.length},
   {k:'fiction',name:L(T.fiction),glyph:'说',col:'var(--c-w)',n:L(T.texts)(FI.length),c:FI.length},
@@ -1074,14 +1074,14 @@ const wTabs=()=>switcher([
 const CNUM='〇一二三四五六七八九十';
 const poTitle=p=>p.title||(p.no?`${L(T.untitled)} · ${lang==='en'?'No. '+p.no:'其'+CNUM[p.no]}`:L(T.untitled));
 function vPoems(){
-  const span=PO.length?`${PO[PO.length-1].key.slice(0,4)} — ${PO[0].key.slice(0,4)}`:'';
+  const span=PO.length?`${PO[0].key.slice(0,4)} — ${PO[PO.length-1].key.slice(0,4)}`:'';
   const toc=PO.map((p,i)=>`<li><button data-poem="${i}"><span class="num">${p.date.replace(/年|月/g,'.').replace('日','')}</span><b>${esc(poTitle(p))}</b></button></li>`).join('');
   const body=PO.map((p,i)=>`<article class="poem" id="po-${i}"><header><span class="cap">${p.date}${p.note?' · '+esc(p.note):''}</span><h2>${esc(poTitle(p))}</h2></header>
     <div class="po-l" lang="zh-CN">${p.lines.map(l=>l?`<p>${esc(l)}</p>`:'<span class="po-br"></span>').join('')}</div>${p.imgs?`<figure class="po-ph de-g">${p.imgs.map(s=>`<img src="img/${s}" alt="" loading="lazy">`).join('')}</figure>`:''}${p.img?`<figure class="po-ph"><img src="img/${p.img}" alt="" loading="lazy"></figure>`:''}</article>`).join('<div class="po-orn" aria-hidden="true">✦</div>');
   return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.poems)} · ${span}</small></h1><p>${L(T.poLead)}</p></section>
     ${wTabs()}
     ${lang==='en'?`<p class="empty">${L(T.dZh)}</p>`:''}
-    <div class="poems"><nav class="po-toc" aria-label="${L(T.poems)}"><span class="cap">${L(T.poemsN)(PO.length)} · ${L(T.desc)}</span><ol>${toc}</ol></nav><div class="po-list">${body}</div></div>${cmBox('poems')}`;
+    <div class="poems"><nav class="po-toc" aria-label="${L(T.poems)}"><span class="cap">${L(T.poemsN)(PO.length)} · ${L(T.asc)}</span><ol>${toc}</ol></nav><div class="po-list">${body}</div></div>${cmBox('poems')}`;
 }
 function deHTML(e){
   const body=e.p.map(p=>p.imgs?`<figure class="de-g">${p.imgs.map(s=>`<img src="img/${s}" alt="" loading="lazy">`).join('')}</figure>`:p.img?`<figure><img src="img/${p.img}" alt="" loading="lazy"></figure>`
