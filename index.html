@@ -588,6 +588,16 @@ dl.meta dt{color:var(--ink3)} dl.meta dd{margin:0}
 @media (max-width:760px){.poems{grid-template-columns:1fr}.po-toc{position:static;max-height:none}.po-toc ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 16px}}
 /* 随记 */
 .diary{padding-bottom:96px}
+/* 随记的密码锁 */
+.dlock{max-width:420px;margin:72px auto 120px;text-align:center}
+.dlock .dl-g{font-family:var(--serif);font-size:56px;line-height:1;color:var(--c-w);margin-bottom:20px}
+.dlock p{color:var(--ink2);margin:0 0 28px}
+.dlock form{display:flex;gap:16px;align-items:flex-end;justify-content:center}
+.dlock input{font:inherit;font-family:var(--en);font-size:18px;letter-spacing:.3em;text-align:center;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--rule);padding:8px 0;width:200px;border-radius:0}
+.dlock input:focus{outline:none;border-color:var(--ink)}
+.dlock .dl-msg{min-height:1.6em;margin-top:16px;font-size:13px;color:var(--ink2)}
+.dlock.bad input{animation:dlShake .35s}
+@keyframes dlShake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .dy{padding-top:64px}
 .dy-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:12px;border-bottom:1px solid var(--ink)}
 .dy-h h2{margin:0;font-family:var(--en);font-weight:400;font-size:clamp(44px,5.4vw,76px);line-height:1;letter-spacing:.02em;color:var(--c-w)}
@@ -723,7 +733,7 @@ figure.de-g img{width:100%;max-height:none;aspect-ratio:3/4;object-fit:cover}
 <script src="photos.js?v=20261103d"></script>
 <script src="projects.js?v=20261103d"></script>
 <script src="profile.js?v=20261103d"></script>
-<script src="diary.js?v=20261103d"></script>
+<script src="diary.enc.js?v=20261111"></script>
 <script src="poems.js?v=20261103d"></script>
 <script src="fiction.js?v=20261103f"></script>
 <script>
@@ -774,6 +784,7 @@ const T={
   dOrder:['年份由近到远 · 年内也由晚到早','Newest first'],
   dMore:[n=>`展开全文 · ${n} 段`,n=>`Read all · ${n} paragraphs`],dLess:['收起','Collapse'],
   dZh:['','These notebook entries are in Chinese only.'],
+dLock:['随记是私人的，输入密码后阅读。','These notebooks are private. Enter the password to read.'],dPw:['密码','Password'],dOpenBtn:['打开','Open'],dWrong:['密码不对，再试一次。','Wrong password. Try again.'],dWait:['正在打开…','Opening…'],
   wLead:['论文、评论与随笔，按写作时间排列。每篇都可以切换中文或英文阅读，中文还可以竖排。','Papers, criticism and essays, in the order they were written. Every piece can be read in Chinese or English.'],
   asc:['由早到晚','Oldest first'],desc:['由近到远','Newest first'],chars:[n=>`${n.toLocaleString()} 字`,n=>`${n.toLocaleString('en')} chars`],
   horiz:['横排','Horizontal'],vert:['竖排','Vertical'],rSample:['英文为译文。','English translation from the Chinese original.'],
@@ -826,7 +837,7 @@ const ENTRY=[
   {k:'painting',img:`paint/thumb/c7-d1.jpg?v=${IMGV}`,wh:[900,600],sub:()=>`${L(T.nSeries)(PSERIES.length)} · ${L(T.works)(P.length)}`},
   {k:'photo',img:'photo/B1/mid/b1-33.jpg',wh:[1000,1500],sub:()=>`${L(T.nSeries)(PHS.length)} · ${L(T.frames)(PH.length)}`},
   {k:'projects',img:'projimg/sheshan-plum.jpg',wh:[1400,1380],sub:()=>L(T.nProj)(PR.length)},
-  {k:'writing',poem:true,sub:()=>[W.length&&`${L(T.essays)} ${W.length}`,FI.length&&`${L(T.fiction)} ${FI.length}`,DY.length&&`${L(T.diary)} ${DY.length}`,PO.length&&`${L(T.poems)} ${PO.length}`].filter(Boolean).join(' · ')}
+  {k:'writing',poem:true,sub:()=>[W.length&&`${L(T.essays)} ${W.length}`,FI.length&&`${L(T.fiction)} ${FI.length}`,DN&&`${L(T.diary)} ${DN}`,PO.length&&`${L(T.poems)} ${PO.length}`].filter(Boolean).join(' · ')}
 ];
 function plateInner(e){
   if(e.img)return `<img class="base" src="${e.img}" alt="" width="${e.wh[0]}" height="${e.wh[1]}" loading="lazy" decoding="async" draggable="false"><img class="ink" src="${e.img}" alt="" decoding="async" draggable="false">`;
@@ -1064,11 +1075,29 @@ function vProject(p){
 /* ================= 文字 ================= */
 const sortedW=()=>W.slice().sort((a,b)=>a.date.localeCompare(b.date));
 /* 文字下分三块：文章 / 随记 / 诗 */
-const DY=window.DIARY||[],PO=(window.POEMS||[]).map((p,i)=>[p,i]).sort((a,b)=>a[0].key.localeCompare(b[0].key)||a[1]-b[1]).map(x=>x[0]);
+/* 随记是加密的（diary.enc.js），输对密码才在浏览器里解开；DN 是篇数 */
+const DENC=window.DIARY_ENC||null,DN=DENC?DENC.n:0;let DY=[];
+const ub64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function unlockDiary(pw){
+  const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:ub64(DENC.salt),iterations:DENC.iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+  DY=JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub64(DENC.iv)},key,ub64(DENC.ct))));
+  try{sessionStorage.setItem('yh-dpw',pw)}catch(e){}
+}
+function vDiaryLock(){
+  return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${L(T.diary)} · ${L(T.texts)(DN)}</small></h1></section>
+    ${wTabs()}
+    <div class="dlock"><div class="dl-g" aria-hidden="true">记</div><p>${L(T.dLock)}</p>
+    <form class="dl-form" autocomplete="off"><input type="password" name="pw" aria-label="${L(T.dPw)}" placeholder="${L(T.dPw)}" required autofocus><button class="btn" type="submit">${L(T.dOpenBtn)}</button></form>
+    <div class="dl-msg" role="status"></div></div>`;
+}
+/* 同一个浏览器标签页里输过一次密码，刷新后不用再输 */
+(()=>{let p=null;try{p=sessionStorage.getItem('yh-dpw')}catch(e){}if(p&&DENC)unlockDiary(p).then(()=>{if(wSec==='diary')route()}).catch(()=>{})})();
+const PO=(window.POEMS||[]).map((p,i)=>[p,i]).sort((a,b)=>a[0].key.localeCompare(b[0].key)||a[1]-b[1]).map(x=>x[0]);
 const wTabs=()=>switcher([
   {k:'essays',name:L(T.essays),glyph:'文',col:'var(--c-w)',n:L(T.texts)(W.length),c:W.length},
   {k:'fiction',name:L(T.fiction),glyph:'说',col:'var(--c-w)',n:L(T.texts)(FI.length),c:FI.length},
-  {k:'diary',name:L(T.diary),glyph:'记',col:'var(--c-w)',n:L(T.texts)(DY.length),c:DY.length},
+  {k:'diary',name:L(T.diary),glyph:'记',col:'var(--c-w)',n:L(T.texts)(DN),c:DN},
   {k:'poems',name:L(T.poems),glyph:'诗',col:'var(--c-w)',n:L(T.poemsN)(PO.length),c:PO.length}].filter(x=>x.c),'ws',wSec,L(T.pickSection));
 /* 诗：由早到晚；左边是目录，右边一首一首排下来 */
 const CNUM='〇一二三四五六七八九十';
@@ -1115,12 +1144,12 @@ function vFiction(){
 }
 function vWriting(){
   if(wSec==='fiction'&&FI.length)return vFiction();
-  if(wSec==='diary'&&DY.length)return vDiary();
+  if(wSec==='diary'&&DN)return DY.length?vDiary():vDiaryLock();
   if(wSec==='poems'&&PO.length)return vPoems();
   const total=W.reduce((s,x)=>s+x.words,0),gl=g=>lang==='en'?GENRE[g]:g;
   const list=W.filter(x=>wGenre==='all'||x.genre===wGenre).slice().sort((a,b)=>wOrder==='asc'?a.date.localeCompare(b.date):b.date.localeCompare(a.date));
   return `<section class="ph"><h1>${L(T.nav.writing)}<small class="cap">Writing · ${pad(W.length)} · ${lang==='en'?total.toLocaleString('en')+' characters':(total/10000).toFixed(1)+' 万字'}</small></h1><p>${L(T.wLead)}</p></section>
-    ${DY.length?wTabs():''}
+    ${DN?wTabs():''}
     <div class="bar" style="border-top-color:var(--rule)"><div class="chips" role="group">${['all',...Object.keys(GENRE).filter(g=>W.some(x=>x.genre===g))].map(g=>`<button class="chip" data-wg="${g}" aria-pressed="${wGenre===g}">${g==='all'?L(T.all):gl(g)}</button>`).join('')}</div>
       <div class="modes" role="group"><button data-wo="asc" aria-pressed="${wOrder==='asc'}">${L(T.asc)}</button><button data-wo="desc" aria-pressed="${wOrder==='desc'}">${L(T.desc)}</button></div></div>
     <div class="wlist">${list.map(x=>`<a class="wrow" href="#${x.id}"><span class="num">${x.id}</span><span class="wt">${esc(L(x.title))}${x.subtitle?`<small>${esc(L(x.subtitle))}</small>`:''}</span><span class="wm">${gl(x.genre)} · ${L(T.chars)(x.words)} · ${x.date.replace(/-/g,'.')}</span><p class="wx">${esc(L(x.summary))}</p></a>`).join('')}</div>`;
@@ -1569,6 +1598,10 @@ function initComments(){
   });
 }
 view.addEventListener('submit',e=>{
+  const dl=e.target.closest('.dl-form');
+  if(dl){e.preventDefault();const box=dl.closest('.dlock'),msg=box.querySelector('.dl-msg'),pw=dl.elements.pw.value;if(!pw)return;
+    box.classList.remove('bad');msg.textContent=L(T.dWait);
+    unlockDiary(pw).then(()=>route()).catch(()=>{msg.textContent=L(T.dWrong);void box.offsetWidth;box.classList.add('bad');dl.elements.pw.select()});return}
   const f=e.target.closest('.cmt-form');if(!f)return;e.preventDefault();
   const box=f.closest('.cmt'),msg=f.querySelector('[data-cmt-msg]'),btn=f.querySelector('[type=submit]'),v=k=>f.elements[k].value.trim();
   if(v('website'))return;   /* 机器人才会填这个隐藏框 */

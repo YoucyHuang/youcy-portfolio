@@ -8,3 +8,6 @@ paint/full/h1.jpg
 paint/full/h2.jpg
 
 _design/
+
+# 随记原文只留在本地；网站上只放加密后的 diary.enc.js（node lock-diary.mjs <密码> 生成）
+diary.src.js
